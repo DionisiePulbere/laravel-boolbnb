@@ -20,10 +20,6 @@ return new class extends Migration
             $table->dateTime('date_visit');
             $table->timestamps();
 
-            $table->foreign('apartment_id')
-            ->references('id')
-            ->on('apartments')
-            ->onDelete('cascade');
         });
     }
 
