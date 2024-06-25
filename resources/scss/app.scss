@@ -1,1 +1,72 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+*{
+    font-family: "Figtree", sans-serif !important;
+    box-sizing: border-box;
+}
+
+.primary-color{
+    color: #FF5A5F;
+}
+
+.my-header{
+    border-bottom: 1px solid #ececec;
+}
+
+.my-btn-primary{
+    background-color: #FF5A5F;
+    border: none;
+}
+
+.my-primary-border{
+    border: 2px solid #FF5A5F;
+    color: #FF5A5F;
+}
+
+.my-register-btn{
+    border: 2px solid #FF5A5F;
+    color: #FF5A5F;
+}
+
+.my-register-btn:hover{
+    border: inset 1px solid #FF5A5F;
+    background-color: #FF5A5F;
+    color: #fff;
+}
+
+.my-register-btn:focus{
+    border: inset 1px solid #FF5A5F;
+    background-color: #FF5A5F;
+    color: #fff;
+}
+
+.my-btn-primary:hover{
+    box-shadow: 0 0 10px #FF5A5F;
+    background-color: #FF5A5F !important;
+}
+
+.my-btn-primary:focus{
+    box-shadow: 0 0 10px #FF5A5F;
+    background-color: #FF5A5F !important;
+    transform: scale(0.98);
+}
+
+.my-login-header{
+    background-color: #ffffff !important;
+    font-weight: 600;
+    border-color: #ececec !important;
+}
+
+.my-login-card{
+    border-color: #ececec !important;
+}
+
+.forgot-password{
+    color: #212529;
+    text-decoration: none;
+}
+
+.forgot-password:hover{
+    color: #212529;
+    text-decoration: underline;
+}
