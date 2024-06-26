@@ -54,7 +54,7 @@
             </div>
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
-                <input type="text" class="form-control" id="square_meters" name="square_meters" value="{{ old('price') }}">
+                <input type="text" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
             </div>
             <div class="mb-3">
                 <label for="number_of_rooms" class="form-label">Numero di stanze</label>
