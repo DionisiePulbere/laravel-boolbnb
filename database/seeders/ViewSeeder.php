@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\View;
 use App\Models\Apartment;
-use faker\Generator as Faker;
+use Faker\Generator as Faker;
 
 class ViewSeeder extends Seeder
 {
