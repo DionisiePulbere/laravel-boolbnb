@@ -45,12 +45,34 @@
         </p>
         <p class="dashboard-p">{{$apartment->description}}</p>
         <div class="d-flex mt-4">
-            <button class="btn btn-outline-dark">
+            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-outline-dark">
                 Modifica casa<i class="fa-solid fa-pen ms-3"></i>
-            </button>
-            <button class="btn my-btn-primary text-white ms-5">
+            </a>
+            <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="btn my-btn-primary text-white ms-5 js-delete-btn" data-apartment-title="{{ $apartment->title }}">
                 Elimina casa<i class="fa-solid fa-trash ms-3"></i>
-            </button>
+                </button>
+            </form>  
+        </div>
+    </div>
+    <!-- modale -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="confirmDeleteModal">Conferma Eliminazione</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Chiudi</button>
+                <button type="button" id="confirm-deletion" class="btn my-btn-primary text-white">Cancella</button>
+            </div>
         </div>
     </div>
 @endsection
