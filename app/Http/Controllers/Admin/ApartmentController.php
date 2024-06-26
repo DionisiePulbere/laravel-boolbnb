@@ -40,7 +40,10 @@ class ApartmentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'via' => 'required|string|max:255',
+            'numero' => 'required|string|max:10',
+            'citta' => 'required|string|max:255',
+            'cap' => 'required|string|max:10',
             'primary_image' => 'required|image|mimes:jpeg,png|max:2048',
             'cover_images' => 'image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
@@ -50,11 +53,15 @@ class ApartmentController extends Controller
             'number_of_bathrooms' => 'required|integer|min:1|max:8',
             'summary' => 'required|string|max:1000',
         ]);
+
+        $formData['address'] = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
         $formData = $request->all();
+        
 
         if($request->hasFile('cover_image')) {
             $img_path = Storage::disk('public')->put('post_images', $formData['cover_image']);
             $formData['cover_image'] = $img_path;
+            
         }
         $newApartment = new Apartment();
         $newApartment->fill($formData);

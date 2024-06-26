@@ -37,10 +37,6 @@
             </div>
             {{-- FINE INFO PER LA GEOCALIZAZZIONE --}}
             <div class="mb-3">
-                <label for="cap" class="form-label">Pease</label>
-                <input type="text" class="form-control" id="cap" name="cap" value="{{ old('cap') }}">
-            </div>
-            <div class="mb-3">
                 <label for="primary_image" class="form-label">Immagine di copertina (min.1)</label>
                 <input class="form-control" type="file" id="primary_image" name="primary_image">
             </div>
