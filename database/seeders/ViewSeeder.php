@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\View;
 use App\Models\Apartment;
-use Faker\Generator as Faker;
+use faker\Generator as Faker;
 
 class ViewSeeder extends Seeder
 {
@@ -15,17 +15,18 @@ class ViewSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $Faker)
+    public function run(Faker $faker)
     {
         $apartments = Apartment::All();
         foreach ($apartments as $apartment) {
-            for ($i=0; $i < 10; $i++) { 
-                View::create([
-                    'apartment_id' => $apartment->id,
-                    'ip_address' => $Faker->ipv4,
-                    'date_visit' => $Faker->dateTimeBetween('-1 week', 'now'),
-                ]);
+            for ($i=0; $i < 10; $i++) {
+                $newView = new View();
+                $newView->apartment_id = $apartment->id;
+                $newView->address_ip = $faker->ipv4;
+                $newView->date_visit = $faker->dateTimeBetween('-1 week', 'now');
+                $newView->save();
             }
+
         }
     }
 }
