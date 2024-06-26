@@ -9,16 +9,20 @@ class Apartment extends Model
 {
     use HasFactory;
 
+    public function users() {
+        return $this->belongsTo(User::class);
+    }
+
     public function images() {
-        return $this->belongsTo(Image::class);
+        return $this->hasMany(Image::class);
     }
 
     public function messages() {
-        return $this->belongsTo(Message::class);
+        return $this->hasMany(Message::class);
     }
 
     public function views() {
-        return $this->belongsTo(Views::class);
+        return $this->hasMany(Views::class);
     }
 
     public function sponsorships() {

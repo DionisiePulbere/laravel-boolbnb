@@ -10,6 +10,6 @@ class Image extends Model
     use HasFactory;
 
     public function apartments() {
-        return $this->hasMany(Apartment::class);
+        return $this->belongsTo(Apartment::class);
     }
 }
