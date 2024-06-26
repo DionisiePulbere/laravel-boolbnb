@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column mb-5">
         <div class="d-flex align-items-center mb-5 show-header">
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Torna indietro</h2>
@@ -44,5 +44,13 @@
             {{$apartment->square_meters}} m<sup>2</sup>
         </p>
         <p class="dashboard-p">{{$apartment->description}}</p>
+        <div class="d-flex mt-4">
+            <button class="btn btn-outline-dark">
+                Modifica casa<i class="fa-solid fa-pen ms-3"></i>
+            </button>
+            <button class="btn my-btn-primary text-white ms-5">
+                Elimina casa<i class="fa-solid fa-trash ms-3"></i>
+            </button>
+        </div>
     </div>
 @endsection
