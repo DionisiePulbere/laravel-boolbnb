@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('apartment_id')->unsigned();
             $table->integer('address_ip')->unsigned();
             $table->dateTime('date_visit');
             $table->timestamps();
