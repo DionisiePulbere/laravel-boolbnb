@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
+
 
     <table class="table table-striped table-hover">
         <tr>
@@ -53,6 +53,6 @@
         @endforeach
     </table>
     
-</div>
+
 
 @endsection

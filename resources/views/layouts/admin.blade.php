@@ -57,7 +57,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black dashboard-link" href="#">
+                                <a class="nav-link text-black dashboard-link" href="{{route('admin.apartments.index')}}">
                                     <i class="fa-solid fa-house-user fa-lg me-2 primary-color"></i> Appartamenti
                                 </a>
                             </li>
