@@ -15,14 +15,8 @@ class View extends Model
         'date_visit',
     ];
 
-<<<<<<< HEAD
-    // public function apartment()
-    // {
-    //     return $this->belongsTo(Apartment::class);
-    // }
-=======
-    public function apartments() {
+    public function apartment()
+    {
         return $this->belongsTo(Apartment::class);
     }
->>>>>>> Feat-create-models
 }
