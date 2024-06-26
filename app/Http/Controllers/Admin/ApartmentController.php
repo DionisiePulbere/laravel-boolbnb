@@ -54,13 +54,13 @@ class ApartmentController extends Controller
             'description' => 'required|string|max:1000',
         ]);
         $formData = $request->all();
-        
 
-        if($request->hasFile('cover_image')) {
-            $img_path = Storage::disk('public')->put('post_images', $formData['cover_image']);
-            $formData['cover_image'] = $img_path;
+        if($request->hasFile('thumb')) {
+            $img_path = Storage::disk('public')->put('apartment_image', $formData['thumb']);
+            $formData['thumb'] = $img_path;
             
         }
+        
         $newApartment = new Apartment();
         $newApartment->fill($formData);
         $newApartment->address = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
