@@ -113,6 +113,24 @@
     margin-top: 10px;
 }
 
+.nav-item:last-child .dashboard-link {
+    margin-bottom: 10px;
+}
+
+
+// apartments index
+
+th{
+    background-color: #ff5a603f !important;
+}
+
+.table{
+    border: 1px solid #ececec;
+}
+
+tr:nth-of-type(odd) td{
+    background-color: #ff5a6011 !important;
+}
 
 
 
