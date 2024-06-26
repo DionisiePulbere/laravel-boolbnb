@@ -40,7 +40,7 @@
                             {{-- <div class="col-4">
                                 <a class="btn btn-dark" href="#"><i class="fa-solid fa-pen"></i></a>
                             </div> --}}
-                            <a class="btn btn-dark" href="#"><i class="fa-solid fa-eye"></i></a>
+                            <a class="btn btn-dark" href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}"><i class="fa-solid fa-eye"></i></a>
                             {{-- <div class="col-4">
     
                                 <form action="" method="POST">
