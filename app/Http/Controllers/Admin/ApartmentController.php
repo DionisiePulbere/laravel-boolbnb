@@ -37,7 +37,19 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'primary_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cover_images' => 'required|array|min:3',
+            'cover_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric|min:0',
+            'square_meters' => 'required|numeric|min:0',
+            'number_of_rooms' => 'required|integer|min:1|max:8',
+            'number_of_beds' => 'required|integer|min:1|max:8',
+            'number_of_bathrooms' => 'required|integer|min:1|max:8',
+            'summary' => 'required|string|max:1000',
+        ]);
     }
 
     /**
