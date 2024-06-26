@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="d-flex flex-column mb-5">
-        <div class="d-flex align-items-center mb-5 show-header">
+        <div class="d-flex align-items-center mb-5 show-header pb-2">
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
-            <h2 class="fw-bold ms-3 mb-0">Torna indietro</h2>
+            <h2 class="fw-bold ms-3 mb-0">Torna alle case</h2>
         </div>
         <div class="overflow-hidden" style="border-radius: 12px;width:75%">
             <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" >

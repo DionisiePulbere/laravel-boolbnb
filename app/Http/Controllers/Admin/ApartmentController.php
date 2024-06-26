@@ -39,22 +39,20 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'via' => 'required|string|max:255',
             'numero' => 'required|string|max:10',
             'citta' => 'required|string|max:255',
             'cap' => 'required|string|max:10',
-            'primary_image' => 'required|image|mimes:jpeg,png|max:2048',
+            'thumb' => 'required|image|mimes:jpeg,png|max:2048',
             'cover_images' => 'image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
-            'number_of_rooms' => 'required|integer|min:1|max:8',
-            'number_of_beds' => 'required|integer|min:1|max:8',
-            'number_of_bathrooms' => 'required|integer|min:1|max:8',
-            'summary' => 'required|string|max:1000',
+            'number_of_room' => 'required|integer|min:1|max:8',
+            'number_of_bed' => 'required|integer|min:1|max:8',
+            'number_of_bath' => 'required|integer|min:1|max:8',
+            'description' => 'required|string|max:1000',
         ]);
-
-        $formData['address'] = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
         $formData = $request->all();
         
 
@@ -65,6 +63,9 @@ class ApartmentController extends Controller
         }
         $newApartment = new Apartment();
         $newApartment->fill($formData);
+        $newApartment->address = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
+        $newApartment->latitude = 41.902782;
+        $newApartment->longitude = 12.496366;
         $newApartment->save();
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
     }
@@ -100,7 +101,44 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apartment = Apartment::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'via' => 'required|string|max:255',
+            'numero' => 'required|string|max:10',
+            'citta' => 'required|string|max:255',
+            'cap' => 'required|string|max:10',
+            'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'cover_images' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'price' => 'required|numeric|min:0',
+            'square_meters' => 'required|numeric|min:0',
+            'number_of_room' => 'required|integer|min:1|max:8',
+            'number_of_bed' => 'required|integer|min:1|max:8',
+            'number_of_bath' => 'required|integer|min:1|max:8',
+            'description' => 'required|string|max:1000',
+        ]);
+
+        $formData = $request->all();
+
+        if ($request->hasFile('thumb')) {
+            // Lo elimina se è stato inserito
+            if ($apartment->thumb) {
+                Storage::disk('public')->delete($apartment->thumb);
+            }
+            // Salva la nuova copertina
+            $thumb_path = Storage::disk('public')->put('post_images', $request->file('thumb'));
+            $formData['thumb'] = $thumb_path;
+        }
+
+        $formData['address'] = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
+        $formData['latitude'] = 41.902782;
+        $formData['longitude'] = 12.496366;
+
+        $apartment->update($formData);
+
+        return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
+
     }
 
     /**
