@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" href="{{ Vite::asset("resources/images/favicon.png") }}" type="image/x-icon">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -52,7 +54,7 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link text-black dashboard-link {{ Route::is('admin.dashboard') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-tachometer-alt fa-lg me-2 primary-color"></i> Dashboard
+                                    <i class="fa-solid fa-table-columns fa-lg me-2 primary-color"></i> Dashboard
                                 </a>
                             </li>
 
