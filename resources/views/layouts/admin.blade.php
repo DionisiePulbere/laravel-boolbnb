@@ -63,7 +63,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black dashboard-link href="{{ route('admin.apartments.index') }}">
+                                <a class="nav-link text-black dashboard-link href="{{ route('admin.apartments.create') }}">
                                     <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Nuovo affitto
                                 </a>
                             </li>
