@@ -51,14 +51,20 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link text-black dashboard-link {{ true == 'admin.dashboard' ? 'dashboard-actual-link' : '' }}" href="#">
+                                <a class="nav-link text-black dashboard-link {{ Route::is('admin.dashboard') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.dashboard') }}">
                                     <i class="fa-solid fa-tachometer-alt fa-lg me-2 primary-color"></i> Dashboard
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black dashboard-link" href="{{route('admin.apartments.index')}}">
+                                <a class="nav-link text-black dashboard-link {{ Route::is('admin.apartments.index') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house-user fa-lg me-2 primary-color"></i> Appartamenti
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-black dashboard-link href="{{ route('admin.apartments.index') }}">
+                                    <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Nuovo affitto
                                 </a>
                             </li>
                         </ul>
