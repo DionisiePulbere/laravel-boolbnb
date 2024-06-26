@@ -44,7 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     // public function apartments(){
     //     return $this->hasMany(Apartment::class);
     // }
+=======
+    public function apartments() {
+        return $this->hasMany(Apartment::class);
+    }
+>>>>>>> Feat-create-models
 }
