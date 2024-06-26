@@ -22,7 +22,7 @@ class ViewSeeder extends Seeder
             for ($i=0; $i < 10; $i++) {
                 $newView = new View();
                 $newView->apartment_id = $apartment->id;
-                $newView->ip_address = $Faker->ipv4;
+                $newView->address_ip = $Faker->ipv4;
                 $newView->date_visit = $Faker->dateTimeBetween('-1 week', 'now');
                 $newView->save();
             }
