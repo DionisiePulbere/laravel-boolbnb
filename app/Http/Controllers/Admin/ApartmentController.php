@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -40,9 +41,8 @@ class ApartmentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'primary_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'cover_images' => 'required|array|min:3',
-            'cover_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'primary_image' => 'required|image|mimes:jpeg,png|max:2048',
+            'cover_images' => 'image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
             'number_of_rooms' => 'required|integer|min:1|max:8',
@@ -50,6 +50,16 @@ class ApartmentController extends Controller
             'number_of_bathrooms' => 'required|integer|min:1|max:8',
             'summary' => 'required|string|max:1000',
         ]);
+        $formData = $request->all();
+
+        if($request->hasFile('cover_image')) {
+            $img_path = Storage::disk('public')->put('post_images', $formData['cover_image']);
+            $formData['cover_image'] = $img_path;
+        }
+        $newApartment = new Apartment();
+        $newApartment->fill($formData);
+        $newApartment->save();
+        return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
     }
 
     /**
