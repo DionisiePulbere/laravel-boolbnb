@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
-use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -25,7 +24,7 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Apartment $apartment)
     {
         return view('admin.apartments.create', compact('apartment'));
     }
@@ -47,9 +46,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -58,9 +57,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -81,17 +80,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
-
-        // CONTROLLA SE C'è' LA VECCHIA IMMAGINA E NEL CASO LA CANCELLA
-        if($apartment->image) {
-            Storage::delete($apartment->image);
-        };
-
         $apartment->delete();
-
         return redirect()->route('admin.apartments.index');
     }
 }
