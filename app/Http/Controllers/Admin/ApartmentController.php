@@ -57,8 +57,7 @@ class ApartmentController extends Controller
 
         if($request->hasFile('thumb')) {
             $img_path = Storage::disk('public')->put('apartment_image', $formData['thumb']);
-            $formData['thumb'] = $img_path;
-            
+            $formData['thumb'] = $img_path;  
         }
         
         $newApartment = new Apartment();
@@ -127,7 +126,7 @@ class ApartmentController extends Controller
                 Storage::disk('public')->delete($apartment->thumb);
             }
             // Salva la nuova copertina
-            $thumb_path = Storage::disk('public')->put('post_images', $request->file('thumb'));
+            $thumb_path = Storage::disk('public')->put('apartment_image', $request->file('thumb'));
             $formData['thumb'] = $thumb_path;
         }
 
