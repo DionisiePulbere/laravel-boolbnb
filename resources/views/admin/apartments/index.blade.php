@@ -1,56 +1,61 @@
 @extends('layouts.admin')
 
 @section('content')
-    @if ($apartments->count() > 0)
-        <table class="table table-striped table-hover">
-            <tr>
-                <th>Id</th>
-                <th>titolo</th>
-                <th>Visibilità</th>
-                <th>Prezzo</th>
-                <th>Stanze</th>
-                <th>Letti</th>
-                <th>Bagni</th>
-                <th>m<sup>2</sup></th>
-                <th>Indirizzo</th>
-                <th>Azioni</th>
-                
-                
-            </tr>
-            
-            @foreach ($apartments as $apartment)
-            <tr>
-                <td>{{$apartment->id}}</td>
-                <td>{{$apartment->title}}</td>
-                <td>{{$apartment->visibility}}</td>
-                <td>{{$apartment->price}}</td>
-                <td>{{$apartment->rooms}}</td>
-                <td>{{$apartment->number_of_bed}}</td>
-                <td>{{$apartment->number_of_bath}}</td>
-                <td>{{$apartment->square_meters}}</td>
-                <td>{{$apartment->address}}</td>
-                <td>
-                    <div class="row justify-content-around">
-                        <div class="col-4">
-                            <a class="btn btn-primary" href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                        </div>
-                        <div class="col-4">
-                            <a class="btn btn-primary" href="#"><i class="fa-solid fa-newspaper"></i></a>
-                        </div>
-                        <div class="col-4">
 
-                            <form action="" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
-                            </form>
-                        </div>
-                    </div>
+    @if ($apartments->count() > 0)
+        <div class="rounded overflow-hidden">
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Titolo</th>
+                    <th>Sponsor</th>
+                    <th>Prezzo</th>
+                    {{-- <th>Stanze</th>
+                    <th>Letti</th>
+                    <th>Bagni</th>
+                    <th>m<sup>2</sup></th> --}}
+                    <th>Indirizzo</th>
+                    <th>Azioni</th>
                     
-                </td>
-            </tr>
-            @endforeach
-        </table>
+                    
+                </tr>
+                
+                @foreach ($apartments as $apartment)
+                <tr class="tr-table">
+                    <td>{{$apartment->id}}</td>
+                    <td>{{$apartment->title}}</td>
+                    @if ($apartment->visibility == 1)
+                        <td>Sì</td>
+                    @elseif ($apartment->visibility == 0)
+                        <td>No</td>
+                    @endif
+                    <td>{{$apartment->price}}</td>
+                    {{-- <td>{{$apartment->rooms}}</td>
+                    <td>{{$apartment->number_of_bed}}</td>
+                    <td>{{$apartment->number_of_bath}}</td>
+                    <td>{{$apartment->square_meters}}</td> --}}
+                    <td>{{$apartment->address}}</td>
+                    <td>
+                        {{-- <div class="row justify-content-center"> --}}
+                            {{-- <div class="col-4">
+                                <a class="btn btn-dark" href="#"><i class="fa-solid fa-pen"></i></a>
+                            </div> --}}
+                            <a class="btn btn-dark" href="#"><i class="fa-solid fa-eye"></i></a>
+                            {{-- <div class="col-4">
+    
+                                <form action="" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </div> --}}
+                        {{-- </div> --}}
+                        
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
     @else
     <div class="d-flex flex-column align-items-center text-center">
         <img src="{{ Vite::asset("resources/images/login.png") }}" alt="" class="w-100" >
