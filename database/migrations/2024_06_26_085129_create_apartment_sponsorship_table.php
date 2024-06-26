@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('apartament_sponsorship', function (Blueprint $table) {
+        Schema::create('apartment_sponsorship', function (Blueprint $table) {
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')
             ->references('id')
@@ -26,8 +26,8 @@ return new class extends Migration
             ->on('sponsorships')
             ->onDelete('cascade'); 
 
-            // $table->dateTime('start_date');
-            // $table->dateTime('expire_date');
+            $table->dateTime('start_date');
+            $table->dateTime('expire_date');
 
             $table->primary(['apartment_id', 'sponsorship_id']);
         });
