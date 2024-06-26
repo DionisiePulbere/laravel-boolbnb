@@ -6,9 +6,9 @@
         <div class="rounded overflow-hidden">
             <table class="table">
                 <tr>
-                    <th>Id</th>
+                    <th class="d-none d-sm-table-cell">Id</th>
                     <th>Titolo</th>
-                    <th>Sponsor</th>
+                    <th class="d-none d-sm-table-cell">Sponsor</th>
                     <th>Prezzo</th>
                     {{-- <th>Stanze</th>
                     <th>Letti</th>
@@ -22,12 +22,12 @@
                 
                 @foreach ($apartments as $apartment)
                 <tr class="tr-table">
-                    <td>{{$apartment->id}}</td>
+                    <td class="d-none d-sm-table-cell">{{$apartment->id}}</td>
                     <td>{{$apartment->title}}</td>
                     @if ($apartment->visibility == 1)
-                        <td>Sì</td>
+                        <td class="d-none d-sm-table-cell">Sì</td>
                     @elseif ($apartment->visibility == 0)
-                        <td>No</td>
+                        <td class="d-none d-sm-table-cell">No</td>
                     @endif
                     <td>{{$apartment->price}}</td>
                     {{-- <td>{{$apartment->rooms}}</td>
