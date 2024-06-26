@@ -80,7 +80,7 @@
                 <label for="summary" class="form-label">Descrizione</label>
                 <textarea class="form-control" id="summary" rows="10" name="summary">{{ old('summary') }}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Salva</button>
+            <button type="submit" class="btn my-btn-primary text-white">Salva</button>
         </form>  
     </div>
 @endsection
