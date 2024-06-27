@@ -40,6 +40,19 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $date_of_birth = $request-> date_of_birth;
+        if (strtotime($date_of_birth) > time()) {
+            return redirect()->back()->withErrors(['date_of_birth' => 'La data di nascita non può essere nel futuro.'])->withInput();
+        }
+    
+        // Calcolo dell'età
+        $age = date_diff(date_create($date_of_birth), date_create('today'))->y;
+    
+        // Controllo che l'età sia almeno 18 anni
+        if ($age < 18) {
+            return redirect()->back()->withErrors(['date_of_birth' => 'Devi avere almeno 18 anni per registrarti.'])->withInput();
+        }
+
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
