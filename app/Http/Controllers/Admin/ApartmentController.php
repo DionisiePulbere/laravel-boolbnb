@@ -38,6 +38,15 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
+            'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
+            'cover_images.required' => 'Il campo Altri immagini è obbligatorio.',
+            'price.required' => 'Il campo Prezzo è obbligatorio.',
+            'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
+            'description.required' => 'Il campo Descrizione è obbligatorio.',
+        ];
+
         $request->validate([
             'title' => 'required|string|max:255',
             'via' => 'required|string|max:255',
@@ -45,14 +54,14 @@ class ApartmentController extends Controller
             'citta' => 'required|string|max:255',
             'cap' => 'required|string|max:10',
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
-            'cover_images' => 'image|mimes:jpeg,png|max:2048',
+            'cover_images' => 'required|image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
-        ]);
+            'description' => 'required|string|max:1000', 
+        ], $messages);
         $formData = $request->all();
 
         if($request->hasFile('thumb')) {
@@ -102,6 +111,13 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
 
+        $messages = [
+            'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
+            'price.required' => 'Il campo Prezzo è obbligatorio.',
+            'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
+            'description.required' => 'Il campo Descrizione è obbligatorio.',
+        ];
+
         $request->validate([
             'title' => 'required|string|max:255',
             'via' => 'required|string|max:255',
@@ -116,7 +132,7 @@ class ApartmentController extends Controller
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
             'description' => 'required|string|max:1000',
-        ]);
+        ], $messages);
 
         $formData = $request->all();
 
