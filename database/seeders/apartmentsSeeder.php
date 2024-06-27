@@ -18,6 +18,7 @@ class apartmentsSeeder extends Seeder
     {
         for($i=0; $i<10 ; $i++){
             $newApartment = new Apartment();
+            $newApartment->user_id = 1;
             $newApartment->title = $faker->sentence(3);
             $newApartment->slug = Str::slug($newApartment->title, '-');
             $newApartment->visibility = 1;
