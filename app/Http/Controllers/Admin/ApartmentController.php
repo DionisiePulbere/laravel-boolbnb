@@ -19,6 +19,7 @@ class ApartmentController extends Controller
     {
         $currentUser= Auth::user();
         
+        
         $apartments = Apartment::where('user_id','=', $currentUser->id)->get();
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -41,6 +42,8 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+        //vengo in pace
+        $currentUser= Auth::user();
         $request->validate([
             'title' => 'required|string|max:255',
             'via' => 'required|string|max:255',
@@ -68,6 +71,8 @@ class ApartmentController extends Controller
         $newApartment->address = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
         $newApartment->latitude = 41.902782;
         $newApartment->longitude = 12.496366;
+        //aggiungo l'id dell utente --Monsterman
+        $newApartment->user_id = $currentUser->id;
         $newApartment->save();
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
     }
