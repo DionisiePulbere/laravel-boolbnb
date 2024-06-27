@@ -76,6 +76,11 @@ class ApartmentController extends Controller
             $formData['thumb'] = $img_path;  
         }
         
+        if ($request->hasFile('cover_image')) {
+            $cover_path = Storage::disk('public')->put('apartment_image', $formData['cover_image']);
+            $formData['cover_image'] = $cover_path;
+        }
+
         $newApartment = new Apartment();
         $newApartment->fill($formData);
         //aggiungo l'id dell utente --Monsterman
@@ -144,15 +149,20 @@ class ApartmentController extends Controller
         $formData = $request->all();
 
         if ($request->hasFile('thumb')) {
-            // Lo elimina se è stato inserito
             if ($apartment->thumb) {
                 Storage::disk('public')->delete($apartment->thumb);
             }
-            // Salva la nuova copertina
             $thumb_path = Storage::disk('public')->put('apartment_image', $request->file('thumb'));
             $formData['thumb'] = $thumb_path;
         }
 
+        if ($request->hasFile('cover_image')) {
+            if ($apartment->cover_image) {
+                Storage::disk('public')->delete($apartment->cover_image);
+            }
+            $cover_path = Storage::disk('public')->put('apartment_image', $request->file('cover_image'));
+            $formData['cover_image'] = $cover_path;
+        }
 
 
         $apartment->update($formData);
