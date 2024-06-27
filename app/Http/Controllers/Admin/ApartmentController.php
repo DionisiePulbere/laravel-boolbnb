@@ -66,7 +66,7 @@ class ApartmentController extends Controller
             'latitude' => 'required|numeric',
             'longitude'=> 'required|numeric'
         ], $messages);
-        
+
         $formData = $request->all();
 
         if($request->hasFile('thumb')) {
@@ -132,7 +132,7 @@ class ApartmentController extends Controller
             'citta' => 'required|string|max:255',
             'cap' => 'required|string|max:10',
             'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
-            'cover_images' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
             'number_of_room' => 'required|integer|min:1|max:8',
