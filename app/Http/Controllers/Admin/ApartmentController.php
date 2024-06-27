@@ -44,30 +44,10 @@ class ApartmentController extends Controller
     {
         //vengo in pace
         $currentUser= Auth::user();
-        $messages = [
-            'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
-            'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
-            'cover_image.required' => 'Il campo Altri immagini è obbligatorio.',
-            'price.required' => 'Il campo Prezzo è obbligatorio.',
-            'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
-            'description.required' => 'Il campo Descrizione è obbligatorio.',
-            'address.required' => 'Il campo Indirizzo è obbligatorio.',
-        ];
+        
+        $messages = $this->getValidationMessages();
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'thumb' => 'required|image|mimes:jpeg,png|max:2048',
-            'address' => 'required|min:5|string',
-            'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
-            'price' => 'required|numeric|min:0',
-            'square_meters' => 'required|numeric|min:0',
-            'number_of_room' => 'required|integer|min:1|max:8',
-            'number_of_bed' => 'required|integer|min:1|max:8',
-            'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
-            'latitude' => 'required|numeric',
-            'longitude'=> 'required|numeric'
-        ], $messages);
+        $request->validate($this->getStoreValidationRules(), $messages);
 
         $formData = $request->all();
 
@@ -122,29 +102,9 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
 
-        $messages = [
-            'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
-            'price.required' => 'Il campo Prezzo è obbligatorio.',
-            'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
-            'description.required' => 'Il campo Descrizione è obbligatorio.',
-            'address.required' => 'Il campo Indirizzo è obbligatorio.',
-        ];
+        $messages = $this->getValidationMessages();
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'address' => 'required|min:5|string',
-            'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
-            'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
-            'price' => 'required|numeric|min:0',
-            'square_meters' => 'required|numeric|min:0',
-            'number_of_room' => 'required|integer|min:1|max:8',
-            'number_of_bed' => 'required|integer|min:1|max:8',
-            'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
-            'latitude' => 'required|numeric',
-            'longitude'=> 'required|numeric'
-
-        ], $messages);
+        $request->validate($this->getUpdateValidationRules(), $messages);
 
         $formData = $request->all();
 
@@ -184,4 +144,67 @@ class ApartmentController extends Controller
         $apartment->delete();
         return redirect()->route('admin.apartments.index');
     }
+
+    private function getStoreValidationRules()
+    {
+        return [
+            'title' => 'required|string|max:255',
+            'thumb' => 'required|image|mimes:jpeg,png|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
+            'address' => 'required|min:5|string',
+            'price' => 'required|numeric|min:0',
+            'square_meters' => 'required|numeric|min:0',
+            'number_of_room' => 'required|integer|min:1|max:8',
+            'number_of_bed' => 'required|integer|min:1|max:8',
+            'number_of_bath' => 'required|integer|min:1|max:8',
+            'description' => 'required|string|max:1000',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric'
+        ];
+    }
+
+    private function getUpdateValidationRules()
+    {
+        return [
+            'title' => 'required|string|max:255',
+            'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'address' => 'required|min:5|string',
+            'price' => 'required|numeric|min:0',
+            'square_meters' => 'required|numeric|min:0',
+            'number_of_room' => 'required|integer|min:1|max:8',
+            'number_of_bed' => 'required|integer|min:1|max:8',
+            'number_of_bath' => 'required|integer|min:1|max:8',
+            'description' => 'required|string|max:1000',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric'
+        ];
+    }
+
+    private function getValidationMessages()
+    {
+        return [
+            'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
+            'title.string' => 'Il campo Nome dell\'immobile non deve contenere più di 255 caratteri',
+            'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
+            'thumb.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
+            'thumb.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
+            'thumb.max' => 'Il campo Immagine di copertina non può essere più grande di 2048 KB.',
+            'cover_image.required' => 'Il campo Altri immagini è obbligatorio.',
+            'cover_image.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
+            'cover_image.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
+            'cover_image.max' => 'Il campo Immagine di copertina non può essere più grande di 2048 KB.',
+            'address.required' => 'Il campo Indirizzo è obbligatorio.',
+            'price.required' => 'Il campo Prezzo è obbligatorio.',
+            'price.numeric' => 'Il campo Prezzo deve essere un numero.',
+            'price.min' => 'Il campo Prezzo deve essere almeno 0.',
+            'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
+            'square_meters.numeric' => 'Il campo Metri quadrati deve essere un numero.',
+            'square_meters.min' => 'Il campo Metri quadrati deve essere almeno 0.',
+            'description.required' => 'Il campo Descrizione è obbligatorio.',
+            'description.string' => 'Il campo Descrizione deve essere scritto in caratteri.',
+            'description.max' => 'Il campo Descrizione non può essere più lungo di 1000 caratteri.',
+        ];
+    }
 }
+
