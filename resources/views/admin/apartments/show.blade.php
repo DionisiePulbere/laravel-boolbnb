@@ -45,10 +45,10 @@
         </p>
         <p class="dashboard-p">{{$apartment->description}}</p>
         <div class="d-flex mt-4">
-            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-outline-dark">
+            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-outline-dark">
                 Modifica casa<i class="fa-solid fa-pen ms-3"></i>
             </a>
-            <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="POST">
+            <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->slug]) }}" method="POST">
                 @csrf
                 @method('DELETE')
 

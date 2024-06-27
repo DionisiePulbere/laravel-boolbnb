@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -66,7 +67,7 @@ class ApartmentController extends Controller
         $newApartment->latitude = 41.902782;
         $newApartment->longitude = 12.496366;
         $newApartment->save();
-        return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
+        return redirect()->route('admin.apartments.show',['apartment' => $newApartment->slug]);
     }
 
     /**
@@ -136,7 +137,7 @@ class ApartmentController extends Controller
 
         $apartment->update($formData);
 
-        return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
+        return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
     }
 

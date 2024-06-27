@@ -19,6 +19,7 @@ class apartmentsSeeder extends Seeder
         for($i=0; $i<10 ; $i++){
             $newApartment = new Apartment();
             $newApartment->title = $faker->sentence(3);
+            $newApartment->slug = Str::slug($newApartment->title, '-');
             $newApartment->visibility = 1;
             $newApartment->thumb = 'https://picsum.photos/200/300';
             $newApartment->description = $faker->sentence(10);
@@ -31,9 +32,6 @@ class apartmentsSeeder extends Seeder
             $newApartment->longitude =$faker->longitude($min = -90, $max = 90);
             $newApartment->address =$faker->streetAddress();
             $newApartment->save();
-
-
-
         }
     }
 }
