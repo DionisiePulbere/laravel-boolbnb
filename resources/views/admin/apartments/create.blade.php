@@ -6,20 +6,15 @@
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 ">Aggiungi una casa</h2>
         </div>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <form action="{{route('admin.apartments.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control" id="title" name="title" value="{{ old('title') }}">
+            </div>
+            <div class="mb-3">
+                <label for="via" class="form-label">Via</label>
+                <input type="text" placeholder="es. Via Roma" class="form-control" id="via" name="via" value="{{ old('via') }}">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
@@ -30,19 +25,39 @@
             </div>
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
-                <input class="form-control" type="file" id="thumb" name="thumb">
+                <input class="form-control @error('thumb') is-invalid @enderror" type="file" id="thumb" name="thumb">
+                @error('thumb')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
-                <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control" type="file" id="cover_image" name="cover_image">
+                <label for="cover_images" class="form-label">Altri immagini (min.3)</label>
+                <input class="form-control @error('cover_images') is-invalid @enderror" type="file" id="cover_images" name="cover_images">
+                @error('cover_images')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="text" placeholder="Prezzo per una notte"  class="form-control" id="price" name="price" value="{{ old('price') }}">
+                <input type="text" placeholder="Prezzo per una notte"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
+                @error('price')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
-                <input type="text" placeholder="Inserisci i metri quadrati" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                <input type="text" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                @error('square_meters')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="number_of_room" class="form-label">Numero di stanze</label>
@@ -70,7 +85,12 @@
             </div>  
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
-                <textarea class="form-control" placeholder="Descrivi dettagliatamente la tua casa..."  id="description" rows="10" name="description">{{ old('description') }}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..."  id="description" rows="10" name="description">{{ old('description') }}</textarea>
+                @error('description')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <button type="submit" class="btn my-btn-primary text-white mt-3">Salva <i class="fa-solid fa-plus ms-2"></i></button>
         </form>  
