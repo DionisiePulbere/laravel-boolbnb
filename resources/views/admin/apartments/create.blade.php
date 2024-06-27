@@ -10,11 +10,12 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Nome dell'immobile</label>
-                <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control" id="title" name="title" value="{{ old('title') }}">
-            </div>
-            <div class="mb-3">
-                <label for="via" class="form-label">Via</label>
-                <input type="text" placeholder="es. Via Roma" class="form-control" id="via" name="via" value="{{ old('via') }}">
+                <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
+                @error('title')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
