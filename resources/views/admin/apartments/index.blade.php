@@ -36,22 +36,31 @@
                     <td>{{$apartment->square_meters}}</td> --}}
                     <td>{{$apartment->address}}</td>
                     <td>
-                        {{-- <div class="row justify-content-center"> --}}
-                            {{-- <div class="col-4">
-                                <a class="btn btn-dark" href="#"><i class="fa-solid fa-pen"></i></a>
-                            </div> --}}
-                            <a class="btn btn-dark" href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}"><i class="fa-solid fa-eye"></i></a>
-                            {{-- <div class="col-4">
-    
-                                <form action="" method="POST">
-                                    @method('DELETE')
+                        <div class="row justify-content-center">
+                            <div class="col-6 col-lg-4  d-flex justify-content-center">
+                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="d-none d-lg-block col-lg-4 d-flex justify-content-center">
+                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="d-none d-lg-block col-lg-4 d-flex justify-content-center">
+                                <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                    @method('DELETE')
+                                    <button type="submit" class="btn my-btn-primary text-white js-delete-btn" data-apartment-title="{{ $apartment->title }}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
                                 </form>
-                            </div> --}}
-                        {{-- </div> --}}
-                        
+                            </div>
+                        </div>
                     </td>
+                    
                 </tr>
                 @endforeach
             </table>
@@ -68,6 +77,23 @@
     </div>
     @endif
     
-
+    <!-- modale -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="confirmDeleteModal">Conferma Eliminazione</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="button" id="confirm-deletion" class="btn my-btn-primary text-white">Cancella</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
