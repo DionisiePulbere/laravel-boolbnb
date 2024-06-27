@@ -47,7 +47,7 @@ class ApartmentController extends Controller
         $messages = [
             'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
             'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
-            'cover_images.required' => 'Il campo Altri immagini è obbligatorio.',
+            'cover_image.required' => 'Il campo Altri immagini è obbligatorio.',
             'price.required' => 'Il campo Prezzo è obbligatorio.',
             'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
             'description.required' => 'Il campo Descrizione è obbligatorio.',
@@ -56,7 +56,7 @@ class ApartmentController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
-            'cover_images' => 'required|image|mimes:jpeg,png|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
             'number_of_room' => 'required|integer|min:1|max:8',
@@ -66,6 +66,7 @@ class ApartmentController extends Controller
             'latitude' => 'required|numeric',
             'longitude'=> 'required|numeric'
         ], $messages);
+        
         $formData = $request->all();
 
         if($request->hasFile('thumb')) {

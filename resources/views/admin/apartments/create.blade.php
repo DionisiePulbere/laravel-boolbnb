@@ -34,9 +34,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="cover_images" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control @error('cover_images') is-invalid @enderror" type="file" id="cover_images" name="cover_images">
-                @error('cover_images')
+                <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
+                <input class="form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image">
+                @error('cover_image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
