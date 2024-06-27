@@ -51,11 +51,13 @@ class ApartmentController extends Controller
             'price.required' => 'Il campo Prezzo è obbligatorio.',
             'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
             'description.required' => 'Il campo Descrizione è obbligatorio.',
+            'address.required' => 'Il campo Indirizzo è obbligatorio.',
         ];
 
         $request->validate([
             'title' => 'required|string|max:255',
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
+            'address' => 'required|min:5|string',
             'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
@@ -76,9 +78,6 @@ class ApartmentController extends Controller
         
         $newApartment = new Apartment();
         $newApartment->fill($formData);
-        $newApartment->address = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
-        $newApartment->latitude = 41.902782;
-        $newApartment->longitude = 12.496366;
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
         $newApartment->save();
@@ -123,14 +122,12 @@ class ApartmentController extends Controller
             'price.required' => 'Il campo Prezzo è obbligatorio.',
             'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
             'description.required' => 'Il campo Descrizione è obbligatorio.',
+            'address.required' => 'Il campo Indirizzo è obbligatorio.',
         ];
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'via' => 'required|string|max:255',
-            'numero' => 'required|string|max:10',
-            'citta' => 'required|string|max:255',
-            'cap' => 'required|string|max:10',
+            'address' => 'required|min:5|string',
             'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
             'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
@@ -139,6 +136,9 @@ class ApartmentController extends Controller
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
             'description' => 'required|string|max:1000',
+            'latitude' => 'required|numeric',
+            'longitude'=> 'required|numeric'
+
         ], $messages);
 
         $formData = $request->all();
@@ -153,11 +153,11 @@ class ApartmentController extends Controller
             $formData['thumb'] = $thumb_path;
         }
 
-        $formData['address'] = $request->via . ' ' . $request->numero . ', ' . $request->citta . ' ' . $request->cap;
-        $formData['latitude'] = 41.902782;
-        $formData['longitude'] = 12.496366;
+
 
         $apartment->update($formData);
+        $apartment->fill($formData);
+        $apartment->save();
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
 
