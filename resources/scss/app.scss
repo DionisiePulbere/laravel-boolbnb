@@ -152,7 +152,21 @@ tr:nth-of-type(odd) td{
     color: #646464;
 }
 
+/* INIZIO STILE PER RICERCA INDIRIZZO */
+#suggestions {
+    list-style-type: none;
+    border: 1px solid transparent;
+}
 
+#suggestions li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #f0f0f0;
+}
+/* FINE STILE PER RICERCA INDIRIZZO */
 
 // Media query
 

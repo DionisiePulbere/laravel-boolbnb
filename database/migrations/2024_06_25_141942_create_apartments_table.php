@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->boolean('visibility')->default(0);
+            $table->boolean('visibility')->default(1);
             $table->string('thumb');
             $table->text('description');
             $table->decimal('price', total: 7, places: 2 );

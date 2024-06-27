@@ -46,10 +46,6 @@ class ApartmentController extends Controller
         $currentUser= Auth::user();
         $request->validate([
             'title' => 'required|string|max:255',
-            'via' => 'required|string|max:255',
-            'numero' => 'required|string|max:10',
-            'citta' => 'required|string|max:255',
-            'cap' => 'required|string|max:10',
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
             'cover_images' => 'image|mimes:jpeg,png|max:2048',
             'price' => 'required|numeric|min:0',
@@ -58,6 +54,8 @@ class ApartmentController extends Controller
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
             'description' => 'required|string|max:1000',
+            'latitude' => 'required|numeric',
+            'longitude'=> 'required|numeric'
         ]);
         $formData = $request->all();
 
