@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,13 @@ class ApartmentController extends Controller
      */
     public function create(Apartment $apartment)
     {
-        return view('admin.apartments.create', compact('apartment'));
+        $services = Service::all();
+
+        $data = [
+            'services' => $services
+        ];
+
+        return view('admin.apartments.create', $data, compact('apartment'));
     }
 
     /**
@@ -75,12 +82,19 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_image', $formData['thumb']);
             $formData['thumb'] = $img_path;  
         }
+
         
         $newApartment = new Apartment();
         $newApartment->fill($formData);
+
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
         $newApartment->save();
+
+        if($request->has('services')) {
+            $newApartment->services()->attach($formData['services']);
+        }
+
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
     }
 
@@ -102,8 +116,14 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Apartment $apartment)
-    {
-        return view('admin.apartments.edit', compact('apartment'));
+    {  
+        $services = Service::all();
+
+        $data = [
+            'services' => $services
+        ];
+
+        return view('admin.apartments.edit', $data, compact('apartment'));
     }
 
     /**
@@ -153,11 +173,15 @@ class ApartmentController extends Controller
             $formData['thumb'] = $thumb_path;
         }
 
-
-
         $apartment->update($formData);
         $apartment->fill($formData);
         $apartment->save();
+
+        if($request->has('services')) {
+            $apartment->services()->sync($formData['services']);
+        } else {
+            $apartment->services()->detach();
+        }
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
 

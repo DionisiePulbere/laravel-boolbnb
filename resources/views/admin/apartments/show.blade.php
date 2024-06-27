@@ -43,6 +43,16 @@
 
             {{$apartment->square_meters}} m<sup>2</sup>
         </p>
+        <p class="dashboard-p">
+            
+            @if (count($apartment->services) > 0)
+            @foreach ($apartment->services as $service)
+                <i class="{{ $service->icon }}"></i> {{ $service->name }}@if (!$loop->last),@endif
+            @endforeach
+            @else
+                nessun servizio offerto
+            @endif
+        </p>
         <p class="dashboard-p">{{$apartment->description}}</p>
         <div class="d-flex mt-4">
             <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-outline-dark">
