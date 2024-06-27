@@ -24,6 +24,7 @@
                 <tr class="tr-table">
                     <td class="d-none d-sm-table-cell">{{$apartment->id}}</td>
                     <td>{{$apartment->title}}</td>
+                    <td>{{$apartment->slug}}</td>
                     @if ($apartment->visibility == 1)
                         <td class="d-none d-sm-table-cell">Sì</td>
                     @elseif ($apartment->visibility == 0)
@@ -38,19 +39,19 @@
                     <td>
                         <div class="row justify-content-center">
                             <div class="col-6 col-lg-4  d-flex justify-content-center">
-                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                             </div>
                             
                             <div class="d-none d-lg-block col-lg-4 d-flex justify-content-center">
-                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
+                                <a class="btn btn-dark border-none" href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                             </div>
                             
                             <div class="d-none d-lg-block col-lg-4 d-flex justify-content-center">
-                                <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="POST">
+                                <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->slug]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn my-btn-primary text-white js-delete-btn" data-apartment-title="{{ $apartment->title }}">

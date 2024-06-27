@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/apartments', ApartmentController::class);
     Route::resource('apartments', ApartmentController::class)->parameters([
-        'apartments' => 'apartment:id'
+        'apartments' => 'apartment:slug'
     ]);   
 });
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -81,7 +82,7 @@ class ApartmentController extends Controller
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
         $newApartment->save();
-        return redirect()->route('admin.apartments.show',['apartment' => $newApartment->id]);
+        return redirect()->route('admin.apartments.show',['apartment' => $newApartment->slug]);
     }
 
     /**
@@ -159,7 +160,7 @@ class ApartmentController extends Controller
         $apartment->fill($formData);
         $apartment->save();
 
-        return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
+        return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
     }
 
