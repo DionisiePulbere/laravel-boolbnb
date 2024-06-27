@@ -71,7 +71,7 @@
         <h4 class="fw-bold mt-4">Metti la tua prima casa in <span class="primary-color">affitto</span></h4>
         <p>Clicca sul bottone qui sotto, compila il form di inserimento ed inizia subito a guadagnare con Boolbnb</p>
         
-        <a class="btn my-btn-primary text-white w-50 mt-3 mb-5" href="{{ route('password.request') }}">
+        <a class="btn my-btn-primary text-white w-50 mt-3 mb-5" href="{{ route('admin.apartments.create') }}">
             Aggiungi <i class="fa-solid fa-house-medical ms-3"></i>
         </a>
     </div>
