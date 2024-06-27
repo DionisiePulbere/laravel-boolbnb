@@ -49,7 +49,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="text" placeholder="Prezzo per una notte"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
+                <input type="number" placeholder="Prezzo per una notte"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
                 @error('price')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
             </div>
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
-                <input type="text" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
                 @error('square_meters')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -88,7 +88,25 @@
                         <option value="{{ $i }}" @if(old('number_of_bath', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
                     @endfor
                 </select>
-            </div>  
+            </div> 
+            @php
+                $zone = $services->chunk(ceil($services->count() / 2));
+            @endphp
+            <div>
+                <h5>Servizi:</h5>
+                <div class="mb-3 d-flex">
+                    @foreach ($zone as $zona)
+                    <div style="flex: 1;">
+                        @foreach ($zona as $service)
+                        <div class="form-check p-10">
+                            <input @checked(in_array($service->id, old('services', []))) class="service me-1" type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            <label for="service-{{ $service->id }}"><i class="{{ $service->icon }} me-2"></i>{{ $service->name}}</label>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endforeach
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..."  id="description" rows="10" name="description">{{ old('description') }}</textarea>
