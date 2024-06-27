@@ -78,6 +78,12 @@ class ApartmentController extends Controller
         $newApartment->user_id = $currentUser->id;
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->save();
+
+        // "Aggiungo i servizi scelti dall'utente al post creato
+        if($request->has('services')) {
+            $newApartment->services()->attach($formData['services']);
+        }
+
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->slug]);
     }
 
@@ -204,7 +210,8 @@ class ApartmentController extends Controller
     {
         return [
             'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
-            'title.string' => 'Il campo Nome dell\'immobile non deve contenere più di 255 caratteri',
+            'title.string' => 'Il campo Nome dell\'immobile deve essere una stringa',
+            'title.max' => 'Il campo Nome dell\'immobile non deve contenere più di 255 caratteri',
             'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
             'thumb.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
             'thumb.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
