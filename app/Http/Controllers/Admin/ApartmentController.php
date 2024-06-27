@@ -173,15 +173,14 @@ class ApartmentController extends Controller
             $formData['thumb'] = $thumb_path;
         }
 
-        $apartment->update($formData);
-        $apartment->fill($formData);
-        $apartment->save();
+        
+    $apartment->update($formData);
 
-        if($request->has('services')) {
-            $apartment->services()->sync($formData['services']);
-        } else {
-            $apartment->services()->detach();
-        }
+    if ($request->has('services')) {
+        $apartment->services()->sync($formData['services']);
+    } else {
+        $apartment->services()->detach();
+    }
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->id]);
 

@@ -113,13 +113,13 @@
                         @foreach ($zona as $service)
                         <div class="form-check p-10">
                             @if ($errors->any())
-                            {{-- Se ci sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
-                            <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                        @else
-                            {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza dei servizi nella collection che ci arriva dal db --}}
-                            <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                        @endif
-                            <label for="service-{{ $service->id }}"><i class="{{ $service->icon }} me-2"></i>{{ $service->name}}</label>
+                                {{-- Se ci sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @else
+                                {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza dei servizi nella collection che ci arriva dal db --}}
+                                <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @endif
+                                <label for="service-{{ $service->id }}"><i class="{{ $service->icon }} me-2"></i>{{ $service->name}}</label>
                         </div>
                         @endforeach
                     </div>
@@ -137,7 +137,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-dark mt-3">Modifica<i class="fa-solid fa-pen ms-3"></i></button>
+            <button type="submit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
         </form>
     </div>
 @endsection
