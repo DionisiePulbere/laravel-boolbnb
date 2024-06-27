@@ -21,24 +21,13 @@
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control" id="title" name="title" value="{{ old('title') }}">
             </div>
-            {{--  INFO PER LA GEOCALIZAZZIONE --}}
             <div class="mb-3">
-                <label for="via" class="form-label">Via</label>
-                <input type="text" placeholder="es. Via Roma" class="form-control" id="via" name="via" value="{{ old('via') }}">
+                <label for="address" class="form-label">Indirizzo</label>
+                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address') }}">
+                 <ul id="suggestions"></ul>
+                 <input type="hidden" id="latitude" name="latitude">
+                 <input type="hidden" id="longitude" name="longitude">
             </div>
-            <div class="mb-3">
-                <label for="numero" class="form-label">Numero</label>
-                <input type="text" placeholder="Inserisci il numero civico" class="form-control" id="numero" name="numero" value="{{ old('numero') }}">
-            </div>
-            <div class="mb-3">
-                <label for="citta" class="form-label">Città</label>
-                <input type="text" placeholder="Inserisci la città" class="form-control" id="citta" name="citta" value="{{ old('citta') }}">
-            </div>
-            <div class="mb-3">
-                <label for="cap" class="form-label">Cap</label>
-                <input type="text" placeholder="Inserisci il cap" class="form-control" id="cap" name="cap" value="{{ old('cap') }}">
-            </div>
-            {{-- FINE INFO PER LA GEOCALIZAZZIONE --}}
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
                 <input class="form-control" type="file" id="thumb" name="thumb">

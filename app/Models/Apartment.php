@@ -15,11 +15,14 @@ class Apartment extends Model
         'thumb',
         'cover_images',
         'price',
+        'address',
         'square_meters',
         'number_of_room',
         'number_of_bed',
         'number_of_bath',
         'description',
+        'latitude',
+        'longitude'
     ];
 
     public function users() {
