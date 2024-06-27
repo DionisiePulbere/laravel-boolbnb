@@ -81,6 +81,7 @@ class ApartmentController extends Controller
         $newApartment->fill($formData);
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
+        $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->save();
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->slug]);
     }

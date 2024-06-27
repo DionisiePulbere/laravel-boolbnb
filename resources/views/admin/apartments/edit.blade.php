@@ -3,7 +3,7 @@
 @section('content')
     <div class="container pb-5 mb-5">
         <div class="d-flex align-items-center mb-4 show-header pb-2">
-            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
+            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Modifica casa</h2>
         </div>
 

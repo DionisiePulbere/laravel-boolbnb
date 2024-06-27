@@ -8,6 +8,7 @@
                 <tr>
                     <th class="d-none d-sm-table-cell">Id</th>
                     <th>Titolo</th>
+                    <th>Slug</th>
                     <th class="d-none d-sm-table-cell">Sponsor</th>
                     <th>Prezzo</th>
                     {{-- <th>Stanze</th>
