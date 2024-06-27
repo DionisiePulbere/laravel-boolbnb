@@ -18,9 +18,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
+        //utente autenticato
         $currentUser= Auth::user();
         
-        
+        //filtro gli appartamenti prendendo  solo quelli appartenti all user autenticato
         $apartments = Apartment::where('user_id','=', $currentUser->id)->get();
         return view('admin.apartments.index', compact('apartments'));
     }
