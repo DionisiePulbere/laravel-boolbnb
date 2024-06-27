@@ -55,6 +55,8 @@ class ApartmentController extends Controller
             'number_of_bath' => 'required|integer|min:1|max:8',
             'description' => 'required|string|max:1000',
             'latitude' => 'required|numeric',
+            'longitude'=> 'required|numeric',
+            'latitude' => 'required|numeric',
             'longitude'=> 'required|numeric'
         ]);
         $formData = $request->all();
