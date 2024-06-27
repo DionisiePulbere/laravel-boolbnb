@@ -20,9 +20,14 @@
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
                 <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address') }}">
-                 <ul id="suggestions"></ul>
-                 <input type="hidden" id="latitude" name="latitude">
-                 <input type="hidden" id="longitude" name="longitude">
+                <ul id="suggestions"></ul>
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
             </div>
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
