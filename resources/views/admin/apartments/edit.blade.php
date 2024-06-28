@@ -79,7 +79,7 @@
                         <img src="{{ asset('storage/' . $apartment->cover_image) }}" style="max-width: 100px;">
                     </div>
                 @endif
-                <input class="form-control" type="file" id="cover_image" name="cover_image">
+                <input class="form-control" type="file" id="cover_image" name="cover_image" multiple>
             </div>
 
             <div class="mb-3">

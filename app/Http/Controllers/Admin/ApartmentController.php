@@ -158,6 +158,14 @@ class ApartmentController extends Controller
             $cover_path = Storage::disk('public')->put('apartment_image', $request->file('cover_image'));
             $formData['cover_image'] = $cover_path;
         }
+        if ($request->hasFile('cover_image')) {
+            foreach ($request->file('cover_image') as $image) {             
+                $imagePath = Storage::disk('public')->put('apartment_image', $image);
+                $apartmentImage = new Image();
+                $apartmentImage-> image = $imagePath;
+                $apartmentImage->apartment_id = $apartment->id;
+                $apartmentImage->save();
+        }}
 
 
         $apartment->update($formData);
