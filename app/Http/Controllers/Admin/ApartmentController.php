@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Image;
 use App\Models\Service;
 use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Storage;
@@ -65,7 +66,6 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_image', $formData['thumb']);
             $formData['thumb'] = $img_path;  
         }
-
         
         if ($request->hasFile('cover_image')) {
             $cover_path = Storage::disk('public')->put('apartment_image', $formData['cover_image']);
@@ -78,7 +78,19 @@ class ApartmentController extends Controller
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
         $newApartment->slug = Str::slug($newApartment->title, '-');
+
         $newApartment->save();
+
+        if ($request->hasFile('cover_image')) {
+            foreach ($request->file('cover_image') as $image) {             
+                $imagePath = Storage::disk('public')->put('apartment_image', $image);
+                $apartmentImage = new Image();
+                $apartmentImage-> image = $imagePath;
+                $apartmentImage->apartment_id = $newApartment->id;
+                $apartmentImage->save();
+        }}
+
+
 
         // "Aggiungo i servizi scelti dall'utente al post creato
         if($request->has('services')) {
@@ -151,6 +163,7 @@ class ApartmentController extends Controller
             $formData['cover_image'] = $cover_path;
         }
 
+
         $apartment->update($formData);
 
         if($request->has('services')){
@@ -181,7 +194,7 @@ class ApartmentController extends Controller
         return [
             'title' => 'required|string|max:255',
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
-            'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
+            // 'cover_image' => 'required|image|mimes:jpeg,png|max:2048',
             'address' => 'required|min:5|string',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
@@ -199,7 +212,7 @@ class ApartmentController extends Controller
         return [
             'title' => 'required|string|max:255',
             'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
-            'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
+            // 'cover_image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'address' => 'required|min:5|string',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',
@@ -223,9 +236,9 @@ class ApartmentController extends Controller
             'thumb.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
             'thumb.max' => 'Il campo Immagine di copertina non può essere più grande di 2048 KB.',
             'cover_image.required' => 'Il campo Altri immagini è obbligatorio.',
-            'cover_image.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
-            'cover_image.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
-            'cover_image.max' => 'Il campo Immagine di copertina non può essere più grande di 2048 KB.',
+            'cover_image.image' => 'Il campo Altri immagini deve essere un\'immagine.',
+            'cover_image.mimes' => 'Il campo Altri immagini deve essere un file di tipo: jpeg, png.',
+            'cover_image.max' => 'Il campo Altri immagini non può essere più grande di 2048 KB.',
             'address.required' => 'Il campo Indirizzo è obbligatorio.',
             'price.required' => 'Il campo Prezzo è obbligatorio.',
             'price.numeric' => 'Il campo Prezzo deve essere un numero.',

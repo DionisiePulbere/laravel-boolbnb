@@ -19,7 +19,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address') }}">
+                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control @error('title') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
                 <ul id="suggestions"></ul>
                 @error('address')
                     <span class="invalid-feedback" role="alert">
@@ -40,12 +40,12 @@
             </div>
             <div class="mb-3">
                 <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image">
-                @error('cover_image')
+                <input class="form-control" type="file" id="cover_image" name="cover_image[]" multiple>
+                {{-- @error('cover_image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                @enderror
+                @enderror --}}
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
