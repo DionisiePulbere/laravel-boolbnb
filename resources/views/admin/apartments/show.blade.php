@@ -31,6 +31,7 @@
         <div class="mb-3 mt-3">
             @if ($apartment->visibility === 1)
                 <button class="btn my-register-btn px-3" >Sponsorizzato <i class="fa-solid fa-crown"></i></button>
+                <p>Tempo rimanete: {{}}</p>
                 {{-- Magari poi lo riportiamo alla show della sponsorizzazione --}}
             @elseif ($apartment->visibility === 0)
                 <button class="btn my-btn-primary text-white">
