@@ -13,8 +13,8 @@
 
             @if ($apartment->visibility === 0)
                 <div class="mb-3">
-                    <label for="sponsor_id" class="form-label">Sposorizza</label>
-                    <select class="form-select" id="sponsor_id" name="sponsor_id">
+                    <label for="sponsorships" class="form-label">Sposorizza</label>
+                    <select class="form-select" name="sponsorships[]" id="sponsorships">
                         <option value="" selected>Seleziona la sponsor per il tuo appartamento</option>
                         @foreach ($sponsorships as $sponsor)
                             @php
@@ -23,14 +23,22 @@
                                 // Estrai le ore
                                 $hours = (int)explode(':', $duration)[0];
                             @endphp
-                        <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
+                        <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) {{ in_array($sponsor->id, $apartment->sponsorships->pluck('id')->toArray()) ? 'selected' : '' }} value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
                         @endforeach
                       </select>
-                    @error('title')
+                    @error('sponsorships')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                </div>
+            @else
+                <div class="mb-3">
+                    <label for="sponsorships" class="form-label">Vuoi annullare la sponsorizzazione?</label>
+                    <select name="" id="">
+                        <option value="">si</option>
+                        <option value="">no</option>
+                    </select>
                 </div>
             @endif
             

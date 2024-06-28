@@ -11,6 +11,7 @@ use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -176,6 +177,40 @@ class ApartmentController extends Controller
         else {
             $apartment->services()->detach();
         }
+
+        // Gestione delle sponsorizzazioni
+
+        // Ottieni tutte le sponsorizzazioni associate all'appartamento
+        $existingSponsorships = $apartment->sponsorships()->get();
+        // Ottieni l'id della sponsorizzazione attiva corrente, se presente
+        $activeSponsorshipId = $apartment->sponsorships()->wherePivot('active', true)->value('id');
+
+        $now = Carbon::now(); // Ottieni la data e l'ora corrente
+        
+        foreach ($formData['sponsorships'] as $sponsor) {
+            $sponsorship = Sponsorship::find($sponsor);
+
+            if ($sponsorship) {
+                // Calcola l'expire_date in base alla duration della sponsorizzazione
+                $duration = $sponsorship->duration;
+                $durationParts = explode(':', $duration); // Divide la durata in ore, minuti, secondi
+                $hours = (int) $durationParts[0];
+                $minutes = (int) $durationParts[1];
+                $seconds = (int) $durationParts[2];
+
+                // Calcola l'expire_date aggiungendo ore, minuti, secondi alla data corrente
+                $expireDate = $now->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+
+                // Sincronizzazione della tabella pivot con start_date e expire_date
+                $apartment->sponsorships()->syncWithoutDetaching([
+                    $sponsor => [
+                        'start_date' => $now,
+                        'expire_date' => $expireDate,
+                    ]
+                ]);
+            }
+        }
+
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
