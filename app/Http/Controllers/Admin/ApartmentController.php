@@ -148,11 +148,14 @@ class ApartmentController extends Controller
             $formData['cover_image'] = $cover_path;
         }
 
-    if ($request->has('services')) {
-        $apartment->services()->sync($formData['services']);
-    } else {
-        $apartment->services()->detach();
-    }
+        $apartment->update($formData);
+
+        if($request->has('services')){
+            $apartment->services()->sync($formData['services']);
+        }
+        else {
+            $apartment->services()->detach();
+        }
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
