@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Service;
+use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -107,9 +108,11 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {  
         $services = Service::all();
+        $sponsorships = Sponsorship::all();
 
         $data = [
-            'services' => $services
+            'services' => $services,
+            'sponsorships'=>$sponsorships
         ];
 
         return view('admin.apartments.edit', $data, compact('apartment'));

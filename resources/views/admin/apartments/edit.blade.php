@@ -11,6 +11,30 @@
             @csrf
             @method('PUT') <!-- Include this for the PUT request -->
 
+            @if ($apartment->visibility === 0)
+                <div class="mb-3">
+                    <label for="sponsor_id" class="form-label">Sposorizza</label>
+                    <select class="form-select" id="sponsor_id" name="sponsor_id">
+                        <option value="" selected>Seleziona la sponsor per il tuo appartamento</option>
+                        @foreach ($sponsorships as $sponsor)
+                            @php
+                                // Supponiamo che $sponsor->duration contenga "24:00:00"
+                                $duration = $sponsor->duration;
+                                // Estrai le ore
+                                $hours = (int)explode(':', $duration)[0];
+                            @endphp
+                        <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
+                        @endforeach
+                      </select>
+                    @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            @endif
+            
+
             <div class="mb-3">
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $apartment->title) }}">
