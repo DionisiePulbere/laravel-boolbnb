@@ -29,8 +29,8 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                <input type="hidden" id="latitude" name="latitude">
-                <input type="hidden" id="longitude" name="longitude">
+                <input type="hidden" id="latitude" name="latitude" value="{{old('longitude', $apartment->latitude)}}">
+                <input type="hidden" id="longitude" name="longitude" value="{{old('latitude', $apartment->longitude)}}">
             </div>
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
