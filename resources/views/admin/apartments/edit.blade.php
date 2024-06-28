@@ -25,7 +25,7 @@
                             @endphp
                         <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) {{ in_array($sponsor->id, $apartment->sponsorships->pluck('id')->toArray()) ? 'selected' : '' }} value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
                         @endforeach
-                      </select>
+                    </select>
                     @error('sponsorships')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -34,11 +34,16 @@
                 </div>
             @else
                 <div class="mb-3">
-                    <label for="sponsorships" class="form-label">Vuoi annullare la sponsorizzazione?</label>
-                    <select name="" id="">
-                        <option value="">si</option>
-                        <option value="">no</option>
+                    <label for="cancel_sponsorship" class="form-label">Vuoi annullare la sponsorizzazione?</label>
+                    <select class="form-select" name="cancel_sponsorship" id="cancel_sponsorship">
+                        <option value="no" selected>No</option>
+                        <option value="yes">Sì</option>
                     </select>
+                    @error('sponsorships')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
             @endif
             
