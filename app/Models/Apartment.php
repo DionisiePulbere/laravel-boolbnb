@@ -40,7 +40,7 @@ class Apartment extends Model
     }
 
     public function views() {
-        return $this->hasMany(Views::class);
+        return $this->hasMany(View::class);
     }
 
     public function sponsorships() {

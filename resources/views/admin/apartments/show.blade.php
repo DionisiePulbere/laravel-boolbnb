@@ -6,8 +6,27 @@
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Torna alle case</h2>
         </div>
-        <div class="overflow-hidden" style="border-radius: 12px;width:75%">
-            <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" >
+        @if ($apartment->thumb)
+            <img src="{{ asset('storage/' . $apartment->thumb) }}" style="max-width: 100px;">
+         @else
+            <div class="overflow-hidden" style="border-radius: 12px; max-width:300px">
+                <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" > 
+            </div>
+        @endif
+        {{-- <div class="overflow-hidden" style="border-radius: 12px;width:75%">
+            <img src="{{ Storage::url($cover_image) }}" alt="" class="w-50" >
+        </div> --}}
+        <div>
+            <h3>Altre immagini</h3>
+            @if ($apartment->images->count())
+                <div class="mb-3">
+                    @foreach($apartment->images as $image)
+                        <img src="{{ asset('storage/' . $image->image) }}" style="max-width: 100px;">
+                    @endforeach
+                </div>
+            @else
+                <p>Nessuna immagine aggiuntiva disponibile.</p>
+            @endif
         </div>
         <div class="mb-3 mt-3">
             @if ($apartment->visibility = 1)

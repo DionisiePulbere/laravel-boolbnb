@@ -44,10 +44,13 @@
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
                 @if ($apartment->thumb)
                     <div class="mb-3">
-                        {{-- <img src="{{ asset('storage/' . $apartment->thumb) }}" style="max-width: 100px;"> --}}
-                        <div class="overflow-hidden" style="border-radius: 12px;max-width:300px">
-                            <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" >
-                        </div>
+                        @if ($apartment->thumb)
+                            <img src="{{ asset('storage/' . $apartment->thumb) }}" style="max-width: 100px;">
+                        @else
+                            <div class="overflow-hidden" style="border-radius: 12px;max-width:300px">
+                                <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" > 
+                            </div>
+                        @endif
                     </div>
                 @endif
                 <input class="form-control" type="file" id="thumb" name="thumb">
@@ -55,11 +58,11 @@
 
             <div class="mb-3">
                 <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
-                {{-- @if ($apartment->cover_image)
+                @if ($apartment->cover_image)
                     <div class="mb-3">
                         <img src="{{ asset('storage/' . $apartment->cover_image) }}" style="max-width: 100px;">
                     </div>
-                @endif --}}
+                @endif
                 <input class="form-control" type="file" id="cover_image" name="cover_image">
             </div>
 
