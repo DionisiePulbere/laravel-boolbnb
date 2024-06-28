@@ -175,3 +175,25 @@ tr:nth-of-type(odd) td{
         border-right: 0;
     }
 }
+
+
+// Validazione
+
+.input-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 12px;
+    height: 13px;
+}
