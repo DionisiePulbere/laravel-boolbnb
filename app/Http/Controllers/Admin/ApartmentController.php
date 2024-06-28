@@ -67,10 +67,6 @@ class ApartmentController extends Controller
             $formData['thumb'] = $img_path;  
         }
         
-        if ($request->hasFile('cover_image')) {
-            $cover_path = Storage::disk('public')->put('apartment_image', $formData['cover_image']);
-            $formData['cover_image'] = $cover_path;
-        }
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
