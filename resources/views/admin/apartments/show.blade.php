@@ -10,10 +10,10 @@
             <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" >
         </div>
         <div class="mb-3 mt-3">
-            @if ($apartment->visibility = 1)
+            @if ($apartment->visibility === 1)
                 <button class="btn my-register-btn px-3" >Sponsorizzato <i class="fa-solid fa-crown"></i></button>
                 {{-- Magari poi lo riportiamo alla show della sponsorizzazione --}}
-            @elseif ($apartment->visibility = 0)
+            @elseif ($apartment->visibility === 0)
                 <button class="btn my-btn-primary text-white">
                     Sponsorizza questa casa<i class="fa-solid fa-ranking-star ms-3"></i>
                 </button>
