@@ -105,7 +105,13 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $sponsorships = Sponsorship::all();
+
+        $data = [
+            'sponsorships' => $sponsorships
+        ];
+
+        return view('admin.apartments.show', $data ,compact('apartment'));
     }
 
     /**

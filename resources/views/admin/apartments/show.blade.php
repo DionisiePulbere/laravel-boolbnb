@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@php
+    use Carbon\Carbon;
+@endphp
 @section('content')
     <div class="d-flex flex-column mb-5">
         <div class="d-flex align-items-center mb-5 show-header pb-2">
@@ -30,12 +32,37 @@
         </div>
         <div class="mb-3 mt-3">
             @if ($apartment->visibility === 1)
-                <button class="btn my-register-btn px-3" >Sponsorizzato <i class="fa-solid fa-crown"></i></button>
-                <p>Tempo rimanete: {{}}</p>
-                {{-- Magari poi lo riportiamo alla show della sponsorizzazione --}}
+                <button class="btn my-register-btn px-3">Sponsorizzato <i class="fa-solid fa-crown"></i></button>
+                @if ($apartment->sponsorships->isNotEmpty())
+                    @foreach ($apartment->sponsorships as $sponsorship)
+                        @php
+                            $expire_date = \Carbon\Carbon::parse($sponsorship->pivot->expire_date);
+                            $now = \Carbon\Carbon::now();
+                            $diff = $expire_date->diff($now);
+                            
+                            $days = $diff->days;
+                            $hours = $diff->h;
+                            $minutes = $diff->i;
+                            $seconds = $diff->s;
+                            
+                            // Formattazione del risultato
+                            if ($days > 0) {
+                                $formatted_time = "{$days} giorni";
+                            } elseif ($hours > 0) {
+                                $formatted_time = "{$hours} ore {$minutes} minuti";
+                            } elseif ($minutes > 0) {
+                                $formatted_time = "{$minutes} minuti";
+                            } else {
+                                $formatted_time = "{$seconds} secondi";
+                            }
+                        @endphp
+                        <p>Tempo rimanente: {{ $formatted_time }}</p>
+                        {{-- Magari poi lo riportiamo alla show della sponsorizzazione --}}
+                    @endforeach
+                @endif
             @elseif ($apartment->visibility === 0)
                 <button class="btn my-btn-primary text-white">
-                    Sponsorizza questa casa<i class="fa-solid fa-ranking-star ms-3"></i>
+                    Sponsorizza questa casa <i class="fa-solid fa-ranking-star ms-3"></i>
                 </button>
             @endif
         </div>
