@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Service;
+use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -33,7 +35,13 @@ class ApartmentController extends Controller
      */
     public function create(Apartment $apartment)
     {
-        return view('admin.apartments.create', compact('apartment'));
+        $services = Service::all();
+
+        $data = [
+            'services' => $services
+        ];
+
+        return view('admin.apartments.create', $data, compact('apartment'));
     }
 
     /**
@@ -57,6 +65,7 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_image', $formData['thumb']);
             $formData['thumb'] = $img_path;  
         }
+
         
         if ($request->hasFile('cover_image')) {
             $cover_path = Storage::disk('public')->put('apartment_image', $formData['cover_image']);
@@ -65,10 +74,17 @@ class ApartmentController extends Controller
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
+
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->save();
+
+        // "Aggiungo i servizi scelti dall'utente al post creato
+        if($request->has('services')) {
+            $newApartment->services()->attach($formData['services']);
+        }
+
         return redirect()->route('admin.apartments.show',['apartment' => $newApartment->slug]);
     }
 
@@ -90,8 +106,16 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Apartment $apartment)
-    {
-        return view('admin.apartments.edit', compact('apartment'));
+    {  
+        $services = Service::all();
+        $sponsorships = Sponsorship::all();
+
+        $data = [
+            'services' => $services,
+            'sponsorships'=>$sponsorships
+        ];
+
+        return view('admin.apartments.edit', $data, compact('apartment'));
     }
 
     /**
@@ -127,10 +151,14 @@ class ApartmentController extends Controller
             $formData['cover_image'] = $cover_path;
         }
 
-
         $apartment->update($formData);
-        $apartment->fill($formData);
-        $apartment->save();
+
+        if($request->has('services')){
+            $apartment->services()->sync($formData['services']);
+        }
+        else {
+            $apartment->services()->detach();
+        }
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
@@ -188,7 +216,8 @@ class ApartmentController extends Controller
     {
         return [
             'title.required' => 'Il campo Nome dell\'immobile è obbligatorio.',
-            'title.string' => 'Il campo Nome dell\'immobile non deve contenere più di 255 caratteri',
+            'title.string' => 'Il campo Nome dell\'immobile deve essere una stringa',
+            'title.max' => 'Il campo Nome dell\'immobile non deve contenere più di 255 caratteri',
             'thumb.required' => 'Il campo Immagine di copertina è obbligatorio.',
             'thumb.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
             'thumb.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',

@@ -11,6 +11,30 @@
             @csrf
             @method('PUT') <!-- Include this for the PUT request -->
 
+            @if ($apartment->visibility === 0)
+                <div class="mb-3">
+                    <label for="sponsor_id" class="form-label">Sposorizza</label>
+                    <select class="form-select" id="sponsor_id" name="sponsor_id">
+                        <option value="" selected>Seleziona la sponsor per il tuo appartamento</option>
+                        @foreach ($sponsorships as $sponsor)
+                            @php
+                                // Supponiamo che $sponsor->duration contenga "24:00:00"
+                                $duration = $sponsor->duration;
+                                // Estrai le ore
+                                $hours = (int)explode(':', $duration)[0];
+                            @endphp
+                        <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
+                        @endforeach
+                      </select>
+                    @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            @endif
+            
+
             <div class="mb-3">
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $apartment->title) }}">
@@ -20,26 +44,18 @@
                     </span>
                 @enderror
             </div>
-
-            {{--  INFO PER LA GEOCALIZZAZIONE --}}
             <div class="mb-3">
-                <label for="via" class="form-label">Via</label>
-                <input type="text" placeholder="es. Via Roma" class="form-control" id="via" name="via" value="{{ old('via', $apartment->via) }}">
+                <label for="address" class="form-label">Indirizzo</label>
+                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address', $apartment->address) }}">
+                <ul id="suggestions"></ul>
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <input type="hidden" id="latitude" name="latitude" value="{{old('longitude', $apartment->latitude)}}">
+                <input type="hidden" id="longitude" name="longitude" value="{{old('latitude', $apartment->longitude)}}">
             </div>
-            <div class="mb-3">
-                <label for="numero" class="form-label">Numero</label>
-                <input type="text" placeholder="Inserisci il numero civico" class="form-control" id="numero" name="numero" value="{{ old('numero', $apartment->numero) }}">
-            </div>
-            <div class="mb-3">
-                <label for="citta" class="form-label">Città</label>
-                <input type="text" placeholder="Inserisci la città" class="form-control" id="citta" name="citta" value="{{ old('citta', $apartment->citta) }}">
-            </div>
-            <div class="mb-3">
-                <label for="cap" class="form-label">Cap</label>
-                <input type="text" placeholder="Inserisci il cap" class="form-control" id="cap" name="cap" value="{{ old('cap', $apartment->cap) }}">
-            </div>
-            {{-- FINE INFO PER LA GEOCALIZZAZIONE --}}
-
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
                 @if ($apartment->thumb)
@@ -65,7 +81,7 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="text" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
+                <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
                 @error('price')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -75,7 +91,7 @@
 
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
-                <input type="text" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
+                <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
                 @error('square_meters')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -110,6 +126,31 @@
                 </select>
             </div>
 
+            @php
+            $zone = $services->chunk(ceil($services->count() / 2));
+            @endphp
+            <div>
+                <h5>Servizi:</h5>
+                <div class="mb-3 d-flex">
+                    @foreach ($zone as $zona)
+                    <div style="flex: 1;">
+                        @foreach ($zona as $service)
+                        <div class="form-check p-10">
+                            @if ($errors->any())
+                                {{-- Se ci sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @else
+                                {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza dei servizi nella collection che ci arriva dal db --}}
+                                <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @endif
+                                <label for="service-{{ $service->id }}"><i class="{{ $service->icon }} me-2"></i>{{ $service->name}}</label>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..." id="description" rows="10" name="description">{{ old('description', $apartment->description) }}</textarea>
@@ -120,7 +161,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-dark mt-3">Modifica<i class="fa-solid fa-pen ms-3"></i></button>
+            <button type="submit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
         </form>
     </div>
 @endsection

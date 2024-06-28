@@ -21,7 +21,7 @@ class apartmentsSeeder extends Seeder
             $newApartment->user_id = 1;
             $newApartment->title = $faker->sentence(3);
             $newApartment->slug = Str::slug($newApartment->title, '-');
-            $newApartment->visibility = 1;
+            $newApartment->visibility = 0;
             $newApartment->thumb = 'https://picsum.photos/200/300';
             $newApartment->description = $faker->sentence(10);
             $newApartment->price =$faker->randomFloat(2, 100, 999) ;

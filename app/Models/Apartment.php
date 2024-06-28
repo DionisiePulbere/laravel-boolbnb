@@ -39,10 +39,6 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function views() {
-        return $this->hasMany(Views::class);
-    }
-
     public function sponsorships() {
         return $this->belongsToMany(Sponsorship::class);
     }
@@ -50,4 +46,9 @@ class Apartment extends Model
     public function services() {
         return $this->belongsToMany(Service::class);
     }
+
+    public function views() {
+        return $this->hasMany(Views::class);
+    }
+
 }
