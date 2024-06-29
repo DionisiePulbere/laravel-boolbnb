@@ -84,11 +84,11 @@ const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
 // const coverImage = document.getElementById('cover_image');
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
+// form.addEventListener('submit', e => {
+//     e.preventDefault();
 
-    validateInputs();
-});
+//     validateInputs();
+// });
 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -164,3 +164,10 @@ const validateInputs = () => {
     //     setSuccess(coverImage);
     // }
 };
+//funzione che blocca l'invio del form create dopo il primo click sul submit
+const CreateForm = document.querySelector('#create-form');
+const CreateBtnSubmit = document.querySelector('#createSubmit');
+CreateForm.addEventListener('sumbit',onFormSubmit);
+function onFormSubmit(){
+    CreateBtnSubmit.classList.add('disabled');
+}
