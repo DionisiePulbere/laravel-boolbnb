@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentController;
-
+use App\Http\Controllers\Api\ImageController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
+Route::get('/apartment_image/{filename}', [imageController::class, 'show']);
+
