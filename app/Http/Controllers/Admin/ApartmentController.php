@@ -122,12 +122,14 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {  
+        $images=Image::all();
         $services = Service::all();
         $sponsorships = Sponsorship::all();
 
         $data = [
             'services' => $services,
-            'sponsorships'=>$sponsorships
+            'sponsorships'=>$sponsorships,
+            'images'=>$images
         ];
 
         return view('admin.apartments.edit', $data, compact('apartment'));
@@ -255,7 +257,7 @@ class ApartmentController extends Controller
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:8000',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric'
         ];
@@ -273,7 +275,7 @@ class ApartmentController extends Controller
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:8000',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric'
         ];
