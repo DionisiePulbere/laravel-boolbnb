@@ -17,6 +17,7 @@ class apartmentsSeeder extends Seeder
     public function run(Faker $faker)
     {
         $newApartment1 = new Apartment();
+        $newApartment1->id = 1;
         $newApartment1->user_id = 1;
         $newApartment1->title = 'Baita Elio';
         $newApartment1->slug = Str::slug($newApartment1->title, '-');
@@ -36,6 +37,7 @@ class apartmentsSeeder extends Seeder
         $newApartment1->save();
 
         $newApartment2 = new Apartment();
+        $newApartment2->user_id = 2;
         $newApartment2->user_id = 1;
         $newApartment2->title = 'Starhotels Grand Milan';
         $newApartment2->slug = Str::slug($newApartment2->title, '-');
@@ -60,6 +62,7 @@ class apartmentsSeeder extends Seeder
         $newApartment2->save();
 
         $newApartment3 = new Apartment();
+        $newApartment3->id = 3;
         $newApartment3->user_id = 1;
         $newApartment3->title = 'Villa De Luca';
         $newApartment3->slug = Str::slug($newApartment3->title, '-');
@@ -79,6 +82,7 @@ class apartmentsSeeder extends Seeder
         $newApartment3->save();
 
         $newApartment4 = new Apartment();
+        $newApartment4->id = 4;
         $newApartment4->user_id = 1;
         $newApartment4->title = 'Casa Patrizia Firenze';
         $newApartment4->slug = Str::slug($newApartment4->title, '-');
