@@ -72,30 +72,31 @@
             <div class="mb-3">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
                 @if ($apartment->thumb)
-                    <div class="mb-3">
+                    <div class="mb-3 ms-image-container">
                         @if (filter_var($apartment->thumb, FILTER_VALIDATE_URL))
-                            <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" style="width:200px; height:200px">
+                            <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="ms-img">
                         @else
-                            <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" style="width:200px; height:200px">
+                            <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="ms-img">
                         @endif
                     </div>
                 @endif
                 <input class="form-control" type="file" id="thumb" name="thumb">
             </div>
-
-            <div class="mb-3">
                 <label for="image" class="form-label">Altri immagini (min.3)</label>
-                <div class="d-flex my-3">
-                    @foreach ($apartment->images as $image)
-                        @if ($image->image)
-                            @if (filter_var($image->image, FILTER_VALIDATE_URL))
-                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="pe-2" style="width:100px; height:200px" class="me-3">
-                            @else
-                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" style="width:100px; height:200px" class="me-3">
-                            @endif
+            <div class="mb-3">
+                @foreach ($apartment->images as $image)
+                    @if ($image->image)
+                        @if (filter_var($image->image, FILTER_VALIDATE_URL))
+                            <div class="ms-img-container mb-3">
+                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="ms-img">
+                            </div>
+                        @else
+                            <div class="ms-img-container mb-3">
+                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" class="ms-img">
+                            </div>
                         @endif
-                    @endforeach
-                </div>
+                    @endif
+                @endforeach
                 <input class="form-control" type="file" id="image" name="image[]" multiple>
             </div>
 
