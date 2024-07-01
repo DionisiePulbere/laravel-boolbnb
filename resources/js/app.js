@@ -75,20 +75,25 @@ function clearSuggestions() {
 /* FINE RICERCA TRAMITE TOM TOM INDIRIZZO NELLA CRUD */
 
 // Validazione Client Side 
-const form = document.getElementById('create-form');
+const formCreate = document.getElementById('create-form');
 const title = document.getElementById('title');
 const address = document.getElementById('address');
-// const thumb = document.getElementById('thumb');
+const thumb = document.getElementById('thumb');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
-// const coverImage = document.getElementById('cover_image');
+// const coverImage = document.getElementById('cover_image').files;
 
-// form.addEventListener('submit', e => {
-//     e.preventDefault();
+formCreate.addEventListener('submit', e => {
+    e.preventDefault();
 
-//     validateInputs();
-// });
+    validateInputsCreate();
+    // da cambiare in 7 non appena risolto cover_image
+    if (document.querySelectorAll('.success').length === 6) {
+        
+        form.submit();
+    } 
+});
 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -108,15 +113,14 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 };
 
-const validateInputs = () => {
+const validateInputsCreate = () => {
     const titleValue = title.value;
     const addressValue = address.value;
-    // const thumbValue = thumb.;
+    const thumbValue = thumb.value;
     const priceValue = price.value;
     const descriptionValue = description.value;
     const squareMetersValue = squareMeters.value;
-    // const coverImageValue = coverImage.;
-
+    // const coverImageValue = coverImage;
 
     if(titleValue === '') {
         setError(title, 'Il titolo è richiesto');
@@ -130,11 +134,11 @@ const validateInputs = () => {
         setSuccess(address);
     }
 
-    // if(thumbValue === '') {
-    //     setError(thumb, 'L\'immagine di copertina è richiesta');
-    // } else {
-    //     setSuccess(thumb);
-    // }
+    if(thumbValue === '') {
+        setError(thumb, 'L\'immagine di copertina è richiesta');
+    } else {
+        setSuccess(thumb);
+    }
 
     if(priceValue === '') {
         setError(price, 'Il prezzo è richiesto');
@@ -154,13 +158,15 @@ const validateInputs = () => {
         setSuccess(squareMeters);
     }
 
-    // if( coverImageValue === '') {
+    // if( coverImageValue === "") {
     //     setError(coverImage, 'Sono richieste almeno 3 immagini');
-    // } else if( coverImageValue === 1) {
+    // } 
+    // else if( coverImageValue === 1) {
     //     setError(coverImage, 'Sono richieste altre 2 immagini');
     // } else if( coverImageValue === 2) {
     //     setError(coverImage, 'È richiesta un\'altra immagine');
-    // } else {
+    // }
+    //  else {
     //     setSuccess(coverImage);
     // }
 };

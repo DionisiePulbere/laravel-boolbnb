@@ -7,7 +7,7 @@
             <h2 class="fw-bold ms-3 mb-0">Modifica casa</h2>
         </div>
 
-        <form action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
+        <form id="edit-form" action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Include this for the PUT request -->
 
@@ -48,18 +48,20 @@
             @endif
             
 
-            <div class="mb-3">
+            <div class="mb-3 input-control">
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $apartment->title) }}">
+                <div class="error"></div>
                 @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-3 input-control">
                 <label for="address" class="form-label">Indirizzo</label>
                 <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address', $apartment->address) }}">
+                <div class="error"></div>
                 <ul id="suggestions"></ul>
                 @error('address')
                     <span class="invalid-feedback" role="alert">
@@ -95,9 +97,10 @@
                 <input class="form-control" type="file" id="cover_image" name="cover_image" multiple>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 input-control">
                 <label for="price" class="form-label">Prezzo</label>
                 <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
+                <div class="error"></div>
                 @error('price')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -105,9 +108,10 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 input-control">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
                 <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
+                <div class="error"></div>
                 @error('square_meters')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -167,9 +171,10 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 input-control">
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..." id="description" rows="10" name="description">{{ old('description', $apartment->description) }}</textarea>
+                <div class="error"></div>
                 @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -177,7 +182,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
+            <button type="submit" id="editSubmit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
         </form>
     </div>
 @endsection

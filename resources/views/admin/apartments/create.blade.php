@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3 input-control">
                 <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
-                <input class="form-control @error('thumb') is-invalid @enderror" type="file" id="thumb" name="thumb">
+                <input class="form-control @error('thumb') is-invalid @enderror" type="file" id="thumb" name="thumb" >
                 <div class="error"></div>
                 @error('thumb')
                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3 input-control">
                 <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control" type="file" id="cover_image" name="cover_image[]" multiple>
+                <input class="form-control" type="file" id="cover_image" name="cover_image[]" multiple >
                 <div class="error"></div>
                 {{-- @error('cover_image')
                     <span class="invalid-feedback" role="alert">
