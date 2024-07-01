@@ -160,18 +160,14 @@ class ApartmentController extends Controller
             $formData['thumb'] = $thumb_path;
         }
 
-        if ($request->hasFile('image')) {
-            if ($apartment->image) {
-                Storage::disk('public')->delete($apartment->image);
-            }
-        }
+        
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {             
                 $imagePath = Storage::disk('public')->put('apartment_image', $image);
                 $apartmentImage = new Image();
                 $apartmentImage-> image = $imagePath;
                 $apartmentImage->apartment_id = $apartment->id;
-                $apartmentImage->update();
+                $apartmentImage->save();
         }}
 
         $apartment->update($formData);
