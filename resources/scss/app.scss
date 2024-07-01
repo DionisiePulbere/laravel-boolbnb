@@ -176,7 +176,25 @@ tr:nth-of-type(odd) td{
     }
 }
 
+// Immagini
+.ms-image-container {
+    max-width: 500px;
+    max-height: 400px; 
+    overflow: hidden;
+    border-radius: 10px;
+}
 
+.ms-img-container{
+    max-width: 300px;
+    max-height: 200px;
+    display: inline-block;
+}
+.ms-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
 // Validazione
 
 .input-control {

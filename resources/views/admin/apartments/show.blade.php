@@ -2,28 +2,35 @@
 @php
     use Carbon\Carbon;
 @endphp
+
 @section('content')
     <div class="d-flex flex-column mb-5">
         <div class="d-flex align-items-center mb-5 show-header pb-2">
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Torna alle case</h2>
         </div>
-        @if ($apartment->thumb)
-            <img src="{{ asset('storage/' . $apartment->thumb) }}" style="max-width: 100px;">
-         @else
-            <div class="overflow-hidden" style="border-radius: 12px; max-width:300px">
-                <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" > 
-            </div>
-        @endif
-        {{-- <div class="overflow-hidden" style="border-radius: 12px;width:75%">
-            <img src="{{ Storage::url($cover_image) }}" alt="" class="w-50" >
-        </div> --}}
-        <div>
+        <div class="overflow-hidden" style="border-radius: 12px; max-width: 300px;">
+            @if ($apartment->thumb)
+                @if (filter_var($apartment->thumb, FILTER_VALIDATE_URL))
+                    <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="w-100">
+                @else
+                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="w-100">
+                @endif
+            @endif
+        </div>
+
+        <div class="mt-3">
             <h3>Altre immagini</h3>
             @if ($apartment->images->count())
                 <div class="mb-3">
-                    @foreach($apartment->images as $image)
-                        <img src="{{ asset('storage/' . $image->image) }}" style="max-width: 100px;">
+                    @foreach ($apartment->images as $image)
+                        @if ($image->image)
+                            @if (filter_var($image->image, FILTER_VALIDATE_URL))
+                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="pe-2" style="width:100px; height:200px" class="me-3">
+                            @else
+                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" style="width:100px; height:200px" class="me-3">
+                            @endif
+                        @endif
                     @endforeach
                 </div>
             @else
@@ -67,7 +74,20 @@
             @endif
         </div>
         <h2 class="fw-bold mt-4">{{$apartment->title}}</h2>
-        <p class="dashboard-p"><span class="price-bold">Indirizzo: </span>{{$apartment->address}}</p>
+        
+        <div class="mb-3 input-control" hidden>
+            <label for="latitude" class="form-label">Latitudine</label>
+            <p id="latitude">{{ $apartment->latitude }}</p>
+        </div>
+        <div class="mb-3 input-control" hidden>
+            <label for="longitude" class="form-label">Longitudine</label>
+            <p id="longitude">{{ $apartment->longitude }}</p>
+        </div>
+        <div id="map" class="mt-3" style="width: 600px; height: 400px;"></div>
+        <div class="mb-3 mt-3 input-control">
+            <label for="address" id="address" class="form-label">Indirizzo: {{ $apartment->address }}</label>
+        </div>
+
         <p class="dashboard-p"><span class="price-bold">{{$apartment->price}} €</span> a notte.</p>
         <p class="dashboard-p">
             @if ($apartment->number_of_room < 2)
@@ -133,3 +153,5 @@
         </div>
     </div>
 @endsection
+
+{{-- <img src="{{$apartment->thumb ? $apartment->thumb : asset('storage/' . $apartment->thumb) }}" alt="{{$apartment->title}}" class="w-100"> --}}

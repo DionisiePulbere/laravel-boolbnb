@@ -42,14 +42,14 @@
                 @enderror
             </div>
             <div class="mb-3 input-control">
-                <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control" type="file" id="cover_image" name="cover_image[]" multiple>
+                <label for="image" class="form-label">Altri immagini (min.3)</label>
+                <input class="form-control" type="file" id="image" name="image[]" multiple>
                 <div class="error"></div>
-                {{-- @error('cover_image')
+                @error('image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                @enderror --}}
+                @enderror
             </div>
             <div class="mb-3 input-control">
                 <label for="price" class="form-label">Prezzo</label>

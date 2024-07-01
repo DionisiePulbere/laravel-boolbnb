@@ -78,8 +78,8 @@ class ApartmentController extends Controller
 
         $newApartment->save();
 
-        if ($request->hasFile('cover_image')) {
-            foreach ($request->file('cover_image') as $image) {             
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {             
                 $imagePath = Storage::disk('public')->put('apartment_image', $image);
                 $apartmentImage = new Image();
                 $apartmentImage-> image = $imagePath;
@@ -122,12 +122,14 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {  
+        $images=Image::all();
         $services = Service::all();
         $sponsorships = Sponsorship::all();
 
         $data = [
             'services' => $services,
-            'sponsorships'=>$sponsorships
+            'sponsorships'=>$sponsorships,
+            'images'=>$images
         ];
 
         return view('admin.apartments.edit', $data, compact('apartment'));
@@ -158,22 +160,15 @@ class ApartmentController extends Controller
             $formData['thumb'] = $thumb_path;
         }
 
-        if ($request->hasFile('cover_image')) {
-            if ($apartment->cover_image) {
-                Storage::disk('public')->delete($apartment->cover_image);
-            }
-            $cover_path = Storage::disk('public')->put('apartment_image', $request->file('cover_image'));
-            $formData['cover_image'] = $cover_path;
-        }
-        if ($request->hasFile('cover_image')) {
-            foreach ($request->file('cover_image') as $image) {             
+        
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {             
                 $imagePath = Storage::disk('public')->put('apartment_image', $image);
                 $apartmentImage = new Image();
                 $apartmentImage-> image = $imagePath;
                 $apartmentImage->apartment_id = $apartment->id;
                 $apartmentImage->save();
         }}
-
 
         $apartment->update($formData);
 
@@ -256,7 +251,7 @@ class ApartmentController extends Controller
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:8000',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric'
         ];
@@ -274,7 +269,7 @@ class ApartmentController extends Controller
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
             'number_of_bath' => 'required|integer|min:1|max:8',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:8000',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric'
         ];
@@ -290,10 +285,10 @@ class ApartmentController extends Controller
             'thumb.image' => 'Il campo Immagine di copertina deve essere un\'immagine.',
             'thumb.mimes' => 'Il campo Immagine di copertina deve essere un file di tipo: jpeg, png.',
             'thumb.max' => 'Il campo Immagine di copertina non può essere più grande di 2048 KB.',
-            'cover_image.required' => 'Il campo Altri immagini è obbligatorio.',
-            'cover_image.image' => 'Il campo Altri immagini deve essere un\'immagine.',
-            'cover_image.mimes' => 'Il campo Altri immagini deve essere un file di tipo: jpeg, png.',
-            'cover_image.max' => 'Il campo Altri immagini non può essere più grande di 2048 KB.',
+            'image.required' => 'Il campo Altri immagini è obbligatorio.',
+            'image.image' => 'Il campo Altri immagini deve essere un\'immagine.',
+            'image.mimes' => 'Il campo Altri immagini deve essere un file di tipo: jpeg, png.',
+            'image.max' => 'Il campo Altri immagini non può essere più grande di 2048 KB.',
             'address.required' => 'Il campo Indirizzo è obbligatorio.',
             'price.required' => 'Il campo Prezzo è obbligatorio.',
             'price.numeric' => 'Il campo Prezzo deve essere un numero.',
@@ -303,7 +298,7 @@ class ApartmentController extends Controller
             'square_meters.min' => 'Il campo Metri quadrati deve essere almeno 0.',
             'description.required' => 'Il campo Descrizione è obbligatorio.',
             'description.string' => 'Il campo Descrizione deve essere scritto in caratteri.',
-            'description.max' => 'Il campo Descrizione non può essere più lungo di 1000 caratteri.',
+            'description.max' => 'Il campo Descrizione non può essere più lungo di 8000 caratteri.',
         ];
     }
 }
