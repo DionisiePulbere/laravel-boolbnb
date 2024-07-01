@@ -21,6 +21,9 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+    {{-- Css per la mappa --}}
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css">
 </head>
 
 <body>
@@ -80,8 +83,10 @@
                 </main>
             </div>
         </div>
-
     </div>
+
+        <!-- Aggiungi il JavaScript per TomTom Maps -->
+        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps-web.min.js"></script>
 </body>
 
 </html>

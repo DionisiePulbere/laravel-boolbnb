@@ -72,6 +72,26 @@ function clearSuggestions() {
     const suggestionsList = document.getElementById('suggestions');
     suggestionsList.innerHTML = '';
 }
+
+let map;
+let marker;
+
+function initMap(latitude, longitude) {
+    map = tt.map({
+        key: '3AC1MRPiIv2a942lYsYeHx621M3GAx0y',
+        container: 'map',
+        center: [longitude, latitude],
+        zoom: 15
+    });
+
+    marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const latitude = parseFloat(document.getElementById('latitude').textContent);
+    const longitude = parseFloat(document.getElementById('longitude').textContent);
+    initMap(latitude, longitude);
+});
 /* FINE RICERCA TRAMITE TOM TOM INDIRIZZO NELLA CRUD */
 
 // Validazione Client Side 

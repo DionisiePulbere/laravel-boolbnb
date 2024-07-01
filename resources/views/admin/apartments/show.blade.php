@@ -2,6 +2,7 @@
 @php
     use Carbon\Carbon;
 @endphp
+
 @section('content')
     <div class="d-flex flex-column mb-5">
         <div class="d-flex align-items-center mb-5 show-header pb-2">
@@ -67,7 +68,20 @@
             @endif
         </div>
         <h2 class="fw-bold mt-4">{{$apartment->title}}</h2>
-        <p class="dashboard-p"><span class="price-bold">Indirizzo: </span>{{$apartment->address}}</p>
+        
+        <div class="mb-3 input-control" hidden>
+            <label for="latitude" class="form-label">Latitudine</label>
+            <p id="latitude">{{ $apartment->latitude }}</p>
+        </div>
+        <div class="mb-3 input-control" hidden>
+            <label for="longitude" class="form-label">Longitudine</label>
+            <p id="longitude">{{ $apartment->longitude }}</p>
+        </div>
+        <div id="map" class="mt-3" style="width: 600px; height: 400px;"></div>
+        <div class="mb-3 mt-3 input-control">
+            <label for="address" id="address" class="form-label">Indirizzo: {{ $apartment->address }}</label>
+        </div>
+
         <p class="dashboard-p"><span class="price-bold">{{$apartment->price}} €</span> a notte.</p>
         <p class="dashboard-p">
             @if ($apartment->number_of_room < 2)
