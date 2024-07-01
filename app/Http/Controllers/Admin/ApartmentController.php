@@ -171,9 +171,8 @@ class ApartmentController extends Controller
                 $apartmentImage = new Image();
                 $apartmentImage-> image = $imagePath;
                 $apartmentImage->apartment_id = $apartment->id;
-                $apartmentImage->save();
+                $apartmentImage->update();
         }}
-
 
         $apartment->update($formData);
 
