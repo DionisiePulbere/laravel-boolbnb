@@ -23,8 +23,14 @@
             <h3>Altre immagini</h3>
             @if ($apartment->images->count())
                 <div class="mb-3">
-                    @foreach($apartment->images as $image)
-                        <img src="{{ asset('storage/' . $image->image) }}" style="max-width: 100px;">
+                    @foreach ($apartment->images as $image)
+                        @if ($image->image)
+                            @if (filter_var($image->image, FILTER_VALIDATE_URL))
+                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="pe-2" style="width:100px; height:200px" class="me-3">
+                            @else
+                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" style="width:100px; height:200px" class="me-3">
+                            @endif
+                        @endif
                     @endforeach
                 </div>
             @else
