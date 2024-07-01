@@ -9,17 +9,17 @@
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Torna alle case</h2>
         </div>
-        @if ($apartment->thumb)
-            <img src="{{ asset('storage/' . $apartment->thumb) }}" style="max-width: 100px;">
-         @else
-            <div class="overflow-hidden" style="border-radius: 12px; max-width:300px">
-                <img src="https://a0.muscache.com/im/pictures/84e3c5a5-ae64-4909-8791-7ea562302b4a.jpg?im_w=1200" alt="" class="w-100" > 
-            </div>
-        @endif
-        {{-- <div class="overflow-hidden" style="border-radius: 12px;width:75%">
-            <img src="{{ Storage::url($cover_image) }}" alt="" class="w-50" >
-        </div> --}}
-        <div>
+        <div class="overflow-hidden" style="border-radius: 12px; max-width: 300px;">
+            @if ($apartment->thumb)
+                @if (filter_var($apartment->thumb, FILTER_VALIDATE_URL))
+                    <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="w-100">
+                @else
+                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="w-100">
+                @endif
+            @endif
+        </div>
+
+        <div class="mt-3">
             <h3>Altre immagini</h3>
             @if ($apartment->images->count())
                 <div class="mb-3">
@@ -147,3 +147,5 @@
         </div>
     </div>
 @endsection
+
+{{-- <img src="{{$apartment->thumb ? $apartment->thumb : asset('storage/' . $apartment->thumb) }}" alt="{{$apartment->title}}" class="w-100"> --}}
