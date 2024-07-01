@@ -84,7 +84,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="cover_image" class="form-label">Altri immagini (min.3)</label>
+                <label for="image" class="form-label">Altri immagini (min.3)</label>
                 <div class="d-flex my-3">
                     @foreach ($apartment->images as $image)
                         @if ($image->image)
@@ -96,7 +96,7 @@
                         @endif
                     @endforeach
                 </div>
-                <input class="form-control" type="file" id="cover_image" name="cover_image[]" multiple>
+                <input class="form-control" type="file" id="image" name="image[]" multiple>
             </div>
 
             <div class="mb-3">
