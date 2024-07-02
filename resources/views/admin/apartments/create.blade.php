@@ -126,6 +126,7 @@
             <button type="submit" id="createSubmit" class="btn my-btn-primary text-white mt-3">Salva <i class="fa-solid fa-plus ms-2"></i></button>
         </form>  
     </div>
+    <script src="{{ asset('js/create.js') }}" ></script>
 @endsection
 
 

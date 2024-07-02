@@ -13,7 +13,7 @@
                 <div class="card-header my-login-header"><i class="fa-solid fa-user me-2 primary-color"></i>{{ __('Crea un nuovo account') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form id="register-form" method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="mb-3 row flex-column">
@@ -73,9 +73,9 @@
                         <div class="mb-3 row flex-column">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-12">
+                            <div class="col-md-12 input-control">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <div class="error"></div>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -87,8 +87,9 @@
                         <div class="mb-5 row flex-column">
                             <label for="password-confirm" class="col-md-12 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
-                            <div class="col-md-12">
+                            <div class="col-md-12 input-control">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <div class="error"></div>
                             </div>
                         </div>
 
@@ -108,4 +109,5 @@
         <img src="{{ Vite::asset("resources/images/login.png") }}" alt="" srcset="" class="w-75 pt-5 d-none d-lg-block">
     </div>
 </div>
+<script src="{{ asset('js/register.js') }}" ></script>
 @endsection

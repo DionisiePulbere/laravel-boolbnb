@@ -1,22 +1,18 @@
-
-
 // Validazione Client Side 
-const formCreate = document.getElementById('create-form');
+const formEdit = document.getElementById('edit-form');
 const title = document.getElementById('title');
 const address = document.getElementById('address');
-const thumb = document.getElementById('thumb');
-const image = document.getElementById('image');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
 let isValid = false;
 
-formCreate.addEventListener('submit', e => {
+formEdit.addEventListener('submit', e => {
     e.preventDefault();
 
     validateInputs();
     if(isValid){
-        formCreate.submit();
+        formEdit.submit();
     }
 });
 
@@ -27,7 +23,7 @@ const setError = (element, message) => {
     errorDisplay.innerText = message;
     inputControl.classList.add('error');
     inputControl.classList.remove('success')
-}
+};
 
 const setSuccess = element => {
     const inputControl = element.parentElement;
@@ -45,10 +41,7 @@ const validateInputs = () => {
     const priceValue = price.value;
     const descriptionValue = description.value;
     const squareMetersValue = squareMeters.value;
-    const thumbFile = thumb.files;
-    const imageFiles = image.files;
     
-
     if(titleValue === '') {
         setError(title, 'Il titolo è richiesto');
     } else {
@@ -59,18 +52,6 @@ const validateInputs = () => {
         setError(address, 'L\'indirizzo è richiesto');
     } else {
         setSuccess(address);
-    }
-
-    if(thumbFile.length < 1 || thumbFile === null){
-        setError(thumb, 'L\'immagine di copertina è richiesta');
-    } else {
-        setSuccess(thumb);
-    }
-
-    if(imageFiles.length < 4 || imageFiles === null){
-        setError(image, 'Sono richieste 4 immagini');
-    } else {
-        setSuccess(image);
     }
 
     if(priceValue === '') {
@@ -90,17 +71,9 @@ const validateInputs = () => {
     } else {
         setSuccess(squareMeters);
     }
-   
-    // console.log(thumbFile.length);
-    // console.log(coverFiles.length);
-   
-
-    
 
     if (titleValue !== "" && titleValue !== null 
         && addressValue !== "" && addressValue !== null 
-        && thumbFile !== "" && thumbFile !== null 
-        && imageFiles !== "" && imageFiles !== null
         && priceValue !== "" && priceValue !== null 
         && descriptionValue !== "" && descriptionValue !== null 
         && squareMetersValue !== "" && squareMetersValue !== null){
