@@ -7,7 +7,7 @@
             <h2 class="fw-bold ms-3 mb-0">Modifica casa</h2>
         </div>
 
-        <form id="form" action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Include this for the PUT request -->
 
@@ -48,20 +48,18 @@
             @endif
             
 
-            <div class="mb-3 input-control">
+            <div class="mb-3">
                 <label for="title" class="form-label">Nome dell'immobile</label>
                 <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $apartment->title) }}">
-                <div class="error"></div>
                 @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
-            <div class="mb-3 input-control">
+            <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
                 <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address', $apartment->address) }}">
-                <div class="error"></div>
                 <ul id="suggestions"></ul>
                 @error('address')
                     <span class="invalid-feedback" role="alert">
@@ -89,27 +87,20 @@
                     </span>
                 @enderror
             </div>
-                <label for="image" class="form-label">Altri immagini (min.3)</label>
+            <label for="image" class="form-label">Altri immagini (min.3)</label>
             <div class="mb-3">
                 @foreach ($apartment->images as $image)
                     @if ($image->image)
                         @if (filter_var($image->image, FILTER_VALIDATE_URL))
                             <div class="ms-img-container mb-3 position-relative">
                                 <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="ms-img">
-                                {{-- <form action="{{ route('admin.apartments.delete_image', $image->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn rounded btn-danger btn-sm position-absolute top-0 end-0"><i class="fa-solid fa-trash-can"></i></button>
-                                </form> --}}
                             </div>
                         @else
                             <div class="ms-img-container mb-3 position-relative">
                                 <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" class="ms-img">
-                                {{-- <form action="{{ route('admin.apartments.delete_image', $image->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm position-absolute top-0 end-0"><i class="fa-solid fa-trash-can"></i></button>
-                                </form> --}}
+                                <button class="delete-image-btn btn btn-danger btn-sm position-absolute top-0 end-0" data-image-id="{{ $image->id }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
                             </div>
                         @endif
                     @endif
@@ -117,10 +108,9 @@
                 <input class="form-control" type="file" id="image" name="image[]" multiple>
             </div>
 
-            <div class="mb-3 input-control">
+            <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
                 <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
-                <div class="error"></div>
                 @error('price')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -128,10 +118,9 @@
                 @enderror
             </div>
 
-            <div class="mb-3 input-control">
+            <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri quadrati</label>
                 <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
-                <div class="error"></div>
                 @error('square_meters')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -191,10 +180,9 @@
                 </div>
             </div>
 
-            <div class="mb-3 input-control">
+            <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..." id="description" rows="10" name="description">{{ old('description', $apartment->description) }}</textarea>
-                <div class="error"></div>
                 @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -202,7 +190,36 @@
                 @enderror
             </div>
 
-            <button type="submit" id="editSubmit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
+            <button type="submit" class="btn btn-dark mt-3">Modifica <i class="fa-solid fa-pen ms-3"></i></button>
         </form>
     </div>
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-image-btn');
+
+            if (deleteButtons.length > 0) {
+                deleteButtons.forEach(function (button) {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        
+                        const imageId = this.getAttribute('data-image-id');
+                        const imageContainer = this.parentElement;
+
+                        fetch(`/admin/apartments/${imageId}/delete`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        .then(response => {
+                            imageContainer.remove();
+                        })
+                    });
+                });
+            } else {
+                console.error('Nessun pulsante di eliminazione trovato.');
+            }
+        });
+    </script> --}}
 @endsection
