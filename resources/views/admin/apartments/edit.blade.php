@@ -7,7 +7,7 @@
             <h2 class="fw-bold ms-3 mb-0">Modifica casa</h2>
         </div>
 
-        <form id="edit-form" action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
+        <form id="form" action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Include this for the PUT request -->
 

@@ -75,24 +75,31 @@ function clearSuggestions() {
 /* FINE RICERCA TRAMITE TOM TOM INDIRIZZO NELLA CRUD */
 
 // Validazione Client Side 
-const formCreate = document.getElementById('create-form');
+const form = document.getElementById('form');
+const formEdit = document.getElementById('edit-form');
 const title = document.getElementById('title');
 const address = document.getElementById('address');
-const thumb = document.getElementById('thumb');
+// const thumb = document.getElementById('thumb');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
 // const coverImage = document.getElementById('cover_image').files;
+let isValid = false;
 
-formCreate.addEventListener('submit', e => {
+form.addEventListener('submit', e => {
     e.preventDefault();
 
-    validateInputsCreate();
-    // da cambiare in 7 non appena risolto cover_image
-    if (document.querySelectorAll('.success').length === 6) {
+    validateInputs();
+    console.log(form);
+    // if(isValid){
+    //     form.submit();
+    // }
+
+    // da cambiare in 7 non appena risolto cover_image e thumb
+    // if (document.querySelectorAll('.success').length === 5) {
         
-        formCreate.submit();
-    } 
+    //     form.submit();
+    // } 
 });
 
 const setError = (element, message) => {
@@ -113,10 +120,11 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 };
 
-const validateInputsCreate = () => {
+const validateInputs = () => {
+    isValid = false;
     const titleValue = title.value;
     const addressValue = address.value;
-    const thumbValue = thumb.value;
+    // const thumbValue = thumb.value;
     const priceValue = price.value;
     const descriptionValue = description.value;
     const squareMetersValue = squareMeters.value;
@@ -134,11 +142,11 @@ const validateInputsCreate = () => {
         setSuccess(address);
     }
 
-    if(thumbValue === '') {
-        setError(thumb, 'L\'immagine di copertina è richiesta');
-    } else {
-        setSuccess(thumb);
-    }
+    // if(thumbValue === '') {
+    //     setError(thumb, 'L\'immagine di copertina è richiesta');
+    // } else {
+    //     setSuccess(thumb);
+    // }
 
     if(priceValue === '') {
         setError(price, 'Il prezzo è richiesto');

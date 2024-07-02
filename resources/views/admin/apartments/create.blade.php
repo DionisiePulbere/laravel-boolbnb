@@ -6,7 +6,7 @@
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 ">Aggiungi una casa</h2>
         </div>
-        <form id="create-form" action="{{route('admin.apartments.store')}}" method="post" enctype="multipart/form-data">
+        <form id="form" action="{{route('admin.apartments.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3 input-control">
                 <label for="title" class="form-label">Nome dell'immobile</label>
