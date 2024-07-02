@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Validazione Client Side 
 const form = document.getElementById('create-form');
+const formEdit = document.getElementById('edit-form');
 const title = document.getElementById('title');
 const address = document.getElementById('address');
 // const thumb = document.getElementById('thumb');
