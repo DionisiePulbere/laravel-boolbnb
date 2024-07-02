@@ -1,4 +1,5 @@
 import './bootstrap';
+import './create';
 import '~resources/scss/app.scss';
 import * as bootstrap from 'bootstrap';
 import.meta.glob([
@@ -74,110 +75,129 @@ function clearSuggestions() {
 }
 /* FINE RICERCA TRAMITE TOM TOM INDIRIZZO NELLA CRUD */
 
-// Validazione Client Side 
-const form = document.getElementById('form');
-const formEdit = document.getElementById('edit-form');
-const title = document.getElementById('title');
-const address = document.getElementById('address');
+// // Validazione Client Side 
+// const form = document.getElementById('form');
+// const formEdit = document.getElementById('edit-form');
+// const title = document.getElementById('title');
+// const address = document.getElementById('address');
 // const thumb = document.getElementById('thumb');
-const price = document.getElementById('price');
-const description = document.getElementById('description');
-const squareMeters = document.getElementById('square_meters');
-// const coverImage = document.getElementById('cover_image').files;
-let isValid = false;
+// const price = document.getElementById('price');
+// const description = document.getElementById('description');
+// const squareMeters = document.getElementById('square_meters');
+// const coverImage = document.getElementById('image');
+// let isValid = false;
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
+// form.addEventListener('submit', e => {
+//     e.preventDefault();
 
-    validateInputs();
-    console.log(form);
-    // if(isValid){
-    //     form.submit();
-    // }
+//     validateInputs();
+//     console.log(form);
+//     // if(isValid){
+//     //     form.submit();
+//     // }
+// });
 
-    // da cambiare in 7 non appena risolto cover_image e thumb
-    // if (document.querySelectorAll('.success').length === 5) {
-        
-    //     form.submit();
-    // } 
-});
+// const setError = (element, message) => {
+//     const inputControl = element.parentElement;
+//     const errorDisplay = inputControl.querySelector('.error');
 
-const setError = (element, message) => {
-    const inputControl = element.parentElement;
-    const errorDisplay = inputControl.querySelector('.error');
+//     errorDisplay.innerText = message;
+//     inputControl.classList.add('error');
+//     inputControl.classList.remove('success')
+// }
 
-    errorDisplay.innerText = message;
-    inputControl.classList.add('error');
-    inputControl.classList.remove('success')
-}
+// const setSuccess = element => {
+//     const inputControl = element.parentElement;
+//     const errorDisplay = inputControl.querySelector('.error');
 
-const setSuccess = element => {
-    const inputControl = element.parentElement;
-    const errorDisplay = inputControl.querySelector('.error');
+//     errorDisplay.innerText = '';
+//     inputControl.classList.add('success');
+//     inputControl.classList.remove('error');
+// };
 
-    errorDisplay.innerText = '';
-    inputControl.classList.add('success');
-    inputControl.classList.remove('error');
-};
+// const validateInputs = () => {
+//     isValid = false;
+//     const titleValue = title.value;
+//     const addressValue = address.value;
+//     const priceValue = price.value;
+//     const descriptionValue = description.value;
+//     const squareMetersValue = squareMeters.value;
+//     let thumbFile = thumb.files;
+//     let coverFiles = coverImage.files;
+    
 
-const validateInputs = () => {
-    isValid = false;
-    const titleValue = title.value;
-    const addressValue = address.value;
-    // const thumbValue = thumb.value;
-    const priceValue = price.value;
-    const descriptionValue = description.value;
-    const squareMetersValue = squareMeters.value;
-    // const coverImageValue = coverImage;
+//     if(titleValue === '') {
+//         setError(title, 'Il titolo è richiesto');
+//     } else {
+//         setSuccess(title);
+//     }
 
-    if(titleValue === '') {
-        setError(title, 'Il titolo è richiesto');
-    } else {
-        setSuccess(title);
-    }
+//     if(addressValue === '') {
+//         setError(address, 'L\'indirizzo è richiesto');
+//     } else {
+//         setSuccess(address);
+//     }
 
-    if(addressValue === '') {
-        setError(address, 'L\'indirizzo è richiesto');
-    } else {
-        setSuccess(address);
-    }
+//     // if(thumbValue === '') {
+//     //     setError(thumb, 'L\'immagine di copertina è richiesta');
+//     // } else {
+//     //     setSuccess(thumb);
+//     // }
 
-    // if(thumbValue === '') {
-    //     setError(thumb, 'L\'immagine di copertina è richiesta');
-    // } else {
-    //     setSuccess(thumb);
-    // }
+//     if(priceValue === '') {
+//         setError(price, 'Il prezzo è richiesto');
+//     } else {
+//         setSuccess(price);
+//     }
 
-    if(priceValue === '') {
-        setError(price, 'Il prezzo è richiesto');
-    } else {
-        setSuccess(price);
-    }
+//     if(descriptionValue === '') {
+//         setError(description, 'La descrizione è richiesta');
+//     } else {
+//         setSuccess(description);
+//     }
 
-    if(descriptionValue === '') {
-        setError(description, 'La descrizione è richiesta');
-    } else {
-        setSuccess(description);
-    }
+//     if(squareMetersValue === '') {
+//         setError(squareMeters, 'I metri quadrati sono richiesti');
+//     } else {
+//         setSuccess(squareMeters);
+//     }
 
-    if(squareMetersValue === '') {
-        setError(squareMeters, 'I metri quadrati sono richiesti');
-    } else {
-        setSuccess(squareMeters);
-    }
+//     // if( coverImageValue === "") {
+//     //     setError(coverImage, 'Sono richieste almeno 3 immagini');
+//     // } 
+//     // else if( coverImageValue === 1) {
+//     //     setError(coverImage, 'Sono richieste altre 2 immagini');
+//     // } else if( coverImageValue === 2) {
+//     //     setError(coverImage, 'È richiesta un\'altra immagine');
+//     // }
+//     //  else {
+//     //     setSuccess(coverImage);
+//     // }
 
-    // if( coverImageValue === "") {
-    //     setError(coverImage, 'Sono richieste almeno 3 immagini');
-    // } 
-    // else if( coverImageValue === 1) {
-    //     setError(coverImage, 'Sono richieste altre 2 immagini');
-    // } else if( coverImageValue === 2) {
-    //     setError(coverImage, 'È richiesta un\'altra immagine');
-    // }
-    //  else {
-    //     setSuccess(coverImage);
-    // }
-};
+   
+//     // console.log(thumbFile.length);
+//     // console.log(coverFiles.length);
+//     if(thumbFile.length != 1 ){
+//         console.log("no imgs");
+//     } else {
+//         console.log("thumb ha un'immagine");
+//     }
+
+//     if(coverFiles.length < 4 ){
+//         console.log("non abbastanza");
+//     } else {
+//         console.log("abbastanza immagini");
+//     }
+
+//     if (titleValue !== "" && titleValue !== null 
+//         && addressValue !== "" && addressValue !== null 
+//         && priceValue !== "" && priceValue !== null 
+//         && descriptionValue !== "" && descriptionValue !== null 
+//         && squareMetersValue !== "" && squareMetersValue !== null){
+//             isValid = true;
+//     }
+
+// };
 //funzione che blocca l'invio del form create dopo il primo click sul submit
 const CreateForm = document.querySelector('#create-form');
 const CreateBtnSubmit = document.querySelector('#createSubmit');
