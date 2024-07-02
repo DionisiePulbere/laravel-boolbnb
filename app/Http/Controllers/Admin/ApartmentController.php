@@ -240,7 +240,6 @@ class ApartmentController extends Controller
     }
 
 
-
     private function getStoreValidationRules()
     {
         return [
@@ -264,7 +263,7 @@ class ApartmentController extends Controller
         return [
             'title' => 'required|string|max:255',
             'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
-            'image' => 'nullable|mimes:jpeg,png|max:2048',
+            // 'image' => 'nullable|mimes:jpeg,png|max:2048',
             'address' => 'required|min:5|string',
             'price' => 'required|numeric|min:0',
             'square_meters' => 'required|numeric|min:0',

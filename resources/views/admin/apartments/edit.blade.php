@@ -60,7 +60,7 @@
             </div>
             <div class="mb-3 input-control">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control" id="address" name="address" value="{{ old('address', $apartment->address) }}">
+                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $apartment->address) }}">
                 <div class="error"></div>
                 <ul id="suggestions"></ul>
                 @error('address')
@@ -72,7 +72,7 @@
                 <input type="hidden" id="longitude" name="longitude" value="{{old('latitude', $apartment->longitude)}}">
             </div>
             <div class="mb-3">
-                <label for="thumb" class="form-label">Immagine di copertina (min.1)</label>
+                <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine di copertina (min.1)</label>
                 @if ($apartment->thumb)
                     <div class="mb-3 ms-image-container">
                         @if (filter_var($apartment->thumb, FILTER_VALIDATE_URL))

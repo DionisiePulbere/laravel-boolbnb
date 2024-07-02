@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3 input-control">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control @error('title') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
+                <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
                 <div class="error"></div>
                 <ul id="suggestions"></ul>
                 @error('address')
