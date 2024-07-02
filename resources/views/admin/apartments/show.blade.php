@@ -26,9 +26,13 @@
                     @foreach ($apartment->images as $image)
                         @if ($image->image)
                             @if (filter_var($image->image, FILTER_VALIDATE_URL))
-                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="pe-2" style="width:100px; height:200px" class="me-3">
+                                <div class="ms-img-container mb-3 position-relative">
+                                    <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="ms-img">
+                                </div>
                             @else
-                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" style="width:100px; height:200px" class="me-3">
+                                <div class="ms-img-container mb-3 position-relative">
+                                    <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" class="ms-img">
+                                </div>
                             @endif
                         @endif
                     @endforeach
