@@ -9,12 +9,12 @@
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Torna alle case</h2>
         </div>
-        <div class="overflow-hidden" style="border-radius: 12px; max-width: 300px;">
+        <div class="overflow-hidden ms-image-container">
             @if ($apartment->thumb)
                 @if (filter_var($apartment->thumb, FILTER_VALIDATE_URL))
-                    <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="w-100">
+                    <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="ms-img">
                 @else
-                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="w-100">
+                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="ms-img">
                 @endif
             @endif
         </div>
@@ -83,7 +83,7 @@
             <label for="longitude" class="form-label">Longitudine</label>
             <p id="longitude">{{ $apartment->longitude }}</p>
         </div>
-        <div id="map" class="mt-3" style="width: 600px; height: 400px;"></div>
+        <div id="map" class="mt-3" style="max-width: 600px; height: 400px;"></div>
         <div class="mb-3 mt-3 input-control">
             <label for="address" id="address" class="form-label">Indirizzo: {{ $apartment->address }}</label>
         </div>

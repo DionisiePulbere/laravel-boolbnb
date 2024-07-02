@@ -37,4 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::delete('admin/apartments/{image}/delete', [ApartmentController::class, 'deleteImage'])->name('admin.apartments.delete_image');
+
 require __DIR__.'/auth.php';

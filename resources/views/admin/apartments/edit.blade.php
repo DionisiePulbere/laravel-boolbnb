@@ -103,11 +103,11 @@
                         @else
                             <div class="ms-img-container mb-3 position-relative">
                                 <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $apartment->title }}" class="ms-img">
-                                <form action="{{ route('admin.apartments.delete_image', $image->id) }}" method="POST" style="display: inline;">
+                                {{-- <form action="{{ route('admin.apartments.delete_image', $image->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm position-absolute top-0 end-0"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
+                                </form> --}}
                             </div>
                         @endif
                     @endif
