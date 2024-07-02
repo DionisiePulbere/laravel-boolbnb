@@ -170,6 +170,14 @@ class ApartmentController extends Controller
                 $apartmentImage->save();
         }}
 
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $imageId) {
+                $image = Image::findOrFail($imageId);
+                Storage::disk('public')->delete($image->image);
+                $image->delete();
+            }
+        }
+
         $apartment->update($formData);
 
         if($request->has('services')){
@@ -238,6 +246,16 @@ class ApartmentController extends Controller
         $apartment->delete();
         return redirect()->route('admin.apartments.index');
     }
+
+    public function deleteImage($imageId)
+    {
+        $image = Image::findOrFail($imageId);
+        Storage::disk('public')->delete($image->image);
+        $image->delete();
+
+        return redirect()->back()->with('success', 'Immagine eliminata con successo');
+    }
+
 
     private function getStoreValidationRules()
     {
