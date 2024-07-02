@@ -91,7 +91,7 @@ formCreate.addEventListener('submit', e => {
     // da cambiare in 7 non appena risolto cover_image
     if (document.querySelectorAll('.success').length === 6) {
         
-        form.submit();
+        formCreate.submit();
     } 
 });
 
