@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3 input-control">
                 <label for="image" class="form-label">Altri immagini (min.3)</label>
-                <input class="form-control" type="file" id="image" name="image[]" multiple>
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image[]" multiple>
                 <div class="error"></div>
                 @error('image')
                     <span class="invalid-feedback" role="alert">
