@@ -35,4 +35,23 @@ class ApartmentController extends Controller
         }
         
     }
+
+    public function search(Request $request)
+    {
+        $latitude = 40.423335;
+        $longitude = -3.694239;
+        $distance = 20000;
+
+        $apartments = Apartment::findNearby($latitude, $longitude, $distance);
+        if (count($apartments) < 1) {
+            return response()->json([
+                'result' => false,
+            ]);
+        }
+
+        return response()->json([
+            'result'=> true,
+            'apartments'=> $apartments
+        ]);
+    }
 }

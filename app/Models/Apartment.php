@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Apartment extends Model
 {
@@ -50,6 +51,21 @@ class Apartment extends Model
 
     public function services() {
         return $this->belongsToMany(Service::class);
+    }
+
+    public static function findNearby($latitude, $longitude, $distance)
+    {
+        return DB::select(
+            DB::raw("
+                SELECT *
+                FROM apartments
+                WHERE ST_distance_sphere(
+                    point(?, ?),
+                    point(latitude, longitude)
+                ) < ?
+            "),
+            [$latitude, $longitude, $distance]
+        );
     }
 
 }
