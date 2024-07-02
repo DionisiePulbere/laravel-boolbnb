@@ -20,7 +20,7 @@ class ApartmentController extends Controller
     }
 
     public function show($slug){
-        $apartment= Apartment::where('slug' ,'=', $slug)->first();
+        $apartment= Apartment::where('slug' ,'=', $slug)->with('images')->first();
         if($apartment){
             return response()->json([
                 'success' => true,
