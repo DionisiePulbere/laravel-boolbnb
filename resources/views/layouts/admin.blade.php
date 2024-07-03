@@ -72,6 +72,12 @@
                                     <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Nuovo affitto
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-black dashboard-link {{ Route::is('admin.message.index') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.message.index') }}">
+                                    <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Messaggi
+                                </a>
+                            </li>
                         </ul>
 
 

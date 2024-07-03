@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Message;
 
@@ -35,5 +36,15 @@ class MessageController extends Controller
         $message->save();
 
         return response()->json(['message' => 'Messaggio inviato con successo!']);
+    }
+// prendere tabella messaggi, risale apartment tramite id
+    public function index()
+    {
+        $user = Auth::user();
+        $messages = Message::where('apartment_id', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        return view('admin.message.index', compact('messages'));
     }
 }

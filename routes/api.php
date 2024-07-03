@@ -26,3 +26,4 @@ Route::get('/search/{distance?}/{longitude?}/{latitude?}', [ApartmentController:
 Route::get('/apartment_image/{filename}', [ImageController::class, 'show']);
 Route::post('/apartments/message', [MessageController::class, 'store']);
 
+

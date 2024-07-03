@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Api\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,5 +42,11 @@ Route::middleware('auth')->group(function () {
 
 Route::delete('admin/apartments/{image}/delete', [ImageController::class, 'destroy'])->name('admin.apartments.delete_image');
 
+Route::middleware(['auth'])
+->name('admin.')
+->prefix('admin')
+->group(function () {
+    Route::get('/message', [MessageController::class, 'index'])->name('admin.message.index');
+});
 
 require __DIR__.'/auth.php';
