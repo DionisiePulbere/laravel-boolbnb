@@ -74,24 +74,19 @@ class ApartmentController extends Controller
 
         //aggiungo l'id dell utente --Monsterman
         $newApartment->user_id = $currentUser->id;
-        $newApartment->slug = Str::slug($newApartment->title, '-');
-        $checkSlug = $newApartment->whereSlug($newApartment->slug)->exists();
+        $slugToAdd = $newApartment->slug = Str::slug($newApartment->title, '-');
+
+        $checkSlug = $newApartment->whereSlug($slugToAdd)->exists();
         if($checkSlug){
             $count = 1;
-            while(1){
-                $newSlug = $newApartment->slug."-".$count++;
-                $newSlug = Str::slug($newSlug);
-
-                $checkSlug = $newApartment->whereSlug($newSlug)->exists();
-
-                if(!$checkSlug){
-                    $slug = $newSlug;
-
-                    break;
-                }
+            $newSlug = $slugToAdd."-".$count;
+            while($newApartment->whereSlug($newSlug)->exists()){
+                $count += 1;
+                $newSlug = $slugToAdd."-".$count;
             }
+            $newApartment->slug = $newSlug;
         } else{
-            $slug = $newApartment->slug;
+            $newApartment->slug = $slugToAdd;
         }
 
         $newApartment->save();
