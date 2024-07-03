@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\MessageController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,4 +23,6 @@ Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
 Route::get('/apartment_image/{filename}', [imageController::class, 'show']);
 Route::get('/search/{distance?}/{longitude?}/{latitude?}', [ApartmentController::class, 'search']);
+Route::get('/apartment_image/{filename}', [ImageController::class, 'show']);
+Route::post('/apartments/message', [MessageController::class, 'store']);
 
