@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\Apartment;
 
 class MessageController extends Controller
 {
@@ -37,13 +38,13 @@ class MessageController extends Controller
 
         return response()->json(['message' => 'Messaggio inviato con successo!']);
     }
-// prendere tabella messaggi, risale apartment tramite id
+
     public function index()
     {
         $user = Auth::user();
-        $messages = Message::where('apartment_id', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->get();
+        $apartmentIds = Apartment::where('user_id', $user->id)->pluck('id');
+
+        $messages = Message::whereIn('apartment_id', $apartmentIds)->get();
 
         return view('admin.message.index', compact('messages'));
     }

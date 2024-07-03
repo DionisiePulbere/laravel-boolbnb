@@ -46,7 +46,7 @@ Route::middleware(['auth'])
 ->name('admin.')
 ->prefix('admin')
 ->group(function () {
-    Route::get('/message', [MessageController::class, 'index'])->name('admin.message.index');
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 });
 
 require __DIR__.'/auth.php';
