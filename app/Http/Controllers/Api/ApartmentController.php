@@ -53,7 +53,7 @@ class ApartmentController extends Controller
     if($request->distance){
         $distance= $request->distance;
     }else{
-        $distance='';
+        $distance='20';
     }
     
 
