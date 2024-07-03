@@ -164,6 +164,25 @@ class ApartmentController extends Controller
         $request->validate($this->getUpdateValidationRules(), $messages);
 
         $formData = $request->all();
+        $formTitle = $formData['title'];
+        // dd($formTitle);
+        
+
+        if($formTitle !== $apartment->title){
+            $slugToAdd = Str::slug($formTitle, '-');
+            $checkSlug = $apartment->whereSlug($slugToAdd)->exists();
+            if($checkSlug){
+                $count = 1;
+                $newSlug = $slugToAdd."-".$count;
+                while($apartment->whereSlug($newSlug)->exists()){
+                    $count += 1;
+                    $newSlug = $slugToAdd."-".$count;
+                }
+                $formData['slug'] = $newSlug;
+            } else{
+                $formData['slug'] = $slugToAdd;
+            }
+        }
 
         if ($request->hasFile('thumb')) {
             if ($apartment->thumb) {
