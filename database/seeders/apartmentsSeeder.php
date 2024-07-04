@@ -194,7 +194,7 @@ class apartmentsSeeder extends Seeder
         $newApartment11->visibility = 1;
         $newApartment11->thumb = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/d473b55f-5916-4525-ba5d-6915d459cc1c.jpeg?im_w=960';
         $newApartment11->description = 'Appartamento di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
-        $newApartment11->price =5000;
+        $newApartment11->price =88;
         $newApartment11->number_of_room =$faker->numberBetween(1, 4);
         $newApartment11->number_of_bed =$faker->numberBetween(1, 8);
         $newApartment11->number_of_bath =$faker->numberBetween(1, 2);
@@ -211,7 +211,7 @@ class apartmentsSeeder extends Seeder
         $newApartment12->visibility = 1;
         $newApartment12->thumb = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/f95d5750-b93a-48f7-a51f-1a255d1501ff.jpeg?im_w=960';
         $newApartment12->description = 'Villa di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
-        $newApartment12->price =5000;
+        $newApartment12->price =356;
         $newApartment12->number_of_room =$faker->numberBetween(1, 4);
         $newApartment12->number_of_bed =$faker->numberBetween(1, 8);
         $newApartment12->number_of_bath =$faker->numberBetween(1, 2);
