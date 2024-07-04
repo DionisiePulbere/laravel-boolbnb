@@ -10,17 +10,16 @@ use App\Models\Apartment;
 class ApartmentController extends Controller
 {
     public function index (){
-        $apartments = Apartment::all();
-        
-        
+        $apartments = Apartment::with('user')->get();
+    
         return response()->json([
-            'success'=> true,
-            'results'=> $apartments
+            'success' => true,
+            'results' => $apartments
         ]);
     }
 
     public function show($slug){
-        $apartment= Apartment::where('slug' ,'=', $slug)->with('images')->first();
+        $apartment= Apartment::where('slug' ,'=', $slug)->with('images','user')->first();
         if($apartment){
             return response()->json([
                 'success' => true,
@@ -33,7 +32,6 @@ class ApartmentController extends Controller
                 'error' => 'No Apartment found'
             ]);
         }
-        
     }
 
     public function search(Request $request)
