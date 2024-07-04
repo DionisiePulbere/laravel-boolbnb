@@ -22,7 +22,7 @@ class Message extends Model
         $this->email = $user->email;
     }
 
-    public function apartments() {
+    public function apartment() {
         return $this->belongsTo(Apartment::class);
     }
 }

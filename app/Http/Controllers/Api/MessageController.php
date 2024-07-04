@@ -44,7 +44,7 @@ class MessageController extends Controller
         $user = Auth::user();
         $apartmentIds = Apartment::where('user_id', $user->id)->pluck('id');
 
-        $messages = Message::whereIn('apartment_id', $apartmentIds)->get();
+        $messages = Message::whereIn('apartment_id', $apartmentIds)->with('apartment')->get();
 
         return view('admin.message.index', compact('messages'));
     }
