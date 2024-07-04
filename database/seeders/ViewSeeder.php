@@ -26,7 +26,6 @@ class ViewSeeder extends Seeder
                 $newView->date_visit = $faker->dateTimeBetween('-1 week', 'now');
                 $newView->save();
             }
-
         }
     }
 }
