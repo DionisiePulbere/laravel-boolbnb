@@ -46,6 +46,10 @@ class MessageController extends Controller
 
         $messages = Message::whereIn('apartment_id', $apartmentIds)->with('apartment')->get();
 
+        foreach ($messages as $message) {
+            $message->markAsRead();
+        }
+        
         return view('admin.message.index', compact('messages'));
     }
 }

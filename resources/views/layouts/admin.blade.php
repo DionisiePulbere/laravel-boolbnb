@@ -74,8 +74,18 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black dashboard-link {{ Route::is('admin.message.index') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.message.index') }}">
+                                @php
+                                    $user = Auth::user();
+                                    $apartmentIds = \App\Models\Apartment::where('user_id', $user->id)->pluck('id');
+                                    $newMessagesCount = \App\Models\Message::whereIn('apartment_id', $apartmentIds)
+                                                        ->where('is_read', false)
+                                                        ->count();
+                                @endphp
+                                <a class="nav-link text-black position-relative dashboard-link {{ Route::is('admin.message.index') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.message.index') }}">
                                     <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Messaggi
+                                    @if($newMessagesCount > 0)
+                                        <span class="badge position-absolute top-0 end-0 bg-danger">{{ $newMessagesCount }}</span>
+                                    @endif
                                 </a>
                             </li>
                         </ul>

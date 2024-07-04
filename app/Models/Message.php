@@ -14,7 +14,8 @@ class Message extends Model
         'email',
         'object',
         'name',
-        'description'
+        'description',
+        'is_read'
     ];
 
     public function associateUser($user){
@@ -24,5 +25,11 @@ class Message extends Model
 
     public function apartment() {
         return $this->belongsTo(Apartment::class);
+    }
+
+    public function markAsRead()
+    {
+        $this->is_read = true;
+        $this->save();
     }
 }
