@@ -17,7 +17,7 @@ class ApartmentServicesSeeder extends Seeder
     public function run()
     {
         // Numero di appartamenti da collegare
-        $numberOfApartments = 4;
+        $numberOfApartments = 10;
 
         // Imposta i limiti per il numero casuale di servizi da collegare
         $minNumberOfServices = 4; // Numero minimo di servizi
