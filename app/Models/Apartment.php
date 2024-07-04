@@ -50,7 +50,7 @@ class Apartment extends Model
     }
 
     public function services() {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class, 'apartment_service');
     }
 
     public static function findNearby($latitude, $longitude, $distance)

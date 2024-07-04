@@ -10,23 +10,23 @@ use App\Models\Apartment;
 class ApartmentController extends Controller
 {
     public function index (){
-        $apartments = Apartment::with('user')->get();
+         $apartments = Apartment::with('user')->get();
     
-        return response()->json([
-            'success' => true,
-            'results' => $apartments
-        ]);
+    return response()->json([
+        'success' => true,
+        'results' => $apartments
+    ]);
     }
 
     public function show($slug){
-        $apartment= Apartment::where('slug' ,'=', $slug)->with('images','user')->first();
-        if($apartment){
+        $apartment = Apartment::where('slug', $slug)->with('images', 'services')->first();
+
+        if ($apartment) {
             return response()->json([
                 'success' => true,
                 'results' => $apartment
             ]);
-
-        } else{
+        } else {
             return response()->json([
                 'success' => false,
                 'error' => 'No Apartment found'
