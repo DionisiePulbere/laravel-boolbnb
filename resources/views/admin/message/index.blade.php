@@ -8,6 +8,8 @@
         <ul class="list-group">
             @foreach($messages as $message)
                 <li class="list-group-item">
+                    <p><strong>Appartamento:</strong> {{ $message->apartment->title }}</p> 
+                    <p><strong>Indirizzo:</strong> {{ $message->apartment->address }}</p> 
                     <p><strong>Nome:</strong> {{ $message->name }}</p>
                     <p><strong>Email:</strong> {{ $message->email }}</p>
                     <p><strong>Oggetto:</strong> {{ $message->object }}</p>
