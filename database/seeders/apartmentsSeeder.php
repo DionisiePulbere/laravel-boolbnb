@@ -34,7 +34,7 @@ class apartmentsSeeder extends Seeder
         $newApartment1->save();
 
         $newApartment2 = new Apartment();
-        $newApartment2->user_id = 1;
+        $newApartment2->user_id = 2;
         $newApartment2->title = 'San Donato Apartment';
         $newApartment2->slug = Str::slug($newApartment2->title, '-');
         $newApartment2->visibility = 0;
@@ -69,7 +69,7 @@ class apartmentsSeeder extends Seeder
         $newApartment3->save();
 
         $newApartment4 = new Apartment();
-        $newApartment4->user_id = 1;
+        $newApartment4->user_id = 2;
         $newApartment4->title = 'Casa Patrizia Firenze';
         $newApartment4->slug = Str::slug($newApartment4->title, '-');
         $newApartment4->visibility = 0;
@@ -103,10 +103,10 @@ class apartmentsSeeder extends Seeder
         $newApartment5->save();
 
         $newApartment6 = new Apartment();
-        $newApartment6->user_id = 1;
+        $newApartment6->user_id = 2;
         $newApartment6->title = 'Appartamento Open Space';
         $newApartment6->slug = Str::slug($newApartment6->title, '-');
-        $newApartment6->visibility = 0;
+        $newApartment6->visibility = 1;
         $newApartment6->thumb = 'https://a0.muscache.com/im/pictures/miso/Hosting-909162726572829721/original/9eb615f8-3438-434c-acb8-6791533eb701.jpeg?im_w=960';
         $newApartment6->description = 'Appartamento di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
         $newApartment6->price =205;
@@ -137,7 +137,7 @@ class apartmentsSeeder extends Seeder
         $newApartment7->save();
 
         $newApartment8 = new Apartment();
-        $newApartment8->user_id = 1;
+        $newApartment8->user_id = 2;
         $newApartment8->title = 'Melzo Apartment';
         $newApartment8->slug = Str::slug($newApartment8->title, '-');
         $newApartment8->visibility = 0;
@@ -154,7 +154,7 @@ class apartmentsSeeder extends Seeder
         $newApartment8->save();
         
         $newApartment9 = new Apartment();
-        $newApartment9->user_id = 1;
+        $newApartment9->user_id = 2;
         $newApartment9->title = 'Appartamento due camere';
         $newApartment9->slug = Str::slug($newApartment9->title, '-');
         $newApartment9->visibility = 0;
@@ -174,7 +174,7 @@ class apartmentsSeeder extends Seeder
         $newApartment10->user_id = 1;
         $newApartment10->title = 'Boolean Loft';
         $newApartment10->slug = Str::slug($newApartment10->title, '-');
-        $newApartment10->visibility = 0;
+        $newApartment10->visibility = 1;
         $newApartment10->thumb = 'https://verdeprofilo.com/wp-content/uploads/2023/08/Progettare-ufficio-green.jpg';
         $newApartment10->description = 'Appartamento di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
         $newApartment10->price =5000;
@@ -186,5 +186,39 @@ class apartmentsSeeder extends Seeder
         $newApartment10->longitude =9.162701;
         $newApartment10->address ='Via Cassala, 20143 Milano';
         $newApartment10->save();
+
+        $newApartment11 = new Apartment();
+        $newApartment11->user_id = 1;
+        $newApartment11->title = 'Cassano Apartment';
+        $newApartment11->slug = Str::slug($newApartment11->title, '-');
+        $newApartment11->visibility = 1;
+        $newApartment11->thumb = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/d473b55f-5916-4525-ba5d-6915d459cc1c.jpeg?im_w=960';
+        $newApartment11->description = 'Appartamento di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
+        $newApartment11->price =5000;
+        $newApartment11->number_of_room =$faker->numberBetween(1, 4);
+        $newApartment11->number_of_bed =$faker->numberBetween(1, 8);
+        $newApartment11->number_of_bath =$faker->numberBetween(1, 2);
+        $newApartment11->square_meters =$faker->numberBetween(50, 250);
+        $newApartment11->latitude =45.528537;
+        $newApartment11->longitude =9.523278;
+        $newApartment11->address ='Via Giuseppe Mazzini, 20062 Cassano d\'Adda';
+        $newApartment11->save();
+
+        $newApartment12 = new Apartment();
+        $newApartment12->user_id = 1;
+        $newApartment12->title = 'Villa Leonardo';
+        $newApartment12->slug = Str::slug($newApartment12->title, '-');
+        $newApartment12->visibility = 1;
+        $newApartment12->thumb = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/f95d5750-b93a-48f7-a51f-1a255d1501ff.jpeg?im_w=960';
+        $newApartment12->description = 'Villa di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
+        $newApartment12->price =5000;
+        $newApartment12->number_of_room =$faker->numberBetween(1, 4);
+        $newApartment12->number_of_bed =$faker->numberBetween(1, 8);
+        $newApartment12->number_of_bath =$faker->numberBetween(1, 2);
+        $newApartment12->square_meters =$faker->numberBetween(50, 250);
+        $newApartment12->latitude =45.526566;
+        $newApartment12->longitude =9.504919;
+        $newApartment12->address ='Via Leonardo da Vinci, 20062 Cassano d\'Adda';
+        $newApartment12->save();
     }
 }
