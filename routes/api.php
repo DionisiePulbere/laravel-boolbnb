@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +28,9 @@ Route::get('/search/{distance?}/{longitude?}/{latitude?}', [ApartmentController:
 Route::get('/apartment_image/{filename}', [ImageController::class, 'show']);
 Route::post('/apartments/message', [MessageController::class, 'store']);
 Route::get('/services', [ServiceController::class, 'services']);
+Route::get('payment/token', [PaymentController::class, 'token']);
+Route::post('payment/checkout', [PaymentController::class, 'checkout']);  
+
 
 
 

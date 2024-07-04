@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +32,9 @@ Route::middleware(['auth', 'verified'])
     Route::resource('/apartments', ApartmentController::class);
     Route::resource('apartments', ApartmentController::class)->parameters([
         'apartments' => 'apartment:slug'
-    ]);   
+    ]);
+    Route::get('/sponsor', [PaymentController::class, 'index'])->name('sponsor.index');
+ 
 });
 
 Route::middleware('auth')->group(function () {
@@ -50,3 +54,8 @@ Route::middleware(['auth'])
 });
 
 require __DIR__.'/auth.php';
+
+
+/* 
+Route::get('payment/token', [PaymentController::class, 'token']);
+Route::post('payment/checkout', [PaymentController::class, 'checkout']); */
