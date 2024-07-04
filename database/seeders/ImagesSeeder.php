@@ -210,45 +210,64 @@ class ImagesSeeder extends Seeder
         $photo94->image = 'https://a0.muscache.com/im/pictures/84577347/6aabc58c_original.jpg?im_w=720'; 
         $photo94->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo110 = new Image();
+        $photo110->apartment_id = 10;
+        $photo110->image = 'https://evergreens.it/wp-content/uploads/2023/09/ispirazioni-ufficio-piante-artificiali-arredo-1300x680_c.jpg'; 
+        $photo110->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo120 = new Image();
+        $photo120->apartment_id = 10;
+        $photo120->image = 'https://www.green.it/wp-content/uploads/2021/10/green-ufficio-verde.jpg'; 
+        $photo120->save();
         
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo130 = new Image();
+        $photo130->apartment_id = 10;
+        $photo130->image = 'https://media.pianetadesign.it/images/2020/07/Ufficio-moderno-6.jpg'; 
+        $photo130->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo140 = new Image();
+        $photo140->apartment_id = 10;
+        $photo140->image = 'https://media.pianetadesign.it/images/2020/07/Ufficio-moderno-1.jpg'; 
+        $photo140->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo111 = new Image();
+        $photo111->apartment_id = 11;
+        $photo111->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/468ad175-b7aa-400e-8a61-b462e42d67d4.jpeg?im_w=720'; 
+        $photo111->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo112 = new Image();
+        $photo112->apartment_id = 11;
+        $photo112->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/274349cb-8c43-443a-8c20-78620057569d.jpeg?im_w=720'; 
+        $photo112->save();
         
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo113 = new Image();
+        $photo113->apartment_id = 11;
+        $photo113->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/01eb219b-2db9-437d-bd03-572eb3d457a3.jpeg?im_w=720'; 
+        $photo113->save();
 
-        $photo = new Image();
-        $photo->apartment_id = 1;
-        $photo->image = ''; 
-        $photo->save();
+        $photo114 = new Image();
+        $photo114->apartment_id = 11;
+        $photo114->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1126489657627869050/original/d0b324d4-8ed1-4fe0-b8ee-270f0b5121c4.jpeg?im_w=720'; 
+        $photo114->save();
 
+        $photo121 = new Image();
+        $photo121->apartment_id = 12;
+        $photo121->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/5794fdd9-adca-439b-a413-47787fbf6452.jpeg?im_w=720'; 
+        $photo121->save();
+
+        $photo122 = new Image();
+        $photo122->apartment_id = 12;
+        $photo122->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/8dbf3a8d-459c-4fc7-8b7b-1cf33873d6a5.jpeg?im_w=720'; 
+        $photo122->save();
+        
+        $photo123 = new Image();
+        $photo123->apartment_id = 12;
+        $photo123->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/296a7b76-6ca0-4fc9-bf89-3090c26df624.jpeg?im_w=720'; 
+        $photo123->save();
+
+        $photo124 = new Image();
+        $photo124->apartment_id = 12;
+        $photo124->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/bbfd7275-d8a6-408f-a70b-9d9bd1dc207d.jpeg?im_w=720'; 
+        $photo124->save();
     }
 }
