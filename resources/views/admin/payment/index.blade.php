@@ -23,7 +23,7 @@
                         <form method="post" id="payment-form" action="{{ route('admin.payment.checkout') }}">
                             @csrf
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                               <label for="amount">Seleziona il tipo di sponsorizzazione:</label>
                               <select name="sponsorship_type" id="sponsorship_type" class="form-select" required>
                                   @foreach($sponsorshipOptions as $option)
