@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use App\Models\Image;
 use App\Models\Service;
 use App\Models\Sponsorship;
+use App\Models\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -116,16 +117,20 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
-    {
+    public function show(Apartment $apartment){
         $sponsorships = Sponsorship::all();
-
+    
+        // Conteggio delle visite per l'appartamento corrente
+        $viewsCount = View::where('apartment_id', $apartment->id)->count();
+    
         $data = [
-            'sponsorships' => $sponsorships
+            'sponsorships' => $sponsorships,
+            'viewsCount' => $viewsCount  // Aggiungiamo il conteggio delle visite ai dati passati alla vista
         ];
-
+    
         return view('admin.apartments.show', $data ,compact('apartment'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
