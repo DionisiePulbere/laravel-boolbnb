@@ -22,8 +22,13 @@ class PaymentController extends Controller
 
     public function index()
     {
+        $sponsorshipOptions = [
+            ['hours' => 24, 'price' => '2.99 € per 24 ore'],
+            ['hours' => 72, 'price' => '5.99 € per 72 ore'],
+            ['hours' => 144, 'price' => '9.99 € per 144 ore'],
+        ];
         $clientToken = $this->gateway->clientToken()->generate();
-        return view('admin.payment.index', compact('clientToken'));
+        return view('admin.payment.index', compact('clientToken', 'sponsorshipOptions'));
     }
 
     public function checkout(Request $request)

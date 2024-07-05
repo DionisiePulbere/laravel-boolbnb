@@ -23,10 +23,14 @@
                         <form method="post" id="payment-form" action="{{ route('admin.payment.checkout') }}">
                             @csrf
 
-                            <div class="form-group mb-3">
-                                <label for="amount">Importo da addebitare:</label>
-                                <input type="text" id="amount" name="amount" class="form-control" value="10.00" readonly>
-                            </div>
+                            <div class="form-group">
+                              <label for="amount">Seleziona il tipo di sponsorizzazione:</label>
+                              <select name="sponsorship_type" id="sponsorship_type" class="form-select" required>
+                                  @foreach($sponsorshipOptions as $option)
+                                      <option value="{{ $option['hours'] }}">{{ $option['price'] }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
 
                             <div class="form-group mb-3">
                                 <label for="cardholder-name">Nome del titolare della carta</label>
