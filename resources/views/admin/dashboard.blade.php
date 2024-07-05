@@ -3,35 +3,18 @@
 @section('content')
     <h2 class="fw-bold">Benvenuto/a {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h1>
 
-    <div class="container mt-5">
-        <div class="d-flex">
-            <div id="uno" class="row flex-column me-5">
-                <div class="col">
-                    <h1 class="text-center">Appartamenti</h1>
-                    <div class="container-fluid">
-                        <div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="due" class="row flex-column">
-                <div class="col">
-                    <h1 class="text-center">Messaggi</h1>
+        <div class="container mt-5">
+            <div class="card text-bg-danger mb-3" style="background-color: #FF5A5F">
+                <div class="card-header fs-3 text-center">Statistiche</div>
+                <div class="card-body">
+                    <h5>Il numero delle sponsorizzazioni fatte è stato: {{ $totalSponsors }}</h5>
+                    <h5>Il numero delle visite totali è: {{ $totalViews }}</h5>
+                    <h5>Il numero dei messaggi totali ricevuti è: {{ $totalMessages }}</h5>
                 </div>
             </div>
         </div>
-        <div class="d-flex my-5">
-            <div id="tre" class="row flex-column me-5">
-                <div class="col">
-                    <h1 class="text-center">Sponsor</h1>
-                </div>
-            </div>
-            <div id="quattro" class="row flex-column pd-2">
-                <div class="col">
-                    <h1 class="text-center">Statistiche</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+        
+
 @endsection
 
 <style>
