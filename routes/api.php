@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
