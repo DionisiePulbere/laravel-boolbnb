@@ -24,6 +24,8 @@
 
     {{-- Css per la mappa --}}
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css">
+    {{-- BrainTree per i pagamenti --}}
+    <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.min.js"></script>
 </head>
 
 <body>
@@ -31,13 +33,17 @@
 
         <header class="navbar navbar-dark sticky-top flex-md-nowrap p-2 shadow" style="background-color: #FF5A5F">
             <div class="logo_laravel">
-                <img style="width:150px;" src="{{ Vite::asset("resources/images/logo-white.png") }}" alt="">
+                <img style="width: 150px;" src="{{ Vite::asset("resources/images/logo-white.png") }}" alt="">
             </div>
-            <div class="navbar-nav ms-auto">
-                <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link btn dashboard-logout px-3" href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+            <div class="ms-auto d-flex align-items-center">
+                <div class="nav-item text-nowrap m-2">
+                    <a class="btn dashboard-logout px-3 py-2 d-flex align-items-center" href="http://localhost:5174/#/" style="height: 100%;">
+                        <i class="fas fa-home me-1"></i> Sito Web
+                    </a>
+                </div>
+                <div class="nav-item text-nowrap">
+                    <a class="nav-link btn dashboard-logout py-2 px-3 d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -47,7 +53,6 @@
             <button class="navbar-toggler d-md-none collapsed ms-4 dashboard-collapsed-btn" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
         </header>
 
         <div class="container-fluid vh-100">

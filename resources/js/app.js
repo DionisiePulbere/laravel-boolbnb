@@ -27,6 +27,26 @@ allDeleteButtons.forEach((deleteButton) => {
 });
 /* FINE BUTTON ELIMINA NELLA SHOW APARTMENTS */
 
+
+/* INIZIO MODALE CAROSELLO IMMAGINI */
+document.addEventListener('DOMContentLoaded', function () {
+    var lightboxModal = document.getElementById('lightboxModal');
+    var lightboxCarousel = document.getElementById('lightboxCarousel');
+
+    document.querySelectorAll('#apartmentImagesCarousel .carousel-item img').forEach((img, index) => {
+        img.addEventListener('click', function () {
+            var bsLightboxCarousel = new bootstrap.Carousel(lightboxCarousel);
+            bsLightboxCarousel.to(index);
+        });
+    });
+
+    lightboxModal.addEventListener('shown.bs.modal', function () {
+        var bsLightboxCarousel = new bootstrap.Carousel(lightboxCarousel);
+        bsLightboxCarousel.to(0);
+    });
+});
+/* FINE MODALE CAROSELLO IMMAGINI */
+
 /* INIZIO RICERCA TRAMITE TOM TOM INDIRIZZO NELLA CRUD */
 document.getElementById('address').addEventListener('input', function () {
     const query = this.value;

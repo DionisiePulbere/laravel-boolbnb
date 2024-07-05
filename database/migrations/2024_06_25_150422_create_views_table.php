@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('address_ip', 15);
             $table->dateTime('date_visit');
             $table->timestamps();
-
         });
     }
 
