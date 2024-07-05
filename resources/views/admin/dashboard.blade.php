@@ -1,15 +1,44 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2 class="fw-bold">Benvenuto/a {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h1>
+    <h1 class="fw-bold">Ciao {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h1>
 
-        <div class="container mt-5">
-            <div class="card text-bg-danger mb-3" style="background-color: #FF5A5F">
-                <div class="card-header fs-3 text-center">Statistiche</div>
-                <div class="card-body">
-                    <h5>Il numero delle sponsorizzazioni fatte è stato: {{ $totalSponsors }}</h5>
-                    <h5>Il numero delle visite totali è: {{ $totalViews }}</h5>
-                    <h5>Il numero dei messaggi totali ricevuti è: {{ $totalMessages }}</h5>
+        <div class="container mt-5">  
+            <div class="d-flex justify-content-between">
+
+                <div class="apartments text-center rounded">
+                    <div class="top rounded-top">
+                        <h4 class="pt-2">Appartamenti</h4>
+                    </div>
+                    <div class="bottom">
+                        <h1 class="pt-1">{{ $userData['total_apartments'] }}</h1>
+                    </div>
+                </div>
+                <div class="sponsors text-center rounded">
+                    <div class="top rounded-top">
+                        <h4 class="pt-2">Sponsorizzazioni</h4>
+                    </div>
+                    <div class="bottom">
+                        <h1 class="pt-1">{{ $userData['total_sponsors'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="views text-center rounded">
+                    <div class="top rounded-top">
+                        <h4 class="pt-2">Visite</h4>
+                    </div>
+                    <div class="bottom">
+                        <h1 class="pt-1">{{ $userData['total_views'] }}</h1>
+                    </div>
+                </div>
+                <div class="messages text-center rounded">
+                    <div class="top rounded-top">
+                        <h4 class="pt-2">Messaggi</h4>
+                    </div>
+                    <div class="bottom">
+                        <h1 class="pt-1">{{ $userData['total_messages'] }}</h1>
+                    </div>
                 </div>
             </div>
         </div>
@@ -18,24 +47,14 @@
 @endsection
 
 <style>
-#uno{
-    width: 400px;
-    height: 400px;
-    border: 1px solid blue;
-}
-#due{
-    width: 400px;
-    height: 400px;
-    border: 1px solid black;
-}
-#tre{
-    width: 400px;
-    height: 400px;
-    border: 1px solid rgb(43, 255, 0);
-}
-#quattro{
-    width: 400px;
-    height: 400px;
-    border: 1px solid rgb(255, 0, 0);
-}
+ .views , .messages , .sponsors, .apartments{
+    width: 48%;
+    background-color:#FFE5E6;
+    margin-bottom: 34px;
+ }
+
+ .top{
+    background-color:#FF5A5F;
+    padding-bottom: 2px;
+ }
 </style>
