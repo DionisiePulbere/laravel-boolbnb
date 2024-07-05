@@ -24,8 +24,9 @@
 
     {{-- Css per la mappa --}}
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css">
-    {{-- BrainTree per i pagamenti --}}
-    <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.min.js"></script>
+
+
+
 </head>
 
 <body>

@@ -122,51 +122,48 @@ function onFormSubmit(){
     CreateBtnSubmit.classList.add('disabled');
 }
 
-// Inizio payment
-{/* <script src="https://js.braintreegateway.com/web/dropin/1.30.0/js/dropin.min.js"></script>
+/* INIZIO PAGAMENTO */
+var form = document.getElementById('payment-form');
+var clientToken = "{{ $clientToken }}"; // Token client generato dal controller
 
-    const form = document.querySelector('#payment-form');
-    const client_token = "{{ $clientToken }}";
+braintree.dropin.create({
+    authorization: clientToken,
+    container: '#bt-dropin'
+}, function (createErr, instance) {
+    if (createErr) {
+        console.error('Errore durante la creazione di Drop-in:', createErr);
+        return;
+    }
 
-    braintree.dropin.create({
-      authorization: client_token,
-      container: '#dropin-container'
-    }, function (createErr, instance) {
-      form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        instance.requestPaymentMethod(function (err, payload) {
-          document.querySelector('input[name="payment_method_nonce"]').value = payload.nonce;
-          form.submit();
+        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+            if (requestPaymentMethodErr) {
+                console.error('Errore durante la richiesta di metodo di pagamento:', requestPaymentMethodErr);
+                return;
+            }
+
+            // Imposta il nonce nel campo nascosto del form
+            document.getElementById('nonce').value = payload.nonce;
+
+            // Opzionale: mostra il prezzo selezionato nella label
+            var selectedOption = document.getElementById('sponsorship_type');
+            var selectedPriceLabel = document.getElementById('selected-price-label');
+            var selectedPrice = selectedOption.options[selectedOption.selectedIndex].text;
+            selectedPriceLabel.textContent = 'Prezzo selezionato: ' + selectedPrice;
+
+            // Invia il form per completare il pagamento
+            form.submit();
         });
-      });
-    }); */}
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const deleteButtons = document.querySelectorAll('.delete-image-btn');
-
-//     if (deleteButtons.length > 0) {
-//         deleteButtons.forEach(function (button) {
-//             button.addEventListener('click', function (event) {
-//                 event.preventDefault();
-                
-//                 const imageId = this.getAttribute('data-image-id');
-//                 const imageContainer = this.parentElement;
-
-//                 fetch(`/admin/apartments/${imageId}/delete`, {
-//                     method: 'DELETE',
-//                     headers: {
-//                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
-//                         'Content-Type': 'application/json'
-//                     },
-//                 })
-//                 .then(response => {
-//                     imageContainer.remove();
-//                 })
-//             });
-//         });
-//     } else {
-//         console.error('Nessun pulsante di eliminazione trovato.');
-//     }
-// });
+    });
+});
+/* gestisci la data del carta */
+document.getElementById('expiration-date').addEventListener('input', function(e) {
+    var input = e.target.value;
+    if (input.length === 5 && input[2] !== '/') {
+        input = input.slice(0, 2) + '/' + input.slice(2);
+    }
+    e.target.value = input.slice(0, 5);
+});
+/* FINE PAGAMENTO */
