@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Admin\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,8 @@ Route::middleware(['auth'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
 });
 
 require __DIR__.'/auth.php';

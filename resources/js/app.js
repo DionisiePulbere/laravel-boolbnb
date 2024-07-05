@@ -122,6 +122,27 @@ function onFormSubmit(){
     CreateBtnSubmit.classList.add('disabled');
 }
 
+// Inizio payment
+{/* <script src="https://js.braintreegateway.com/web/dropin/1.30.0/js/dropin.min.js"></script>
+
+    const form = document.querySelector('#payment-form');
+    const client_token = "{{ $clientToken }}";
+
+    braintree.dropin.create({
+      authorization: client_token,
+      container: '#dropin-container'
+    }, function (createErr, instance) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        instance.requestPaymentMethod(function (err, payload) {
+          document.querySelector('input[name="payment_method_nonce"]').value = payload.nonce;
+          form.submit();
+        });
+      });
+    }); */}
+
+
 // document.addEventListener('DOMContentLoaded', function () {
 //     const deleteButtons = document.querySelectorAll('.delete-image-btn');
 

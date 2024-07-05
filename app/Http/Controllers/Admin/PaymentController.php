@@ -10,23 +10,28 @@ class PaymentController extends Controller
 {
     protected $gateway;
 
-    public function __construct(Gateway $gateway)
+    public function __construct()
     {
-        $this->gateway = $gateway;
+        $this->gateway = new Gateway([
+            'environment' => env('BRAINTREE_ENV'),
+            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+            'privateKey' => env('BRAINTREE_PRIVATE_KEY'),
+        ]);
     }
 
     public function index()
     {
-        return view('payment.index');
+        $clientToken = $this->gateway->clientToken()->generate();
+        return view('admin.payment.index', compact('clientToken'));
     }
 
     public function checkout(Request $request)
     {
         $nonce = $request->payment_method_nonce;
 
-        // Effettua il pagamento utilizzando Braintree Gateway
         $result = $this->gateway->transaction()->sale([
-            'amount' => '10.00',  // Sostituisci con l'importo effettivo da addebitare
+            'amount' => '10.00', // Modifica l'importo secondo necessità
             'paymentMethodNonce' => $nonce,
             'options' => [
                 'submitForSettlement' => true
@@ -34,17 +39,13 @@ class PaymentController extends Controller
         ]);
 
         if ($result->success) {
-            // Salvare il record della transazione nel database
-            $transaction = $result->transaction;
-            
             return redirect()->back()->with('success', 'Pagamento effettuato con successo!');
         } else {
             $errorString = "";
-            foreach($result->errors->deepAll() as $error) {
+            foreach ($result->errors->deepAll() as $error) {
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
-            
-            return redirect()->back()->with('error', 'Errore durante il pagamento: '.$errorString);
+            return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $errorString);
         }
     }
 }

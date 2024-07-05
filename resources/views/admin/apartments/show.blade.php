@@ -50,9 +50,9 @@
                     @endforeach
                 @endif
             @elseif ($apartment->visibility === 0)
-                <button class="btn my-btn-primary text-white">
+                <a class="btn my-btn-primary text-white" href="{{ route('admin.payment.index') }}">
                     Sponsorizza questa casa <i class="fa-solid fa-ranking-star ms-3"></i>
-                </button>
+                </a>
             @endif
         </div>
 
