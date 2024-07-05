@@ -123,15 +123,15 @@ function onFormSubmit(){
 }
 
 /* INIZIO PAGAMENTO */
-var form = document.getElementById('payment-form');
-var clientToken = "{{ $clientToken }}"; // Token client generato dal controller
+var form = document.querySelector('#payment-form');
+var clientToken = "{{ $clientToken }}"; // Token del cliente generato da Braintree
 
 braintree.dropin.create({
     authorization: clientToken,
     container: '#bt-dropin'
 }, function (createErr, instance) {
     if (createErr) {
-        console.error('Errore durante la creazione di Drop-in:', createErr);
+        console.error('Errore durante la creazione di Drop-in UI:', createErr);
         return;
     }
 
@@ -140,20 +140,14 @@ braintree.dropin.create({
 
         instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
             if (requestPaymentMethodErr) {
-                console.error('Errore durante la richiesta di metodo di pagamento:', requestPaymentMethodErr);
+                console.error('Errore durante la richiesta del metodo di pagamento:', requestPaymentMethodErr);
                 return;
             }
 
-            // Imposta il nonce nel campo nascosto del form
-            document.getElementById('nonce').value = payload.nonce;
+            // Inserisci il nonce generato in un campo nascosto nel form
+            document.querySelector('#nonce').value = payload.nonce;
 
-            // Opzionale: mostra il prezzo selezionato nella label
-            var selectedOption = document.getElementById('sponsorship_type');
-            var selectedPriceLabel = document.getElementById('selected-price-label');
-            var selectedPrice = selectedOption.options[selectedOption.selectedIndex].text;
-            selectedPriceLabel.textContent = 'Prezzo selezionato: ' + selectedPrice;
-
-            // Invia il form per completare il pagamento
+            // Invia il form al server per la transazione
             form.submit();
         });
     });
@@ -167,3 +161,6 @@ document.getElementById('expiration-date').addEventListener('input', function(e)
     e.target.value = input.slice(0, 5);
 });
 /* FINE PAGAMENTO */
+
+
+/* prova */
