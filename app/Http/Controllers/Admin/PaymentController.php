@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
     protected $gateway;
     protected $sponsorshipOptions;
-    protected $braintree;
+    protected $braintree; 
 
     public function __construct(BraintreeService $braintree)
     {
