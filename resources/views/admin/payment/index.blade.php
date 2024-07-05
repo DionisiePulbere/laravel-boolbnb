@@ -53,7 +53,10 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Paga adesso</button>
+                            <div id="bt-dropin"></div>
+                              <input type="hidden" id="nonce" name="payment_method_nonce">
+
+                              <button type="submit" class="btn btn-primary">Paga adesso</button>
                         </form>
                     </div>
                 </div>
