@@ -34,12 +34,14 @@
 
         <header class="navbar navbar-dark sticky-top flex-md-nowrap p-2 shadow" style="background-color: #FF5A5F">
             <div class="logo_laravel">
-                <img style="width: 150px;" src="{{ Vite::asset("resources/images/logo-white.png") }}" alt="">
+                <a href="{{ route('admin.dashboard') }}">
+                    <img style="width: 150px;" src="{{ Vite::asset("resources/images/logo-white.png") }}" alt="">
+                </a>
             </div>
             <div class="ms-auto d-flex align-items-center">
                 <div class="nav-item text-nowrap m-2">
                     <a class="btn dashboard-logout px-3 py-2 d-flex align-items-center" href="http://localhost:5174/#/" style="height: 100%;">
-                        <i class="fas fa-home me-1"></i> Sito Web
+                        <i class="fas fa-home pb-1 me-1"></i> Sito Web
                     </a>
                 </div>
                 <div class="nav-item text-nowrap">
@@ -88,9 +90,9 @@
                                                         ->count();
                                 @endphp
                                 <a class="nav-link text-black position-relative dashboard-link {{ Route::is('admin.message.index') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.message.index') }}">
-                                    <i class="fa-solid fa-house-medical fa-lg me-2 primary-color"></i> Messaggi
+                                    <i class="fa-solid fa-house-flag fa-lg me-2 primary-color"></i> Messaggi
                                     @if($newMessagesCount > 0)
-                                        <span class="badge position-absolute top-0 end-0 bg-danger">{{ $newMessagesCount }}</span>
+                                        <span class="badge my-badge">{{ $newMessagesCount }}</span>
                                     @endif
                                 </a>
                             </li>
@@ -112,3 +114,4 @@
 </body>
 
 </html>
+
