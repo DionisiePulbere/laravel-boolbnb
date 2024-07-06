@@ -60,22 +60,22 @@ class ApartmentController extends Controller
     public function search(Request $request)
     {
         
-    if($request->latitude){
-        $latitude= $request->latitude;
-    } else{
-        $latitude = '';
-    }
+        if($request->latitude){
+            $latitude= $request->latitude;
+        } else{
+            $latitude = '';
+        }
 
-    if($request->longitude){
-        $longitude= $request->longitude;
-    }else{
-        $longitude='';
-    }
-    if($request->distance){
-        $distance= $request->distance;
-    }else{
-        $distance='5000';
-    }
+        if($request->longitude){
+            $longitude= $request->longitude;
+        }else{
+            $longitude='';
+        }
+        if($request->distance){
+            $distance= $request->distance;
+        }else{
+            $distance='20000';
+        }
     
 
         $apartments = Apartment::findNearby($latitude, $longitude, $distance);
@@ -85,9 +85,14 @@ class ApartmentController extends Controller
             ]);
         }
 
+        $apartmentIds = array_column($apartments, 'id');
+        $apartmentsWithRelations = Apartment::whereIn('id', $apartmentIds)
+            ->with('services')
+            ->get();
+
         return response()->json([
             'result'=> true,
-            'apartments'=> $apartments
+            'apartments'=> $apartmentsWithRelations
         ]);
     }
 }
