@@ -71,30 +71,38 @@
                     </span>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="number_of_room" class="form-label">Numero di stanze *</label>
-                <select class="form-select" id="number_of_room" name="number_of_room">
-                    @for ($i = 1; $i <= 8; $i++)
-                        <option value="{{ $i }}" @if(old('number_of_room', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
-                    @endfor
-                </select>
-            </div>     
-            <div class="mb-3">
-                <label for="number_of_bed" class="form-label">Numero di letti *</label>
-                <select class="form-select" id="number_of_bed" name="number_of_bed">
-                    @for ($i = 1; $i <= 8; $i++)
-                        <option value="{{ $i }}" @if(old('number_of_bed', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
-                    @endfor
-                </select>
-            </div>   
-            <div class="mb-3">
-                <label for="number_of_bath" class="form-label">Numero di bagni *</label>
-                <select class="form-select" id="number_of_bath" name="number_of_bath">
-                    @for ($i = 1; $i <= 8; $i++)
-                        <option value="{{ $i }}" @if(old('number_of_bath', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
-                    @endfor
-                </select>
-            </div> 
+            <div class="d-flex">
+                <div class="col-md-4">
+                    <div class="mb-3 me-3">
+                        <label for="number_of_room" class="form-label">Numero di stanze *</label>
+                        <select class="form-select" id="number_of_room" name="number_of_room">
+                            @for ($i = 1; $i <= 8; $i++)
+                                <option value="{{ $i }}" @if(old('number_of_room', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div> 
+                </div>    
+                <div class="col-md-4">
+                    <div class="mb-3 me-3">
+                        <label for="number_of_bed" class="form-label">Numero di letti *</label>
+                        <select class="form-select" id="number_of_bed" name="number_of_bed">
+                            @for ($i = 1; $i <= 8; $i++)
+                                <option value="{{ $i }}" @if(old('number_of_bed', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>   
+                </div> 
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="number_of_bath" class="form-label">Numero di bagni *</label>
+                        <select class="form-select" id="number_of_bath" name="number_of_bath">
+                            @for ($i = 1; $i <= 8; $i++)
+                                <option value="{{ $i }}" @if(old('number_of_bath', $apartment->number ?? '') == $i) selected @endif>{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div> 
+                </div> 
+            </div>
             @php
                 $zone = $services->chunk(ceil($services->count() / 2));
             @endphp

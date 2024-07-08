@@ -53,16 +53,3 @@
             </div>
         </div>
 @endsection
-
-<style>
- .views , .messages , .sponsors, .apartments{
-    width: 48%;
-    background-color:#FFE5E6;
-    margin-bottom: 34px;
- }
-
- .top{
-    background-color:#FF5A5F;
-    padding-bottom: 2px;
- }
-</style>
