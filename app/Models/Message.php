@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'apartment_id',
@@ -15,7 +16,7 @@ class Message extends Model
         'object',
         'name',
         'description',
-        'is_read'
+        'is_read' 
     ];
 
     public function associateUser($user){
@@ -32,4 +33,5 @@ class Message extends Model
         $this->is_read = true;
         $this->save();
     }
+
 }

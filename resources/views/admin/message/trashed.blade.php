@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2>Messaggi Ricevuti</h2>
+    <h2>Messaggi Eliminati</h2>
     @if($messages->isEmpty())
-        <p>Non hai ricevuto nessun messaggio.</p>
+        <p>Non hai messaggi nel cestino.</p>
     @else
         <ul class="list-group">
             @foreach($messages as $message)
@@ -15,10 +15,10 @@
                     <p><strong>Oggetto:</strong> {{ $message->object }}</p>
                     <p><strong>Messaggio:</strong> {{ $message->description }}</p>
                     <hr>
-                    <form action="{{ route('admin.message.destroy', $message->id) }}" method="POST">
+                    <form action="{{ route('admin.message.restore', $message->id) }}" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Elimina</button>
+                        @method('PATCH')
+                        <button type="submit" class="btn btn-warning">Ripristina</button>
                     </form>
                 </li>
             @endforeach
