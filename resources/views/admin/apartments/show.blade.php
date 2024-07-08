@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@php
+@php 
     use Carbon\Carbon;
 @endphp
 
