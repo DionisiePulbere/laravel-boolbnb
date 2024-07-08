@@ -16,11 +16,9 @@
         </div>
 
         {{-- SPONSORIZZAZIONE --}}
-        
-
         <div class="mb-3 mt-3">
             @if ($apartment->visibility === 1)
-                <button class="btn my-register-btn px-3">Sponsorizzato <i class="fa-solid fa-crown"></i></button>
+                <a href="{{ route('admin.payment.index', ['apartment'=>$apartment->slug])}}" class="btn my-register-btn px-3">Sponsorizzato <i class="fa-solid fa-crown"></i></a>
                 <span>numero visite: {{$viewsCount }}</span>
                 @if ($apartment->sponsorships->isNotEmpty())
                     @foreach ($apartment->sponsorships as $sponsorship)
@@ -50,7 +48,7 @@
                     @endforeach
                 @endif
             @elseif ($apartment->visibility === 0)
-                <a class="btn my-btn-primary text-white" href="{{ route('admin.payment.index') }}">
+                <a class="btn my-btn-primary text-white" href="{{ route('admin.payment.index', ['apartment'=>$apartment->slug])}}">
                     Sponsorizza questa casa <i class="fa-solid fa-ranking-star ms-3"></i>
                 </a>
             @endif
