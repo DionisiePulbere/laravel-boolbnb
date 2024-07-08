@@ -49,6 +49,8 @@ Route::middleware(['auth'])
 ->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
     Route::delete('/message/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
+    Route::get('/message/trashed', [MessageController::class, 'trashed'])->name('message.trashed');
+    Route::patch('/message/{id}/restore', [MessageController::class, 'restore'])->name('message.restore');
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
 });

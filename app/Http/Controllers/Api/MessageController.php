@@ -60,4 +60,22 @@ class MessageController extends Controller
 
         return redirect()->route('admin.message.index')->with('success', 'Messaggio eliminato con successo!');
     }
+
+    public function trashed()
+    {
+        $user = Auth::user();
+        $apartmentIds = Apartment::where('user_id', $user->id)->pluck('id');
+
+        $messages = Message::onlyTrashed()->whereIn('apartment_id', $apartmentIds)->with('apartment')->get();
+
+        return view('admin.message.trashed', compact('messages'));
+    }
+
+    public function restore($id)
+    {
+        $message = Message::onlyTrashed()->findOrFail($id);
+        $message->restore();
+
+        return redirect()->route('admin.message.trashed')->with('success', 'Messaggio ripristinato con successo!');
+    }
 }

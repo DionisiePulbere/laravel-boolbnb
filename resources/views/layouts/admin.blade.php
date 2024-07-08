@@ -96,6 +96,17 @@
                                     @endif
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                @php
+                                    $user = Auth::user();
+                                    $apartmentIds = \App\Models\Apartment::where('user_id', $user->id)->pluck('id');
+                                @endphp
+                                <a class="nav-link text-black position-relative dashboard-link {{ Route::is('admin.message.trashed') ? 'dashboard-actual-link' : '' }}" href="{{ route('admin.message.trashed') }}">
+                                    <i class="fa-solid fa-trash-alt fa-lg me-2 primary-color"></i> Cestino
+                                </a>
+                            </li>
+                            
                         </ul>
 
 
