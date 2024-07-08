@@ -269,5 +269,165 @@ class ImagesSeeder extends Seeder
         $photo124->apartment_id = 12;
         $photo124->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1142713955355017474/original/bbfd7275-d8a6-408f-a70b-9d9bd1dc207d.jpeg?im_w=720'; 
         $photo124->save();
+
+        $photo131 = new Image();
+        $photo131->apartment_id = 13;
+        $photo131->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1076859684695909604/original/dc841420-b569-425e-aa9b-e487a443e45c.jpeg?im_w=720'; 
+        $photo131->save();
+
+        $photo132 = new Image();
+        $photo132->apartment_id = 13;
+        $photo132->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1076859684695909604/original/d568eb87-d133-4e45-8a81-0015df6c697d.jpeg?im_w=720'; 
+        $photo132->save();
+
+        $photo133 = new Image();
+        $photo133->apartment_id = 13;
+        $photo133->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1076859684695909604/original/53212fc6-7c8f-4bae-bfda-a5d12eafc82f.jpeg?im_w=720'; 
+        $photo133->save();
+
+        $photo134 = new Image();
+        $photo134->apartment_id = 13;
+        $photo134->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1076859684695909604/original/56297930-0fea-4f57-806b-46b9eae7683b.jpeg?im_w=720'; 
+        $photo134->save();
+
+        $photo141 = new Image();
+        $photo141->apartment_id = 14;
+        $photo141->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NzEwNjAwOTAwMDUwMzMyMDA3/original/55b1a7d6-496d-44a1-b0e6-a72433c28e9d.jpeg?im_w=720'; 
+        $photo141->save();
+
+        $photo142 = new Image();
+        $photo142->apartment_id = 14;
+        $photo142->image = 'https://a0.muscache.com/im/pictures/39cbf018-95b3-4d61-af28-16d7c85ef8d7.jpg?im_w=720'; 
+        $photo142->save();
+
+        $photo143 = new Image();
+        $photo143->apartment_id = 14;
+        $photo143->image = 'https://a0.muscache.com/im/pictures/83cfd698-0723-40ee-8bdb-ceb0765f5fc4.jpg?im_w=1200'; 
+        $photo143->save();
+
+        $photo144 = new Image();
+        $photo144->apartment_id = 14;
+        $photo144->image = 'https://a0.muscache.com/im/pictures/625916d1-c4c6-40dc-86cf-ba8c32342f91.jpg?im_w=1200'; 
+        $photo144->save();
+
+        $photo151 = new Image();
+        $photo151->apartment_id = 15;
+        $photo151->image = 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-851139798615091047/original/2c40b4d9-813f-49a8-acec-a02d3797751a.jpeg?im_w=720'; 
+        $photo151->save();
+
+        $photo152 = new Image();
+        $photo152->apartment_id = 15;
+        $photo152->image = 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-851139798615091047/original/57efbfb3-f3fd-456d-b667-8b4dd53b5577.jpeg?im_w=720'; 
+        $photo152->save();
+
+        $photo153 = new Image();
+        $photo153->apartment_id = 15;
+        $photo153->image = 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-851139798615091047/original/c1a7dd6e-57a8-45fd-a77d-270b6cd44fb2.jpeg?im_w=720'; 
+        $photo153->save();
+
+        $photo154 = new Image();
+        $photo154->apartment_id = 15;
+        $photo154->image = 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-851139798615091047/original/5f6ac9de-8b94-4f60-9a57-c02d1d37cf82.jpeg?im_w=720'; 
+        $photo154->save();
+
+        $photo161 = new Image();
+        $photo161->apartment_id = 16;
+        $photo161->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-770173449655278304/original/0caf5485-9693-438d-8571-ab6a5266a23d.jpeg?im_w=720'; 
+        $photo161->save();
+
+        $photo162 = new Image();
+        $photo162->apartment_id = 16;
+        $photo162->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-770173449655278304/original/22dbd2c5-26e0-4c22-9c25-81bf4e922053.jpeg?im_w=720'; 
+        $photo162->save();
+
+        $photo163 = new Image();
+        $photo163->apartment_id = 16;
+        $photo163->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-770173449655278304/original/d96334b4-840b-4231-8450-93999bc37d31.jpeg?im_w=1200'; 
+        $photo163->save();
+
+        $photo164 = new Image();
+        $photo164->apartment_id = 16;
+        $photo164->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-770173449655278304/original/e8f1b21a-8e39-43f9-9432-f667c7408336.jpeg?im_w=720'; 
+        $photo164->save();
+
+        $photo171 = new Image();
+        $photo171->apartment_id = 17;
+        $photo171->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1102274149576621102/original/073b371a-3c07-47f4-bf6b-4161eacd29ab.jpeg?im_w=960'; 
+        $photo171->save();
+
+        $photo172 = new Image();
+        $photo172->apartment_id = 17;
+        $photo172->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1102274149576621102/original/dc396276-e18a-44f7-91bf-b7051d49b53b.jpeg?im_w=720'; 
+        $photo172->save();
+
+        $photo173 = new Image();
+        $photo173->apartment_id = 17;
+        $photo173->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1102274149576621102/original/b74bb6a9-0e4a-48a7-9931-0514b57c61b7.jpeg?im_w=720'; 
+        $photo173->save();
+
+        $photo174 = new Image();
+        $photo174->apartment_id = 17;
+        $photo174->image = 'https://a0.muscache.com/im/pictures/hosting/Hosting-1102274149576621102/original/51aa64a8-47d0-470d-bb37-a09eb79468f1.jpeg?im_w=720'; 
+        $photo174->save();
+
+        $photo181 = new Image();
+        $photo181->apartment_id = 18;
+        $photo181->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-36782249/original/5bf1b8d3-e21c-493c-92af-cb7a1bfbbf8e.jpeg?im_w=720'; 
+        $photo181->save();
+
+        $photo182 = new Image();
+        $photo182->apartment_id = 18;
+        $photo182->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-36782249/original/dcb847a5-e550-410c-a177-f2c8e4e2a2fe.jpeg?im_w=720'; 
+        $photo182->save();
+
+        $photo183 = new Image();
+        $photo183->apartment_id = 18;
+        $photo183->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-36782249/original/b551f31f-5463-4fa2-a5b3-1bb8a109a6ae.jpeg?im_w=720'; 
+        $photo183->save();
+
+        $photo184 = new Image();
+        $photo184->apartment_id = 18;
+        $photo184->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-36782249/original/44c0eb6b-4dd5-40b1-837a-f8f3478decf1.jpeg?im_w=720'; 
+        $photo184->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 19;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-673087779772592652/original/b5d8c8f7-5f84-4bed-8bc5-5cb210660007.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 19;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-673087779772592652/original/5ee83633-7823-49a1-a922-5c9356c44217.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 19;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-673087779772592652/original/18d003d3-2ac8-4a21-a08a-a7e624444399.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 19;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-673087779772592652/original/496d25f6-bff5-4b96-953d-c03bc58f90c3.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 20;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-1039950206113084332/original/6fe37c9e-d2e4-4db5-942b-26374ce33b54.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 20;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-1039950206113084332/original/76fd91e6-d32b-4733-ba0d-95d871c17078.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 20;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-1039950206113084332/original/2713ca61-7619-4008-9eaa-bca8a917a4b0.jpeg?im_w=720'; 
+        $photo->save();
+
+        $photo = new Image();
+        $photo->apartment_id = 20;
+        $photo->image = 'https://a0.muscache.com/im/pictures/miso/Hosting-1039950206113084332/original/83c83ffe-651f-4ff3-969d-a01e4936130d.jpeg?im_w=720'; 
+        $photo->save();
     }
 }
