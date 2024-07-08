@@ -35,7 +35,7 @@
 
                         <div class="form-group mb-3">
                             <label for="cardholder-name">Nome del titolare della carta</label>
-                            <input type="text" id="cardholder-name" name="cardholder_name" value="{{ Auth::user()->name . " " .Auth::user()->surname }}" class="form-control" readonly required>
+                            <input type="text" id="cardholder-name" name="cardholder_name" value="{{ Auth::user()->name . " " .Auth::user()->surname }}" class="form-control" required>
                         </div>
 
                         <div class="form-group mb-3">
