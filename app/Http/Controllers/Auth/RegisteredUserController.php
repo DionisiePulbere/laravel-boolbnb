@@ -51,6 +51,8 @@ class RegisteredUserController extends Controller
         // Controllo che l'età sia almeno 18 anni
         if ($age < 18) {
             return redirect()->back()->withErrors(['date_of_birth' => 'Devi avere almeno 18 anni per registrarti.'])->withInput();
+        } else if ($age > 100) {
+            return redirect()->back()->withErrors(['date_of_birth' => 'Non puoi avere più di 100 anni per registrarti.'])->withInput();
         }
 
         $user = User::create([

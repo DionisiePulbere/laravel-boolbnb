@@ -2,48 +2,56 @@
 
 @section('content')
     <h1 class="fw-bold">Ciao {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h1>
-
-        <div class="container mt-5">  
-            <div class="d-flex justify-content-between">
-
-                <div class="apartments text-center rounded">
-                    <div class="top rounded-top">
-                        <h4 class="pt-2">Appartamenti</h4>
+        <div class="container">
+            <div class="row justify-content-center my-3">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header text-white text-center" style="background-color: #FF5A5F">Totali appartamenti</div>
+                            <div class="form-group my-3 mx-5 text-center">
+                                <label class="pt-1 ">
+                                    <h1 >{{ $userData['total_apartments'] }}</h1>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bottom">
-                        <h1 class="pt-1">{{ $userData['total_apartments'] }}</h1>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header text-white text-center" style="background-color: #FF5A5F">Totale sponsorizzazioni</div>
+                                <div class="form-group my-3 mx-5 text-center">
+                                    <label class="pt-1 ">
+                                        <h1 >{{ $userData['total_sponsors'] }}</h1>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sponsors text-center rounded">
-                    <div class="top rounded-top">
-                        <h4 class="pt-2">Sponsorizzazioni</h4>
-                    </div>
-                    <div class="bottom">
-                        <h1 class="pt-1">{{ $userData['total_sponsors'] }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="views text-center rounded">
-                    <div class="top rounded-top">
-                        <h4 class="pt-2">Visite</h4>
-                    </div>
-                    <div class="bottom">
-                        <h1 class="pt-1">{{ $userData['total_views'] }}</h1>
-                    </div>
-                </div>
-                <div class="messages text-center rounded">
-                    <div class="top rounded-top">
-                        <h4 class="pt-2">Messaggi</h4>
-                    </div>
-                    <div class="bottom">
-                        <h1 class="pt-1">{{ $userData['total_messages'] }}</h1>
+                    <div class="row justify-content-center my-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header text-white text-center" style="background-color: #FF5A5F">Totali views</div>
+                                    <div class="form-group my-3 mx-5 text-center">
+                                        <label class="pt-1 ">
+                                            <h1 >{{ $userData['total_views'] }}</h1>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header text-white text-center" style="background-color: #FF5A5F">Totale messaggi</div>
+                                        <div class="form-group my-3 mx-5 text-center">
+                                            <label class="pt-1 ">
+                                                <h1 >{{ $userData['total_messages'] }}</h1>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-
 @endsection
 
 <style>
