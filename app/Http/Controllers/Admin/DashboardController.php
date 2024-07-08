@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Sponsorship;
 use App\Models\View;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -16,27 +17,26 @@ class DashboardController extends Controller
     public function index() {
         $user = Auth::user();
 
-        $user->load('apartments.messages', 'apartments.views');
+        $apartments = Apartment::withTrashed()->with(['messages' => function ($query) {
+            $query->withTrashed();
+        }])->where('user_id','=', $user->id)->get();
         $apartmentsCount = $user->apartments->count();
-        $messagesCount = $user->apartments->pluck('messages')->flatten()->count();
         $sponsorsCount = $user->apartments()->where('visibility', 1)->count();
-        $viewsCount = $user->apartments->pluck('views')->flatten()->count();
-        
+       
 
-        $userData = [
+        $apartmentStats = $apartments->map(function ($apartment) {
+            return [
+                'title' => $apartment->title,
+                'total_views' => $apartment->views->count(),
+                'total_messages' => $apartment->messages->count(),
+            ];
+        });
+        
+        $apartmentData = [
             'total_apartments' => $apartmentsCount,
             'total_sponsors' => $sponsorsCount,
-            'total_views' => $viewsCount,
-            'total_messages' => $messagesCount,
         ];
 
-        // $data = [
-        //     'user' => $user,
-        //     'totalSponsors' => $totalSponsors,
-        //     'totalViews' => $totalViews,
-        //     'totalMessages' => $totalMessages,
-        // ];
-
-        return view('admin.dashboard', compact('userData'));
+        return view('admin.dashboard', compact('apartmentData', 'apartmentStats'));
     }
 }
