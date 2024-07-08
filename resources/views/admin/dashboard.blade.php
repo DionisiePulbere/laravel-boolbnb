@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="fw-bold">Ciao {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h1>
+    <h2 class="fw-bold ms-3">Ciao {{ Auth::user()->name . " " .Auth::user()->surname }} 👋🏼</h2>
         <div class="container">
-            <div class="row justify-content-center my-3">
+            <div class="row justify-content-center my-5">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header text-white text-center" style="background-color: #FF5A5F">Totali appartamenti</div>
