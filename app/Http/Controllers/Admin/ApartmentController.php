@@ -216,50 +216,6 @@ class ApartmentController extends Controller
             $apartment->services()->detach();
         }
 
-        // Gestione delle sponsorizzazioni
-        $now = Carbon::now(); // Ottieni la data e l'ora corrente
-        $activeSponsorshipExists = false; // Flag per verificare se esiste una sponsorizzazione attiva
-
-        if (isset($formData['sponsorships'])) {
-            foreach ($formData['sponsorships'] as $sponsor) {
-                $sponsorship = Sponsorship::find($sponsor);
-
-                if ($sponsorship) {
-                    // Calcola l'expire_date in base alla durata della sponsorizzazione
-                    $duration = $sponsorship->duration;
-                    $durationParts = explode(':', $duration); // Divide la durata in ore, minuti, secondi
-                    $hours = (int) $durationParts[0];
-                    $minutes = (int) $durationParts[1];
-                    $seconds = (int) $durationParts[2];
-
-                    // Calcola l'expire_date aggiungendo ore, minuti, secondi alla data corrente
-                    $expireDate = $now->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
-
-                    // Sincronizzazione della tabella pivot con start_date e expire_date
-                    $apartment->sponsorships()->syncWithoutDetaching([
-                        $sponsor => [
-                            'start_date' => $now,
-                            'expire_date' => $expireDate,
-                        ]
-                    ]);
-
-                    // Imposta il flag se almeno una sponsorizzazione è attiva
-                    $activeSponsorshipExists = true;
-                }
-            }
-        }
-
-        // Annullamento delle sponsorizzazioni
-        if ($request->input('cancel_sponsorship') === 'yes') {
-            $apartment->sponsorships()->detach();
-            $activeSponsorshipExists = false;
-        }
-
-        // Aggiornamento della visibilità dell'appartamento in base alla sponsorizzazione
-        $apartment->visibility = $activeSponsorshipExists ? 1 : 0;
-        $apartment->save();
-
-
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment->slug]);
 
     }

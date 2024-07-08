@@ -42,9 +42,9 @@
                             } else {
                                 $formatted_time = "{$seconds} secondi";
                             }
+
                         @endphp
                     <p>Tempo rimanente: {{ $formatted_time }}</p>
-                    {{-- Magari poi lo riportiamo alla show della sponsorizzazione --}}
                     @endforeach
                 @endif
             @elseif ($apartment->visibility === 0)
