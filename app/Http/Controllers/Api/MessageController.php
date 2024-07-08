@@ -36,7 +36,7 @@ class MessageController extends Controller
         
         $message->save();
 
-        return response()->json(['message' => 'Messaggio inviato con successo!']);
+        return response()->json(['message' => 'Messaggio inviato con successo!']); 
     }
 
     public function index()
@@ -51,5 +51,13 @@ class MessageController extends Controller
         }
         
         return view('admin.message.index', compact('messages'));
+    }
+
+    public function destroy($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->delete();
+
+        return redirect()->route('admin.message.index')->with('success', 'Messaggio eliminato con successo!');
     }
 }

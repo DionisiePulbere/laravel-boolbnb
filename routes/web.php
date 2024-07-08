@@ -48,6 +48,7 @@ Route::middleware(['auth'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::delete('/message/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
 });

@@ -15,6 +15,11 @@
                     <p><strong>Oggetto:</strong> {{ $message->object }}</p>
                     <p><strong>Messaggio:</strong> {{ $message->description }}</p>
                     <hr>
+                    <form action="{{ route('admin.message.destroy', $message->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
                 </li>
             @endforeach
         </ul>
