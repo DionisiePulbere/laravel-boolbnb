@@ -48,8 +48,9 @@ Route::middleware(['auth'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
-    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/payment/{apartment:slug}', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+
 });
 
 require __DIR__.'/auth.php';

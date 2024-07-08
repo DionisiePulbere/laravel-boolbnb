@@ -6,46 +6,6 @@
             <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h2 class="fw-bold ms-3 mb-0">Modifica casa</h2>
         </div>
-
-        <form id="edit-form" action="{{ route('admin.apartments.update', ['apartment' => $apartment->id]) }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('PUT') <!-- Include this for the PUT request -->
-
-            @if ($apartment->visibility === 0)
-                <div class="mb-3">
-                    <label for="sponsorships" class="form-label">Sposorizza</label>
-                    <select class="form-select" name="sponsorships[]" id="sponsorships">
-                        <option value="" selected>Seleziona la sponsor per il tuo appartamento</option>
-                        @foreach ($sponsorships as $sponsor)
-                            @php
-                                // Supponiamo che $sponsor->duration contenga "24:00:00"
-                                $duration = $sponsor->duration;
-                                // Estrai le ore
-                                $hours = (int)explode(':', $duration)[0];
-                            @endphp
-                        <option @selected($sponsor->id == old('sponsor_id', $apartment->sponsor_id)) {{ in_array($sponsor->id, $apartment->sponsorships->pluck('id')->toArray()) ? 'selected' : '' }} value="{{ $sponsor->id }}">{{$sponsor->type}} ({{$hours}}h) - {{$sponsor->price}}€</option>
-                        @endforeach
-                    </select>
-                    @error('sponsorships')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            @else
-                <div class="mb-3">
-                    <label for="cancel_sponsorship" class="form-label">Vuoi annullare la sponsorizzazione?</label>
-                    <select class="form-select" name="cancel_sponsorship" id="cancel_sponsorship">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Sì</option>
-                    </select>
-                    @error('sponsorships')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-                </div>
-            @endif
             
 
             <div class="mb-3 input-control">
