@@ -31,7 +31,7 @@
                     @elseif ($apartment->visibility == 0)
                         <td class="d-none d-sm-table-cell">No</td>
                     @endif
-                    <td>{{$apartment->price}}</td>
+                    <td>€{{ number_format($apartment->price, 2, ',', '.') }}</td>
                     {{-- <td>{{$apartment->rooms}}</td>
                     <td>{{$apartment->number_of_bed}}</td>
                     <td>{{$apartment->number_of_bath}}</td>
