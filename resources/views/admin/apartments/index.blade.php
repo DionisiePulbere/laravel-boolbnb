@@ -10,11 +10,6 @@
                     <th>Titolo</th>
                     <th>Slug</th>
                     <th class="d-none d-sm-table-cell">Sponsor</th>
-                    <th>Prezzo</th>
-                    {{-- <th>Stanze</th>
-                    <th>Letti</th>
-                    <th>Bagni</th>
-                    <th>m<sup>2</sup></th> --}}
                     <th>Indirizzo</th>
                     <th>Azioni</th>
                     
@@ -31,11 +26,6 @@
                     @elseif ($apartment->visibility == 0)
                         <td class="d-none d-sm-table-cell">No</td>
                     @endif
-                    <td>€{{ number_format($apartment->price, 2, ',', '.') }}</td>
-                    {{-- <td>{{$apartment->rooms}}</td>
-                    <td>{{$apartment->number_of_bed}}</td>
-                    <td>{{$apartment->number_of_bath}}</td>
-                    <td>{{$apartment->square_meters}}</td> --}}
                     <td>{{$apartment->address}}</td>
                     <td>
                         <div class="row justify-content-center">
