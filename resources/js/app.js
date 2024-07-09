@@ -123,8 +123,8 @@ function onFormSubmit(){
 }
 
 /* INIZIO PAGAMENTO */
-var form = document.querySelector('#payment-form');
-var clientToken = "{{ $clientToken }}"; // Token del cliente generato da Braintree
+let form = document.querySelector('#payment-form');
+let clientToken = "{{ $clientToken }}"; // Token del cliente generato da Braintree
 
 braintree.dropin.create({
     authorization: clientToken,
@@ -154,7 +154,7 @@ braintree.dropin.create({
 });
 /* gestisci la data del carta */
 document.getElementById('expiration-date').addEventListener('input', function(e) {
-    var input = e.target.value;
+    let input = e.target.value;
     if (input.length === 5 && input[2] !== '/') {
         input = input.slice(0, 2) + '/' + input.slice(2);
     }
@@ -164,3 +164,12 @@ document.getElementById('expiration-date').addEventListener('input', function(e)
 
 
 /* prova */
+document.addEventListener('DOMContentLoaded', function () {
+    if ("{{ session('success') }}") {
+        alert("{{ session('success') }}");
+    }
+
+    if ("{{ session('error') }}") {
+        alert("{{ session('error') }}");
+    }
+});

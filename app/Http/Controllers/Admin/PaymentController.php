@@ -41,7 +41,7 @@ class PaymentController extends Controller{
             $apartment->sponsorships()->detach();
             $apartment->visibility = 0;
             $apartment->save();
-            return redirect()->back()->with('success', 'Sponsorizzazione annullata con successo.');
+            return redirect()->route('admin.payment.index', ['apartment' => $apartment->slug])->with('success', 'Sponsorizzazione annullata con successo.');
         }
 
         $sponsorship_id = $request->sponsorships; // ID dell'opzione di sponsorizzazione selezionata
@@ -64,7 +64,7 @@ class PaymentController extends Controller{
                     'submitForSettlement' => true
                 ]
             ]);
-        
+
             if ($result->success) {
                 // Gestione delle sponsorizzazioni
                 $now = Carbon::now();
@@ -74,7 +74,6 @@ class PaymentController extends Controller{
                 $minutes = (int) $durationParts[1];
                 $seconds = (int) $durationParts[2];
                 $expireDate = $now->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
-
 
                 // Salva la sponsorizzazione per l'appartamento
                 $apartment->sponsorships()->syncWithoutDetaching([
@@ -87,7 +86,7 @@ class PaymentController extends Controller{
                 $apartment->visibility = 1;
                 $apartment->save();
 
-                return redirect()->back()->with('success', 'Pagamento effettuato con successo!');
+                return redirect()->route('admin.payment.index', ['apartment' => $apartment->slug])->with('success', 'Pagamento effettuato con successo!');
             } else {
                 $errorString = "";
                 foreach ($result->errors->deepAll() as $error) {
@@ -98,10 +97,10 @@ class PaymentController extends Controller{
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $e->getMessage());
         }
-
     }
-
 }
+
+
 
 
 /* 'fake-valid-nonce' */
