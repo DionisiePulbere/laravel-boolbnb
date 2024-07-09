@@ -11,30 +11,36 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\BraintreeService;
 use Illuminate\Support\Carbon;
 
-class PaymentController extends Controller{
+class PaymentController extends Controller
+{
     protected $gateway;
     protected $sponsorshipOptions;
     protected $braintree; 
 
-    public function __construct(BraintreeService $braintree){
+    public function __construct(BraintreeService $braintree)
+    {
         $this->braintree = $braintree->getGateway();
     }
 
-    public function index(Apartment $apartment){
+    public function index(Apartment $apartment)
+    {
         $user = Auth::user();
         $clientToken = $this->braintree->clientToken()->generate();
-        $sponsorshipOptions = $this->sponsorshipOptions;
         $sponsorships = Sponsorship::all();
 
         return view('admin.payment.index', compact('apartment', 'sponsorships', 'clientToken', 'user'));
     }
 
-    public function checkout(Request $request){
-        $apartment = Apartment::find($request->apartment_id);
+    public function checkout(Request $request)
+    {
+        $messages = $this->getPayValidationMessages();
+        $apartment = Apartment::find($request->apartment_id); // Aggiungi questa linea per ottenere l'oggetto Apartment
 
         if (!$apartment) {
             return redirect()->back()->with('error', 'Appartamento non trovato.');
         }
+
+        $request->validate($this->getPayValidationRules($apartment), $messages); // Aggiungi $apartment come parametro
 
         // Annullamento delle sponsorizzazioni se necessario
         if ($request->has('cancel_sponsorship') && $request->cancel_sponsorship === 'yes') {
@@ -59,7 +65,7 @@ class PaymentController extends Controller{
         try {
             $result = $this->braintree->transaction()->sale([
                 'amount' => $price,
-                'paymentMethodNonce' => 'fake-valid-nonce',
+                'paymentMethodNonce' => 'fake-valid-nonce', // Sostituire con il nonce reale ottenuto da Braintree
                 'options' => [
                     'submitForSettlement' => true
                 ]
@@ -98,6 +104,46 @@ class PaymentController extends Controller{
             return redirect()->back()->with('error', 'Errore durante il pagamento: ' . $e->getMessage());
         }
     }
+
+    private function getPayValidationRules(Apartment $apartment)
+    {
+        if ($apartment->visibility === 0) {
+            return [
+                'card_number' => 'required|regex:/^\d{4} \d{4} \d{4} \d{4}$/',
+                'expiration_date' => 'required',
+                'cvv' => 'required|digits:3',
+                'apartment_name' => 'required|string|max:255',
+                'apartment_id' => 'required|exists:apartments,id',
+                'sponsorships' => 'required|exists:sponsorships,id',
+            ];
+        } else if ($apartment->visibility === 1) {
+            return [
+                'cancel_sponsorship' => 'required|in:yes',
+                'apartment_name' => 'required|string|max:255',
+                'apartment_id' => 'required|exists:apartments,id',
+            ];
+        }
+    }
+
+    private function getPayValidationMessages()
+{
+    return [
+        'card_number.required' => 'Il numero della carta di credito è obbligatorio.',
+        'card_number.regex' => 'Il formato del numero di carta di credito non è valido. Assicurati di inserire il numero nel formato "XXXX XXXX XXXX XXXX".',
+        'expiration_date.required' => 'La data di scadenza è obbligatoria.',
+        'cvv.required' => 'Il CVV è obbligatorio.',
+        'cvv.digits' => 'Il CVV deve essere composto da 3 cifre.',
+        'apartment_name.required' => 'Il nome dell\'appartamento è obbligatorio.',
+        'apartment_name.string' => 'Il nome dell\'appartamento deve essere una stringa.',
+        'apartment_name.max' => 'Il nome dell\'appartamento non può superare i 255 caratteri.',
+        'apartment_id.required' => 'L\'ID dell\'appartamento è obbligatorio.',
+        'apartment_id.exists' => 'L\'ID dell\'appartamento non è valido.',
+        'sponsorships.required' => 'La selezione della sponsorizzazione è obbligatoria.',
+        'sponsorships.exists' => 'L\'ID della sponsorizzazione non è valido.',
+        'cancel_sponsorship.required' => 'Il campo per annullare la sponsorizzazione è obbligatorio.',
+        'cancel_sponsorship.in' => 'Il valore del campo per annullare la sponsorizzazione deve essere "yes".',
+    ];
+}
 }
 
 
