@@ -178,6 +178,15 @@ tr:nth-of-type(odd) td{
 #suggestions li:hover {
     background-color: #f0f0f0;
 }
+
+.services-container {
+    display: flex;
+    gap: 20px; /* Space between columns */
+}
+
+.services-column {
+    flex: 1;
+}
 /* FINE STILE PER RICERCA INDIRIZZO */
 
 // Media query
