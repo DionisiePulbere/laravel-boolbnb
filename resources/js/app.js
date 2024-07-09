@@ -123,42 +123,73 @@ function onFormSubmit(){
 }
 
 /* INIZIO PAGAMENTO */
-let form = document.querySelector('#payment-form');
-let clientToken = "{{ $clientToken }}"; // Token del cliente generato da Braintree
+var clientToken = "{{ $clientToken }}"; // Token client generato da Braintree
 
-braintree.dropin.create({
-    authorization: clientToken,
-    container: '#bt-dropin'
-}, function (createErr, instance) {
-    if (createErr) {
-        console.error('Errore durante la creazione di Drop-in UI:', createErr);
+// Inizializza Braintree SDK e gestisci il pagamento
+braintree.client.create({
+    authorization: clientToken
+}, function (clientErr, clientInstance) {
+    if (clientErr) {
+        console.error('Errore durante la creazione del client:', clientErr);
         return;
     }
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
+    // Opzionale: se vuoi utilizzare Braintree Drop-in UI per generare il nonce
+    braintree.dropin.create({
+        container: '#bt-dropin',
+        authorization: clientToken
+    }, function (dropinErr, dropinInstance) {
+        if (dropinErr) {
+            console.error('Errore durante la creazione di Drop-in UI:', dropinErr);
+            return;
+        }
 
-        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-            if (requestPaymentMethodErr) {
-                console.error('Errore durante la richiesta del metodo di pagamento:', requestPaymentMethodErr);
-                return;
-            }
+        // Aggiungi un event listener al form per gestire la submission
+        var form = document.querySelector('#payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-            // Inserisci il nonce generato in un campo nascosto nel form
-            document.querySelector('#nonce').value = payload.nonce;
+            // Richiedi il metodo di pagamento al client Braintree SDK
+            dropinInstance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+                if (requestPaymentMethodErr) {
+                    console.error('Errore durante la richiesta del metodo di pagamento:', requestPaymentMethodErr);
+                    return;
+                }
 
-            // Invia il form al server per la transazione
-            form.submit();
+                // Inserisci il nonce generato in un campo nascosto nel form
+                var nonceInput = document.createElement('input');
+                nonceInput.setAttribute('type', 'hidden');
+                nonceInput.setAttribute('name', 'payment_method_nonce');
+                nonceInput.setAttribute('value', payload.nonce);
+                form.appendChild(nonceInput);
+
+                // Invia il form al server per la transazione
+                form.submit();
+            });
         });
     });
 });
 /* gestisci la data del carta */
-document.getElementById('expiration-date').addEventListener('input', function(e) {
-    let input = e.target.value;
-    if (input.length === 5 && input[2] !== '/') {
-        input = input.slice(0, 2) + '/' + input.slice(2);
-    }
-    e.target.value = input.slice(0, 5);
+document.addEventListener('DOMContentLoaded', function() {
+    var expirationInput = document.getElementById('expiration-date');
+    var expirationError = document.getElementById('expiration-error');
+
+    expirationInput.addEventListener('change', function() {
+        var enteredDate = expirationInput.value;
+        var currentDate = new Date();
+        var enteredMonth = parseInt(enteredDate.substring(0, 2)) - 1; 
+        var enteredYear = parseInt('20' + enteredDate.substring(3, 5));
+
+        var expirationDate = new Date(enteredYear, enteredMonth);
+
+        if (expirationDate < currentDate) {
+            expirationError.textContent = 'La data non può essere antecedente ad oggi.';
+            expirationInput.setCustomValidity('La data non può essere antecedente ad oggi.');
+        } else {
+            expirationError.textContent = '';
+            expirationInput.setCustomValidity('');
+        }
+    });
 });
 /* FINE PAGAMENTO */
 

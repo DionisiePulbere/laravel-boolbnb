@@ -23,15 +23,6 @@
 
                         <form method="post" id="payment-form" action="{{ route('admin.payment.checkout') }}">
                             @csrf
-                            @if($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
 
                             <div class="form-group mb-3">
                                 <label for="sponsorships" class="form-label">Sponsorizza</label>
@@ -104,7 +95,7 @@
                             <div class="d-flex justify-content-center">
                                 <!-- Campo nascosto per il nonce generato da Braintree -->
                                 <input type="hidden" id="payment_method_nonce" name="payment_method_nonce">
-                                <button type="submit" class="btn dashboard-logout px-3 py-2 text-white" id="submit-button" style="background-color: #FF5A5F">Paga adesso</button>
+                                <button type="submit" class="btn dashboard-logout px-3 py-2 text-white" style="background-color: #FF5A5F">Paga adesso</button>
                             </div>
                         </form>
                     </div>

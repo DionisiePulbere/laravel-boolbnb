@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Braintree\Gateway;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Sponsorship;
@@ -58,19 +57,19 @@ class PaymentController extends Controller
         if (!$selectedOption) {
             return redirect()->back()->with('error', 'Opzione di sponsorizzazione non valida.');
         }
-
+        $paymentMethodNonce = $request->input('payment_method_nonce');
         // Ottieni l'importo dal prezzo dell'opzione selezionata
         $price = $selectedOption->price;
 
         try {
             $result = $this->braintree->transaction()->sale([
                 'amount' => $price,
-                'paymentMethodNonce' => 'fake-valid-nonce', // Sostituire con il nonce reale ottenuto da Braintree
+                'paymentMethodNonce' => 'fake-valid-nonce',
                 'options' => [
                     'submitForSettlement' => true
                 ]
             ]);
-
+            /* dd($result); */
             if ($result->success) {
                 // Gestione delle sponsorizzazioni
                 $now = Carbon::now();
@@ -109,12 +108,24 @@ class PaymentController extends Controller
     {
         if ($apartment->visibility === 0) {
             return [
-                'card_number' => 'required|regex:/^\d{4} \d{4} \d{4} \d{4}$/',
-                'expiration_date' => 'required',
+                'card_number' => 'required|regex:/^\d{4} \d{4} \d{4} \d{4}$/|in:4111 1111 1111 1111,3782 8224 6310 005,6011111111111117,5555555555554444',
+                'expiration_date' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        // Verifica se la data è valida e non è antecedente ad oggi
+                        $enteredDate = \DateTime::createFromFormat('m/y', $value);
+                        $currentDate = new \DateTime();
+
+                        if (!$enteredDate || $enteredDate < $currentDate) {
+                            $fail('La data di scadenza deve essere valida e non antecedente ad oggi.');
+                        }
+                    },
+                ],
                 'cvv' => 'required|digits:3',
                 'apartment_name' => 'required|string|max:255',
                 'apartment_id' => 'required|exists:apartments,id',
-                'sponsorships' => 'required|exists:sponsorships,id',
+                'sponsorships' => 'required|exists:sponsorships,id'
+                /* 'payment_method_nonce' => 'required' */,
             ];
         } else if ($apartment->visibility === 1) {
             return [
@@ -126,24 +137,26 @@ class PaymentController extends Controller
     }
 
     private function getPayValidationMessages()
-{
-    return [
-        'card_number.required' => 'Il numero della carta di credito è obbligatorio.',
-        'card_number.regex' => 'Il formato del numero di carta di credito non è valido. Assicurati di inserire il numero nel formato "XXXX XXXX XXXX XXXX".',
-        'expiration_date.required' => 'La data di scadenza è obbligatoria.',
-        'cvv.required' => 'Il CVV è obbligatorio.',
-        'cvv.digits' => 'Il CVV deve essere composto da 3 cifre.',
-        'apartment_name.required' => 'Il nome dell\'appartamento è obbligatorio.',
-        'apartment_name.string' => 'Il nome dell\'appartamento deve essere una stringa.',
-        'apartment_name.max' => 'Il nome dell\'appartamento non può superare i 255 caratteri.',
-        'apartment_id.required' => 'L\'ID dell\'appartamento è obbligatorio.',
-        'apartment_id.exists' => 'L\'ID dell\'appartamento non è valido.',
-        'sponsorships.required' => 'La selezione della sponsorizzazione è obbligatoria.',
-        'sponsorships.exists' => 'L\'ID della sponsorizzazione non è valido.',
-        'cancel_sponsorship.required' => 'Il campo per annullare la sponsorizzazione è obbligatorio.',
-        'cancel_sponsorship.in' => 'Il valore del campo per annullare la sponsorizzazione deve essere "yes".',
-    ];
-}
+    {
+        return [
+            'card_number.required' => 'Il numero della carta di credito è obbligatorio.',
+            'card_number.regex' => 'Il formato del numero di carta di credito non è valido. Assicurati di inserire il numero nel formato "XXXX XXXX XXXX XXXX".',
+            'card_number.in' => 'Il numero di carta di credito non è valido.',
+            'expiration_date.required' => 'La data di scadenza è obbligatoria.',
+            'cvv.required' => 'Il CVV è obbligatorio.',
+            'cvv.digits' => 'Il CVV deve essere composto da 3 cifre.',
+            'apartment_name.required' => 'Il nome dell\'appartamento è obbligatorio.',
+            'apartment_name.string' => 'Il nome dell\'appartamento deve essere una stringa.',
+            'apartment_name.max' => 'Il nome dell\'appartamento non può superare i 255 caratteri.',
+            'apartment_id.required' => 'L\'ID dell\'appartamento è obbligatorio.',
+            'apartment_id.exists' => 'L\'ID dell\'appartamento non è valido.',
+            'sponsorships.required' => 'La selezione della sponsorizzazione è obbligatoria.',
+            'sponsorships.exists' => 'L\'ID della sponsorizzazione non è valido.',
+            'cancel_sponsorship.required' => 'Il campo per annullare la sponsorizzazione è obbligatorio.',
+            'cancel_sponsorship.in' => 'Il valore del campo per annullare la sponsorizzazione deve essere "yes".',
+            /* 'payment_method_nonce' => 'il metodo di pagamento inserito non è funzionante/corretto' */
+        ];
+    }
 }
 
 
