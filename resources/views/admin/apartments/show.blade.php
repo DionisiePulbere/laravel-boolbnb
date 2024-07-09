@@ -19,7 +19,6 @@
         <div class="mb-3 mt-3">
             @if ($apartment->visibility === 1)
                 <a href="{{ route('admin.payment.index', ['apartment'=>$apartment->slug])}}" class="btn my-register-btn px-3">Sponsorizzato <i class="fa-solid fa-crown"></i></a>
-                <span>numero visite: {{$viewsCount }}</span>
                 @if ($apartment->sponsorships->isNotEmpty())
                     @foreach ($apartment->sponsorships as $sponsorship)
                         @php
@@ -52,6 +51,11 @@
                     Sponsorizza questa casa <i class="fa-solid fa-ranking-star ms-3"></i>
                 </a>
             @endif
+        </div>
+
+        {{-- STATISTICHE --}}
+        <div class="mb-3 mt-3">
+            <span>numero visite: {{$viewsCount }}</span>
         </div>
 
         {{-- FOTO PRINCIPALE --}}

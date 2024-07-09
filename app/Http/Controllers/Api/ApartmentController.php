@@ -87,7 +87,7 @@ class ApartmentController extends Controller
 
         $apartmentIds = array_column($apartments, 'id');
         $apartmentsWithRelations = Apartment::whereIn('id', $apartmentIds)
-            ->with('services')
+            ->with('services', 'user')
             ->get();
 
         return response()->json([
