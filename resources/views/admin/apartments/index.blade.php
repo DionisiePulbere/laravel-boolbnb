@@ -15,17 +15,19 @@
                 <tr>
                     <th class="d-none d-sm-table-cell">Id</th>
                     <th>Titolo</th>
-                    <th class="d-none d-sm-table-cell">Sponsor</th>
+                    <th class="d-none d-sm-table-cell text-center">Sponsor</th>
                     <th>Indirizzo</th>
-                    <th>Azioni</th>
+                    <th class="text-center">Azioni</th>
                 </tr>
                 
                 @foreach ($apartments as $apartment)
                 <tr class="tr-table">
                     <td class="d-none d-sm-table-cell align-middle">{{$apartment->id}}</td>
                     <td class="align-middle">{{$apartment->title}}</td>
-                    <td class="align-middle">
-                        <span class="text-center">{{ $apartment->visibility == 1 ? 'SI' : 'NO' }}</span>
+                    <td class="text-center d-none d-sm-table-cell">
+                        @if ($apartment->visibility == 1)
+                            <div class="sponsor-button p-2 rounded-circle"><i class="fa-solid fa-crown primary-color"></i></div>
+                        @endif
                     </td>
                     <td class="align-middle">{{$apartment->address}}</td>
                     <td class="align-middle">
