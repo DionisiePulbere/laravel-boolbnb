@@ -107,34 +107,41 @@
             @enderror
         </div>
 
-        <!-- Numero di stanze -->
-        <div class="mb-3">
-            <label for="number_of_room" class="form-label">Numero di stanze</label>
-            <select class="form-select" id="number_of_room" name="number_of_room">
-                @for ($i = 1; $i <= 8; $i++)
-                    <option value="{{ $i }}" @if (old('number_of_room', $apartment->number_of_room) == $i) selected @endif>{{ $i }}</option>
-                @endfor
-            </select>
-        </div>
-
-        <!-- Numero di letti -->
-        <div class="mb-3">
-            <label for="number_of_bed" class="form-label">Numero di letti</label>
-            <select class="form-select" id="number_of_bed" name="number_of_bed">
-                @for ($i = 1; $i <= 8; $i++)
-                    <option value="{{ $i }}" @if (old('number_of_bed', $apartment->number_of_bed) == $i) selected @endif>{{ $i }}</option>
-                @endfor
-            </select>
-        </div>
-
-        <!-- Numero di bagni -->
-        <div class="mb-3">
-            <label for="number_of_bath" class="form-label">Numero di bagni</label>
-            <select class="form-select" id="number_of_bath" name="number_of_bath">
-                @for ($i = 1; $i <= 8; $i++)
-                    <option value="{{ $i }}" @if (old('number_of_bath', $apartment->number_of_bath) == $i) selected @endif>{{ $i }}</option>
-                @endfor
-            </select>
+        
+        <div class="d-flex">
+            <!-- Numero di stanze -->
+            <div class="col-md-4">
+                <div class="mb-3 me-3">
+                    <label for="number_of_room" class="form-label">Numero di stanze</label>
+                    <select class="form-select" id="number_of_room" name="number_of_room">
+                        @for ($i = 1; $i <= 8; $i++)
+                            <option value="{{ $i }}" @if (old('number_of_room', $apartment->number_of_room) == $i) selected @endif>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div> 
+            </div>    
+            <!-- Numero di letti -->
+            <div class="col-md-4">
+                <div class="mb-3 me-3">
+                    <label for="number_of_bed" class="form-label">Numero di letti</label>
+                    <select class="form-select" id="number_of_bed" name="number_of_bed">
+                        @for ($i = 1; $i <= 8; $i++)
+                            <option value="{{ $i }}" @if (old('number_of_bed', $apartment->number_of_bed) == $i) selected @endif>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>   
+            </div> 
+            <!-- Numero di bagni -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="number_of_bath" class="form-label">Numero di bagni</label>
+                    <select class="form-select" id="number_of_bath" name="number_of_bath">
+                        @for ($i = 1; $i <= 8; $i++)
+                            <option value="{{ $i }}" @if (old('number_of_bath', $apartment->number_of_bath) == $i) selected @endif>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div> 
+            </div> 
         </div>
 
         <!-- Servizi -->
