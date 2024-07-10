@@ -71,6 +71,7 @@ class ApartmentController extends Controller
         
 
         $newApartment = new Apartment();
+        $newApartment->price = 0;
         $newApartment->fill($formData);
 
         //aggiungo l'id dell utente --Monsterman
@@ -169,6 +170,7 @@ class ApartmentController extends Controller
         $request->validate($this->getUpdateValidationRules(), $messages);
 
         $formData = $request->all();
+        $formData['price'] = 0;
         $formTitle = $formData['title'];
         // dd($formTitle);
         
@@ -240,7 +242,7 @@ class ApartmentController extends Controller
             'thumb' => 'required|image|mimes:jpeg,png|max:2048',
             // 'image' => 'required|mimes:jpeg,png|max:2048',
             'address' => 'required|min:5|string',
-            'price' => 'required|numeric|min:0',
+            /* 'price' => 'required|numeric|min:0', */
             'square_meters' => 'required|numeric|min:0',
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
@@ -258,7 +260,7 @@ class ApartmentController extends Controller
             'thumb' => 'nullable|image|mimes:jpeg,png|max:2048',
             // 'image' => 'nullable|mimes:jpeg,png|max:2048',
             'address' => 'required|min:5|string',
-            'price' => 'required|numeric|min:0',
+            /* 'price' => 'required|numeric|min:0', */
             'square_meters' => 'required|numeric|min:0',
             'number_of_room' => 'required|integer|min:1|max:8',
             'number_of_bed' => 'required|integer|min:1|max:8',
@@ -284,9 +286,9 @@ class ApartmentController extends Controller
             'image.mimes' => 'Il campo Altri immagini deve essere un file di tipo: jpeg, png.',
             'image.max' => 'Il campo Altri immagini non può essere più grande di 2048 KB.',
             'address.required' => 'Il campo Indirizzo è obbligatorio.',
-            'price.required' => 'Il campo Prezzo è obbligatorio.',
+            /* 'price.required' => 'Il campo Prezzo è obbligatorio.',
             'price.numeric' => 'Il campo Prezzo deve essere un numero.',
-            'price.min' => 'Il campo Prezzo deve essere almeno 0.',
+            'price.min' => 'Il campo Prezzo deve essere almeno 0.', */
             'square_meters.required' => 'Il campo Metri quadrati è obbligatorio.',
             'square_meters.numeric' => 'Il campo Metri quadrati deve essere un numero.',
             'square_meters.min' => 'Il campo Metri quadrati deve essere almeno 0.',
