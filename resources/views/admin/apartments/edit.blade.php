@@ -187,4 +187,5 @@
     </form>
 </div>
 
+<script src="{{ asset('js/edit.js') }}" ></script>
 @endsection
