@@ -5,7 +5,7 @@
         <div class="row">
             <div class="d-flex align-items-center mb-4 show-header pb-2">
                 <a href="{{ route('admin.apartments.show',['apartment' => $apartment->slug]) }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
-                <h2 class="fw-bold ms-3 m-0">Torna all'appartamento</h2>
+                <h2 class="fw-bold ms-3 m-0">sponsorizzazione</h2>
             </div>
         </div>
     </div>
