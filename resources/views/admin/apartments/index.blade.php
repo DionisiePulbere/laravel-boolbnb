@@ -11,23 +11,19 @@
                     <th class="d-none d-sm-table-cell">Sponsor</th>
                     <th>Indirizzo</th>
                     <th>Azioni</th>
-                    
-                    
                 </tr>
                 
                 @foreach ($apartments as $apartment)
                 <tr class="tr-table">
-                    <td class="d-none d-sm-table-cell">{{$apartment->id}}</td>
-                    <td>{{$apartment->title}}</td>
-                    @if ($apartment->visibility == 1)
-                        <td class="d-none d-sm-table-cell">Sì</td>
-                    @elseif ($apartment->visibility == 0)
-                        <td class="d-none d-sm-table-cell">No</td>
-                    @endif
-                    <td>{{$apartment->address}}</td>
-                    <td>
+                    <td class="d-none d-sm-table-cell align-middle">{{$apartment->id}}</td>
+                    <td class="align-middle">{{$apartment->title}}</td>
+                    <td class="align-middle">
+                        <span class="text-center">{{ $apartment->visibility == 1 ? 'SI' : 'NO' }}</span>
+                    </td>
+                    <td class="align-middle">{{$apartment->address}}</td>
+                    <td class="align-middle">
                         <div class="row justify-content-center">
-                            <div class="col-6 col-lg-4  d-flex justify-content-center">
+                            <div class="col-6 col-lg-4 d-flex justify-content-center">
                                 <a class="btn btn-dark border-none" href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
@@ -50,7 +46,6 @@
                             </div>
                         </div>
                     </td>
-                    
                 </tr>
                 @endforeach
             </table>
