@@ -90,9 +90,15 @@ class ApartmentController extends Controller
             ->with('services', 'user')
             ->get();
 
+        foreach ($apartmentsWithRelations as $index => $apartment) {
+            $apartment->distance_km = $apartments[$index]->distance_km; 
+        }
+
+        $sortedApartments = $apartmentsWithRelations->sortBy('distance_km')->values()->all();
+
         return response()->json([
-            'result'=> true,
-            'apartments'=> $apartmentsWithRelations
+            'result' => true,
+            'apartments' => $sortedApartments,
         ]);
     }
 }

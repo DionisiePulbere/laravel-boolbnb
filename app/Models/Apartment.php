@@ -57,15 +57,18 @@ class Apartment extends Model
     {
         return DB::select(
             DB::raw("
-                SELECT *
+                SELECT *,
+                       ST_distance_sphere(
+                           point(?, ?),
+                           point(latitude, longitude)
+                       ) / 1000 AS distance_km
                 FROM apartments
                 WHERE ST_distance_sphere(
                     point(?, ?),
                     point(latitude, longitude)
                 ) < ?
             "),
-            [$latitude, $longitude, $distance]
+            [$latitude, $longitude, $latitude, $longitude, $distance]
         );
     }
-
 }

@@ -4,7 +4,7 @@
 @endphp
 
 @section('content')
-    <div class="d-flex flex-column mb-2">
+    <div class="d-flex flex-column" style="margin-bottom: 200px">
         <div class="d-flex align-items-center  show-header pb-2">
             <a href="{{ route('admin.apartments.index') }}" class="my-arrow-left text-dark"><i class="fa-solid fa-chevron-left"></i></a>
             <h3 class="fw-bold ms-3 mb-0">Torna alle case</h3>

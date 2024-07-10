@@ -27,6 +27,7 @@ class DashboardController extends Controller
         $apartmentStats = $apartments->map(function ($apartment) {
             return [
                 'title' => $apartment->title,
+                'thumb' => $apartment->thumb,
                 'total_views' => $apartment->views->count(),
                 'total_messages' => $apartment->messages->count(),
             ];

@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="ms-auto d-flex align-items-center">
-                <div class="nav-item text-nowrap m-2">
+                <div class="nav-item text-nowrap m-2 d-none d-md-block">
                     <a class="btn dashboard-logout px-3 py-2 d-flex align-items-center" href="http://localhost:5174/#/" style="height: 100%;">
                         <i class="fas fa-home pb-1 me-1"></i> Sito Web
                     </a>

@@ -8,7 +8,6 @@
                 <tr>
                     <th class="d-none d-sm-table-cell">Id</th>
                     <th>Titolo</th>
-                    <th>Slug</th>
                     <th class="d-none d-sm-table-cell">Sponsor</th>
                     <th>Indirizzo</th>
                     <th>Azioni</th>
@@ -20,7 +19,6 @@
                 <tr class="tr-table">
                     <td class="d-none d-sm-table-cell">{{$apartment->id}}</td>
                     <td>{{$apartment->title}}</td>
-                    <td>{{$apartment->slug}}</td>
                     @if ($apartment->visibility == 1)
                         <td class="d-none d-sm-table-cell">Sì</td>
                     @elseif ($apartment->visibility == 0)
