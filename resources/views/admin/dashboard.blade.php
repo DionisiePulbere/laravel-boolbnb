@@ -62,7 +62,8 @@
                 <div class="card text-center">
                     <div class="card-header text-white" style="background-color: #404040;font-size: 15px">{{ $apartment['title'] }}</div>
                     <div class="dashboard-img">
-                        <img src="{{ $apartment['thumb'] }}" alt="" srcset="" >
+                        <img src="{{ filter_var($apartment['thumb'], FILTER_VALIDATE_URL) ? $apartment['thumb'] : asset('storage/' . $apartment['thumb']) }}" 
+                        alt="" class="">
                     </div>
                     <div class="row p-2">
                         <div class="col-6">
