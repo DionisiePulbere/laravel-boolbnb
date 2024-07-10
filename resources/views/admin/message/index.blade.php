@@ -11,9 +11,9 @@
             <p>Ancora non hai ricevuto messaggi</p>
         </div>
     @else
-        <ul class="list-group">
+        <ul class="list-group rounded">
             @foreach($messages as $message)
-                <li class="list-group-item">
+                <li class="list-group-item mb-2 border rounded">
                     <p><strong>Appartamento:</strong> {{ $message->apartment->title }}</p> 
                     <p><strong>Indirizzo:</strong> {{ $message->apartment->address }}</p> 
                     <p><strong>Nome:</strong> {{ $message->name }}</p>
