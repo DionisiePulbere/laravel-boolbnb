@@ -74,7 +74,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="card-number">Numero della carta di credito</label>
-                                <input type="text" id="card-number" name="card_number" value="{{ old('card_number', '4111 1111 1111 1111') }}" class="form-control" required>
+                                <input type="text" id="card-number" name="card_number" value="{{ old('card_number') }}" class="form-control" required>
                                 @error('card_number')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -83,14 +83,14 @@
                             <div class="row">
                                 <div class="col-sm-6 mb-3">
                                     <label for="expiration-date">Scadenza</label>
-                                    <input type="text" id="expiration-date" name="expiration_date" value="{{ old('expiration_date', '12/25') }}" class="form-control" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" maxlength="5" required>
+                                    <input type="text" id="expiration-date" name="expiration_date" value="{{ old('expiration_date') }}" class="form-control" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" maxlength="5" required>
                                     @error('expiration_date')
                                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-sm-6 mb-3">
                                     <label for="cvv">CVV</label>
-                                    <input type="text" id="cvv" name="cvv" value="{{ old('cvv', '123') }}" class="form-control" placeholder="CVV" required>
+                                    <input type="text" id="cvv" name="cvv" value="{{ old('cvv') }}" class="form-control" placeholder="CVV" required>
                                     @error('cvv')
                                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                                     @enderror
