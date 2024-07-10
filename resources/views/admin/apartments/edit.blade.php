@@ -55,7 +55,7 @@
         </div>
 
         <!-- Altre immagini -->
-        <label for="image" class="form-label">Altri immagini (min.3)</label>
+        <label for="image" class="form-label">Altri immagini (min.4)</label>
         <div class="row m-0 mb-3">
             {{-- @foreach ($apartment->images as $image)
                 <div class="ms-img-container col-6 col-lg-3 mb-3 position-relative">
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Prezzo -->
-        <div class="mb-3 input-control">
+        {{-- <div class="mb-3 input-control">
             <label for="price" class="form-label">Prezzo</label>
             <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
             <div class="error"></div>
@@ -93,7 +93,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-        </div>
+        </div> --}}
 
         <!-- Metri quadrati -->
         <div class="mb-3 input-control">
@@ -176,21 +176,8 @@
         </div>
 
         <!-- Submit -->
-        <button type="submit" id="createSubmit" class="btn my-btn-primary text-white mt-3">Salva modifiche</button>
+        <button type="submit" id="createSubmit" class="btn my-btn-primary text-white mt-3">Salva modifiche</button> 
     </form>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.delete-image-btn').forEach(function (button) {
-            button.addEventListener('click', function () {
-                var imageId = this.dataset.imageId;
-                var form = document.getElementById('delete-image-form');
-                var input = document.getElementById('delete-image-id');
-                input.value = imageId;
-                form.action = form.action.replace('0', imageId);
-                form.submit();
-            });
-        });
-    });
-</script>
+
 @endsection
