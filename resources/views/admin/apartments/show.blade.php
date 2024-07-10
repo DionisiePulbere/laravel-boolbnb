@@ -149,10 +149,10 @@
         </div>
 
         {{-- PREZZO --}}
-        <h3>Prezzo:</h3>
+        {{-- <h3>Prezzo:</h3>
         <p class="dashboard-p">
             <span class="price-bold">{{$apartment->price}} €</span> a notte.
-        </p>
+        </p> --}}
 
         {{-- DETTAGLI N.CAMERA LETTO, LETTI E BAGNI --}}
         <h3>Info:</h3>
@@ -180,26 +180,26 @@
 
         {{-- SERVIZI --}}
         <h3 class="mb-2">Servizi inclusi:</h3>
-@if (count($apartment->services) > 0)
-    @php
-        $half = ceil(count($apartment->services) / 2);
-        $servicesChunked = $apartment->services->chunk($half);
-    @endphp
-    <div class="services-container">
-        @foreach ($servicesChunked as $services)
-            <ul class="services-column" style="list-style: none; padding: 0;">
-                @foreach ($services as $service)
-                    <li class="li-services mt-2">
-                        <i class="{{ $service->icon }}"></i> {{ $service->name }}
-                    </li>
+        @if (count($apartment->services) > 0)
+            @php
+                $half = ceil(count($apartment->services) / 2);
+                $servicesChunked = $apartment->services->chunk($half);
+            @endphp
+            <div class="services-container">
+                @foreach ($servicesChunked as $services)
+                    <ul class="services-column" style="list-style: none; padding: 0;">
+                        @foreach ($services as $service)
+                            <li class="li-services mt-2">
+                                <i class="{{ $service->icon }}"></i> {{ $service->name }}
+                            </li>
+                        @endforeach
+                    </ul>
                 @endforeach
-            </ul>
-        @endforeach
-    </div>
-@else
-    <p>nessun servizio offerto</p>
-@endif
-        
+            </div>
+        @else
+            <p>nessun servizio offerto</p>
+        @endif
+            
 
         {{-- BUTTON ELIMINA & MODIFCA --}}
         <h3 class="mt-3">Descrizione:</h3>

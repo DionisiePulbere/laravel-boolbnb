@@ -2,7 +2,7 @@
 const formEdit = document.getElementById('edit-form');
 const title = document.getElementById('title');
 const address = document.getElementById('address');
-const price = document.getElementById('price');
+/* const price = document.getElementById('price'); */
 const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
 let isValid = false;
@@ -38,7 +38,7 @@ const validateInputs = () => {
     isValid = false;
     const titleValue = title.value;
     const addressValue = address.value;
-    const priceValue = price.value;
+    /* const priceValue = price.value; */
     const descriptionValue = description.value;
     const squareMetersValue = squareMeters.value;
     
@@ -54,11 +54,11 @@ const validateInputs = () => {
         setSuccess(address);
     }
 
-    if(priceValue === '') {
+   /*  if(priceValue === '') {
         setError(price, 'Il prezzo è richiesto');
     } else {
         setSuccess(price);
-    }
+    } */
 
     if(descriptionValue === '') {
         setError(description, 'La descrizione è richiesta');
@@ -74,7 +74,7 @@ const validateInputs = () => {
 
     if (titleValue !== "" && titleValue !== null 
         && addressValue !== "" && addressValue !== null 
-        && priceValue !== "" && priceValue !== null 
+        /* && priceValue !== "" && priceValue !== null  */
         && descriptionValue !== "" && descriptionValue !== null 
         && squareMetersValue !== "" && squareMetersValue !== null){
             isValid = true;
