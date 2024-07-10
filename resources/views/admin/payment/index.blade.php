@@ -74,7 +74,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="card-number">Numero della carta di credito</label>
-                                <input type="text" id="card-number" name="card_number" value="{{ old('card_number') }}" class="form-control" required>
+                                <input type="text" id="card-number" name="card_number" value="{{ old('card_number') }}" placeholder="4111 1111 1111 1111" class="form-control" required>
                                 @error('card_number')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
