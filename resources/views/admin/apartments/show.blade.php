@@ -149,10 +149,10 @@
         </div>
 
         {{-- PREZZO --}}
-        {{-- <h3>Prezzo:</h3>
+        <h3>Prezzo:</h3>
         <p class="dashboard-p">
             <span class="price-bold">{{$apartment->price}} €</span> a notte.
-        </p> --}}
+        </p>
 
         {{-- DETTAGLI N.CAMERA LETTO, LETTI E BAGNI --}}
         <h3>Info:</h3>

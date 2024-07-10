@@ -51,7 +51,7 @@
                     </span>
                 @enderror
             </div>
-            {{-- <div class="mb-3 input-control">
+            <div class="mb-3 input-control">
                 <label for="price" class="form-label">Prezzo *</label>
                 <input type="number" placeholder="Prezzo per una notte"  class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
                 <div class="error"></div>
@@ -60,7 +60,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div> --}}
+            </div>
             <div class="mb-3 input-control">
                 <label for="square_meters" class="form-label">Metri quadrati *</label>
                 <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">

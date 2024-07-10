@@ -49,7 +49,7 @@
                     </span>
                 @enderror
             </div>
-            <label for="image" class="form-label">Altri immagini (min.4)</label>
+            <label for="image" class="form-label">Altri immagini (min.3)</label>
             <div class="row m-0 mb-3 ">
                 @foreach ($apartment->images as $image)
                     @if ($image->image)
@@ -75,7 +75,7 @@
                 <input class="form-control" type="file" id="image" name="image[]" multiple>
             </div>
 
-            {{-- <div class="mb-3 input-control">
+            <div class="mb-3 input-control">
                 <label for="price" class="form-label">Prezzo</label>
                 <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
                 <div class="error"></div>
@@ -84,7 +84,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div> --}}
+            </div>
 
             <div class="mb-3">
                 <div class="mb-3 input-control">

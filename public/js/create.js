@@ -4,7 +4,7 @@ const title = document.getElementById('title');
 const address = document.getElementById('address');
 const thumb = document.getElementById('thumb');
 const image = document.getElementById('image');
-/* const price = document.getElementById('price'); */
+const price = document.getElementById('price');
 const description = document.getElementById('description');
 const squareMeters = document.getElementById('square_meters');
 let isValid = false;
@@ -40,7 +40,7 @@ const validateInputs = () => {
     isValid = false;
     const titleValue = title.value;
     const addressValue = address.value;
-    /* const priceValue = price.value; */
+    const priceValue = price.value;
     const descriptionValue = description.value;
     const squareMetersValue = squareMeters.value;
     const thumbFile = thumb.files;
@@ -71,11 +71,11 @@ const validateInputs = () => {
         setSuccess(image);
     }
 
-    /* if(priceValue === '') {
+    if(priceValue === '') {
         setError(price, 'Il prezzo è richiesto');
     } else {
         setSuccess(price);
-    } */
+    }
 
     if(descriptionValue === '') {
         setError(description, 'La descrizione è richiesta');
@@ -93,7 +93,7 @@ const validateInputs = () => {
         && addressValue !== "" && addressValue !== null 
         && thumbFile !== "" && thumbFile !== null 
         && imageFiles !== "" && imageFiles !== null
-        /* && priceValue !== "" && priceValue !== null  */
+        && priceValue !== "" && priceValue !== null 
         && descriptionValue !== "" && descriptionValue !== null 
         && squareMetersValue !== "" && squareMetersValue !== null){
             isValid = true;
