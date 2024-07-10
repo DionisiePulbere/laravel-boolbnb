@@ -92,8 +92,8 @@ class apartmentsSeeder extends Seeder
         $newApartment5->thumb = 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-1092617355496270460/original/e7a7c724-910b-41a6-997b-37bdcbd0479b.jpeg?im_w=960';
         $newApartment5->description = 'Appartamento di lusso situata nel cuore di Milano, questa residenza è il paradiso per chi cerca un ambiente elegante e raffinato. Con spazi luminosi e ampi, questa casa vanta finiture di alta qualità e un design moderno e chic. Con una cucina gourmet, una spaziosa zona living e camere da letto lussuose, questa villa è perfetta per chi ama lo stile di vita di lusso. Goditi il comfort e il prestigio di questa residenza esclusiva nel cuore di Milano.';
         $newApartment5->price =123;
-        $newApartment5->number_of_room =$faker->numberBetween(1, 4);
-        $newApartment5->number_of_bed =$faker->numberBetween(1, 8);
+        $newApartment5->number_of_room = 3;
+        $newApartment5->number_of_bed = 3;
         $newApartment5->number_of_bath =$faker->numberBetween(1, 2);
         $newApartment5->square_meters =$faker->numberBetween(50, 250);
         $newApartment5->latitude =45.477703;
