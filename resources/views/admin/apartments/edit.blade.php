@@ -176,7 +176,7 @@
         </div>
 
         <!-- Submit -->
-        <button type="submit" class="btn btn-primary">Salva modifiche</button>
+        <button type="submit" id="createSubmit" class="btn my-btn-primary text-white mt-3">Salva modifiche</button> 
     </form>
 </div>
 
