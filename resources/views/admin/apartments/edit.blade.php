@@ -54,8 +54,13 @@
                 @foreach ($apartment->images as $image)
                     @if ($image->image)
                         @if (filter_var($image->image, FILTER_VALIDATE_URL))
-                            <div class="ms-img-container col-6 col-lg-3  mb-3 position-relative">
-                                <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="ms-img">
+                            <div class="ms-img-container col-6 col-lg-3  mb-3">
+                                <div class="position-relative">
+                                    <img src="{{ $image->image }}" alt="{{ $apartment->title }}" class="ms-img">
+                                    <button class="delete-image-btn btn btn-danger btn-sm position-absolute top-0 end-0" data-image-id="{{ $image->id }}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
                             </div>
                         @else
                             <div class="ms-img-container col-md-6 col-3 mb-3 position-relative">
