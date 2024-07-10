@@ -96,7 +96,7 @@
                         <div class="mb-3 row mb-0">
                             <div class="col-md-12 ">
                                 <button type="submit" class="btn my-btn-primary text-white w-100">
-                                    {{ __('Register') }}
+                                    {{ __('Registrati') }}
                                 </button>
                             </div>
                         </div>
