@@ -17,7 +17,7 @@
                         @csrf
 
                         <div class="mb-3 row flex-column">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
                             <div class="col-md-12">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="mb-3 row flex-column">
-                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Cognome *') }}</label>
 
                             <div class="col-md-12">
                                 <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="mb-3 row flex-column">
-                            <label for="date_of_birth" class="col-md-12 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
+                            <label for="date_of_birth" class="col-md-12 col-form-label text-md-right">{{ __('Data di nascita *') }}</label>
                             <div class="col-md-12">
                                 <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
                                 @error('date_of_birth')
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="mb-3 row flex-column">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email *') }}</label>
 
                             <div class="col-md-12">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="mb-3 row flex-column">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
                             <div class="col-md-12 input-control">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="mb-5 row flex-column">
-                            <label for="password-confirm" class="col-md-12 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                            <label for="password-confirm" class="col-md-12 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
 
                             <div class="col-md-12 input-control">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

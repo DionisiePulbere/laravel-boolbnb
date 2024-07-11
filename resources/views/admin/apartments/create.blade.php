@@ -42,7 +42,7 @@
                 @enderror
             </div>
             <div class="mb-3 input-control">
-                <label for="image" class="form-label">Altre immagini (min.4)</label>
+                <label for="image" class="form-label">Altre immagini (min.4) *</label>
                 <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image[]" multiple>
                 <div class="error"></div>
                 @error('image')

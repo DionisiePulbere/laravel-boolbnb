@@ -13,7 +13,7 @@
 
         <!-- Nome dell'immobile -->
         <div class="mb-3 input-control">
-            <label for="title" class="form-label">Nome dell'immobile</label>
+            <label for="title" class="form-label">Nome dell'immobile *</label>
             <input type="text" placeholder="Inserisci il nome della tua casa" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $apartment->title) }}">
             <div class="error"></div>
             @error('title')
@@ -25,7 +25,7 @@
 
         <!-- Indirizzo -->
         <div class="mb-3 input-control">
-            <label for="address" class="form-label">Indirizzo</label>
+            <label for="address" class="form-label">Indirizzo *</label>
             <input type="text" placeholder="es. Via Roma, 58, Roma" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $apartment->address) }}">
             <div class="error"></div>
             <ul id="suggestions"></ul>
@@ -40,7 +40,7 @@
 
         <!-- Immagine di copertina -->
         <div class="mb-3">
-            <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine di copertina (min.1)</label>
+            <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine di copertina *</label>
             @if ($apartment->thumb)
                 <div class="mb-3 ms-image-container">
                     <img src="{{ $apartment->thumb ? (filter_var($apartment->thumb, FILTER_VALIDATE_URL) ? $apartment->thumb : asset('storage/' . $apartment->thumb)) : '' }}" alt="{{ $apartment->title }}" class="ms-img">
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Altre immagini -->
-        <label for="image" class="form-label">Altri immagini (min.4)</label>
+        <label for="image" class="form-label">Altri immagini (min.4) *</label>
         <div class="row m-0 mb-3">
             {{-- @foreach ($apartment->images as $image)
                 <div class="ms-img-container col-6 col-lg-3 mb-3 position-relative">
@@ -85,7 +85,7 @@
 
         <!-- Prezzo -->
         {{-- <div class="mb-3 input-control">
-            <label for="price" class="form-label">Prezzo</label>
+            <label for="price" class="form-label">Prezzo *</label>
             <input type="number" placeholder="Prezzo per una notte" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $apartment->price) }}">
             <div class="error"></div>
             @error('price')
@@ -97,7 +97,7 @@
 
         <!-- Metri quadrati -->
         <div class="mb-3 input-control">
-            <label for="square_meters" class="form-label">Metri quadrati</label>
+            <label for="square_meters" class="form-label">Metri quadrati *</label>
             <input type="number" placeholder="Inserisci i metri quadrati" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
             <div class="error"></div>
             @error('square_meters')
@@ -112,7 +112,7 @@
             <!-- Numero di stanze -->
             <div class="col-md-4">
                 <div class="mb-3 me-3">
-                    <label for="number_of_room" class="form-label">Numero di stanze</label>
+                    <label for="number_of_room" class="form-label">Numero di stanze *</label>
                     <select class="form-select" id="number_of_room" name="number_of_room">
                         @for ($i = 1; $i <= 8; $i++)
                             <option value="{{ $i }}" @if (old('number_of_room', $apartment->number_of_room) == $i) selected @endif>{{ $i }}</option>
@@ -123,7 +123,7 @@
             <!-- Numero di letti -->
             <div class="col-md-4">
                 <div class="mb-3 me-3">
-                    <label for="number_of_bed" class="form-label">Numero di letti</label>
+                    <label for="number_of_bed" class="form-label">Numero di letti *</label>
                     <select class="form-select" id="number_of_bed" name="number_of_bed">
                         @for ($i = 1; $i <= 8; $i++)
                             <option value="{{ $i }}" @if (old('number_of_bed', $apartment->number_of_bed) == $i) selected @endif>{{ $i }}</option>
@@ -134,7 +134,7 @@
             <!-- Numero di bagni -->
             <div class="col-md-4">
                 <div class="mb-3">
-                    <label for="number_of_bath" class="form-label">Numero di bagni</label>
+                    <label for="number_of_bath" class="form-label">Numero di bagni *</label>
                     <select class="form-select" id="number_of_bath" name="number_of_bath">
                         @for ($i = 1; $i <= 8; $i++)
                             <option value="{{ $i }}" @if (old('number_of_bath', $apartment->number_of_bath) == $i) selected @endif>{{ $i }}</option>
@@ -172,7 +172,7 @@
 
         <!-- Descrizione -->
         <div class="mb-3 input-control">
-            <label for="description" class="form-label">Descrizione</label>
+            <label for="description" class="form-label">Descrizione *</label>
             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descrivi dettagliatamente la tua casa..." id="description" rows="10" name="description">{{ old('description', $apartment->description) }}</textarea>
             <div class="error"></div>
             @error('description')
